@@ -1,0 +1,2662 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taller de Diseño Web</title>
+<meta name="description" content="Diseño Web, 1.er año BTP Soporte Técnico Informático. Cada tema del programa en tres niveles: básico, intermedio y avanzado, con ejercicios para CodePen y Visual Studio Code.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231A1C2E'/%3E%3Crect x='12' y='38' width='10' height='14' rx='2' fill='%233FCB97'/%3E%3Crect x='27' y='26' width='10' height='26' rx='2' fill='%237C9DF5'/%3E%3Crect x='42' y='12' width='10' height='40' rx='2' fill='%23EC6DBE'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: barra superior (nivel + tema) · índice lateral por unidad · vista central (inicio, tema con pestañas de nivel, programa, entregas, glosario) */
+:root {
+  --bg: #EEF1F6;
+  --surface: #FFFFFF;
+  --surface-2: #F6F7FB;
+  --ink: #1A1C2E;
+  --ink-2: #545872;
+  --line: #D6DBE6;
+  --b: #0B7D59;   --b-t: #DCF2E9;
+  --i: #2D58CF;   --i-t: #E2EAFC;
+  --v: #A12C7B;   --v-t: #F6E2EF;
+  --accent: #B35F00; --accent-t: #FBEBD6;
+  --alert: #C9302A;
+  --code-bg: #1B1D33;
+  --code-ink: #E9EAF5;
+  --code-dim: #9A9CC0;
+  --f-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+  --f-text: 'Atkinson Hyperlegible', 'Segoe UI', system-ui, sans-serif;
+  --f-mono: 'JetBrains Mono', Consolas, 'Courier New', monospace;
+  --radius: 14px;
+  --top: 60px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14152A; --surface: #1F2140; --surface-2: #191A35; --ink: #ECECF7; --ink-2: #A8AAC6; --line: #34375E;
+    --b: #3FCB97; --b-t: #133A2D; --i: #7C9DF5; --i-t: #1D2A55; --v: #EC6DBE; --v-t: #3D1A33; --accent: #F0A54A; --accent-t: #3B2A12;
+    --alert: #FF6B61; --code-bg: #0E0F22;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14152A; --surface: #1F2140; --surface-2: #191A35; --ink: #ECECF7; --ink-2: #A8AAC6; --line: #34375E;
+  --b: #3FCB97; --b-t: #133A2D; --i: #7C9DF5; --i-t: #1D2A55; --v: #EC6DBE; --v-t: #3D1A33; --accent: #F0A54A; --accent-t: #3B2A12;
+  --alert: #FF6B61; --code-bg: #0E0F22;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--top) + 12px); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f-text); font-size: 1.0625rem; line-height: 1.6; }
+a { color: var(--i); }
+code { font-family: var(--f-mono); font-size: 0.88em; background: var(--surface-2); border: 1px solid var(--line); padding: 0.05em 0.35em; border-radius: 5px; word-break: break-word; }
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.15; margin: 0 0 0.5em; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: 12px; top: -60px; background: var(--ink); color: var(--bg); padding: 8px 14px; border-radius: 8px; z-index: 100; }
+.skip:focus { top: 10px; }
+
+/* ---------- barra superior ---------- */
+.top { position: sticky; top: 0; z-index: 30; height: var(--top); display: flex; align-items: center; gap: 12px; padding: 0 16px; background: var(--surface); border-bottom: 1px solid var(--line); }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font-family: var(--f-display); font-weight: 800; font-size: 1.1rem; white-space: nowrap; }
+.brand svg { flex: none; }
+.top nav { display: flex; gap: 4px; margin-left: 8px; }
+.top nav a { text-decoration: none; color: var(--ink-2); padding: 6px 10px; border-radius: 8px; font-size: 0.95rem; }
+.top nav a:hover, .top nav a[aria-current="page"] { background: var(--surface-2); color: var(--ink); }
+.top .sp { flex: 1; }
+.lvl-pick { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--ink-2); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; background: var(--surface-2); }
+.seg button { border: 0; background: transparent; padding: 4px 12px; border-radius: 999px; cursor: pointer; font-size: 0.85rem; font-weight: 700; color: var(--ink-2); }
+.seg button[aria-pressed="true"][data-l="b"] { background: var(--b); color: #fff; }
+.seg button[aria-pressed="true"][data-l="i"] { background: var(--i); color: #fff; }
+.seg button[aria-pressed="true"][data-l="v"] { background: var(--v); color: #fff; }
+.icon-btn { border: 1px solid var(--line); background: var(--surface); width: 40px; height: 40px; border-radius: 10px; cursor: pointer; display: grid; place-items: center; flex: none; }
+.icon-btn svg { width: 20px; height: 20px; }
+#menuBtn { display: none; }
+
+/* ---------- estructura ---------- */
+.shell { display: grid; grid-template-columns: 290px 1fr; min-height: calc(100vh - var(--top)); }
+.side { position: sticky; top: var(--top); height: calc(100vh - var(--top)); overflow-y: auto; background: var(--surface); border-right: 1px solid var(--line); padding: 14px 10px 40px; }
+.side h2 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-2); font-family: var(--f-text); margin: 18px 10px 6px; }
+.side h2:first-child { margin-top: 4px; }
+.side ul { list-style: none; margin: 0; padding: 0; }
+.side a { display: flex; gap: 8px; align-items: flex-start; padding: 7px 10px; border-radius: 9px; text-decoration: none; color: var(--ink); font-size: 0.92rem; line-height: 1.3; }
+.side a:hover { background: var(--surface-2); }
+.side a[aria-current="true"] { background: var(--i-t); }
+.side .num { font-family: var(--f-mono); font-size: 0.78rem; color: var(--ink-2); min-width: 2.2em; padding-top: 2px; }
+.side .tt { flex: 1; }
+.dots { display: inline-flex; gap: 3px; padding-top: 5px; }
+.dots i { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--line); }
+.dots i.on[data-l="b"] { background: var(--b); border-color: var(--b); }
+.dots i.on[data-l="i"] { background: var(--i); border-color: var(--i); }
+.dots i.on[data-l="v"] { background: var(--v); border-color: var(--v); }
+main { min-width: 0; padding: 28px clamp(16px, 4vw, 48px) 80px; }
+.wrap { max-width: 980px; margin: 0 auto; }
+
+/* ---------- inicio ---------- */
+.hero { background: var(--code-bg); color: #ECECF7; border-radius: 22px; padding: clamp(24px, 5vw, 48px); position: relative; overflow: hidden; }
+.hero h1 { font-size: clamp(2rem, 5.5vw, 3.4rem); margin-bottom: 0.3em; }
+.hero p { color: #C5C7E0; max-width: 60ch; margin: 0 0 1em; }
+.hero .kicker { font-family: var(--f-mono); font-size: 0.8rem; letter-spacing: 0.06em; color: #9FD3FF; text-transform: uppercase; }
+.stairs { display: flex; gap: 10px; align-items: flex-end; margin-top: 22px; flex-wrap: wrap; }
+.stair { border-radius: 12px; padding: 12px 14px; color: #fff; min-width: 150px; flex: 1; max-width: 230px; }
+.stair b { display: block; font-family: var(--f-display); font-size: 1.15rem; }
+.stair span { font-size: 0.88rem; opacity: 0.92; }
+.stair.b { background: #0B7D59; } .stair.i { background: #2D58CF; padding-top: 30px; } .stair.v { background: #A12C7B; padding-top: 48px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); padding: 9px 16px; border-radius: 10px; cursor: pointer; text-decoration: none; font-weight: 700; font-size: 0.95rem; }
+.btn:hover { background: var(--surface-2); }
+.btn.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.btn.primary:hover { opacity: 0.9; }
+.btn.small { padding: 6px 12px; font-size: 0.88rem; }
+.btn svg { width: 18px; height: 18px; }
+.hero .btn.primary { background: #fff; color: #1A1C2E; border-color: #fff; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 18px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; }
+.card h3 { font-size: 1.15rem; }
+.card p { margin: 0 0 0.6em; color: var(--ink-2); }
+.section-title { margin-top: 38px; font-size: 1.6rem; }
+.unit-card a { text-decoration: none; color: inherit; display: block; }
+.bar { height: 8px; border-radius: 4px; background: var(--surface-2); border: 1px solid var(--line); overflow: hidden; margin-top: 10px; display: flex; }
+.bar span { height: 100%; }
+.bar .sb { background: var(--b); } .bar .si { background: var(--i); } .bar .sv { background: var(--v); }
+.muted { color: var(--ink-2); font-size: 0.92rem; }
+
+/* ---------- tema ---------- */
+.crumb { font-family: var(--f-mono); font-size: 0.82rem; color: var(--ink-2); margin-bottom: 6px; }
+.tema-h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+.analogia { background: var(--accent-t); border-left: 5px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0; padding: 14px 18px; margin: 14px 0 22px; }
+.analogia::before { content: "Para entenderlo"; display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; color: var(--accent); margin-bottom: 2px; }
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; border-bottom: 2px solid var(--line); }
+.tabs [role="tab"] { border: 1px solid var(--line); border-bottom: 0; background: var(--surface-2); border-radius: 12px 12px 0 0; padding: 10px 16px; cursor: pointer; font-weight: 700; color: var(--ink-2); display: inline-flex; align-items: center; gap: 8px; margin-bottom: -2px; }
+.tabs [role="tab"] .ck { width: 18px; height: 18px; border-radius: 50%; border: 2px solid currentColor; display: inline-grid; place-items: center; font-size: 11px; line-height: 1; }
+.tabs [role="tab"][data-l="b"] { color: var(--b); }
+.tabs [role="tab"][data-l="i"] { color: var(--i); }
+.tabs [role="tab"][data-l="v"] { color: var(--v); }
+.tabs [role="tab"][aria-selected="true"] { background: var(--surface); border-bottom: 2px solid var(--surface); }
+.tabs [role="tab"][aria-selected="true"][data-l="b"] { box-shadow: inset 0 4px 0 var(--b); }
+.tabs [role="tab"][aria-selected="true"][data-l="i"] { box-shadow: inset 0 4px 0 var(--i); }
+.tabs [role="tab"][aria-selected="true"][data-l="v"] { box-shadow: inset 0 4px 0 var(--v); }
+.tabs [role="tab"][aria-selected="true"][data-l="t"] { box-shadow: inset 0 4px 0 var(--ink-2); color: var(--ink); }
+.tabs [role="tab"].done .ck { background: currentColor; }
+.tabs [role="tab"].done .ck::after { content: "✓"; color: var(--surface); font-weight: 700; }
+.tabs .alltab { margin-left: auto; font-weight: 400; font-size: 0.9rem; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-top: 0; border-radius: 0 0 var(--radius) var(--radius); padding: clamp(16px, 3vw, 28px); }
+.lvl-badge { display: inline-block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; padding: 3px 10px; border-radius: 999px; margin-bottom: 10px; }
+.lvl-badge.b { background: var(--b-t); color: var(--b); } .lvl-badge.i { background: var(--i-t); color: var(--i); } .lvl-badge.v { background: var(--v-t); color: var(--v); }
+.explica p { margin: 0 0 0.8em; }
+.explica ul, .explica ol { margin: 0 0 0.9em; padding-left: 1.3em; }
+.explica li { margin-bottom: 0.3em; }
+.ejercicio { margin-top: 22px; border: 2px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.ejercicio.b { border-color: var(--b); } .ejercicio.i { border-color: var(--i); } .ejercicio.v { border-color: var(--v); }
+.ej-head { padding: 14px 18px 4px; }
+.ej-head .tag { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
+.ejercicio.b .tag { color: var(--b); } .ejercicio.i .tag { color: var(--i); } .ejercicio.v .tag { color: var(--v); }
+.ej-head h3 { font-size: 1.3rem; margin: 2px 0 8px; }
+.ej-body { padding: 0 18px 16px; }
+.ej-body p { margin: 0 0 0.7em; }
+.ej-body ul { margin: 0 0 0.8em; padding-left: 1.3em; }
+.criterios { list-style: none; padding: 0 !important; margin: 10px 0 12px !important; }
+.criterios li { margin-bottom: 4px; }
+.criterios label { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; }
+.criterios input { width: 18px; height: 18px; margin-top: 3px; accent-color: var(--b); flex: none; }
+.pista { background: var(--surface-2); border-radius: 10px; padding: 8px 14px; margin-bottom: 12px; }
+.pista summary { cursor: pointer; font-weight: 700; color: var(--accent); }
+.pista p { margin: 8px 0 4px; white-space: pre-line; }
+
+/* zona de práctica */
+.practica { background: var(--code-bg); color: var(--code-ink); padding: 12px; }
+.pr-bar { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-bottom: 8px; }
+.pr-tabs { display: inline-flex; gap: 2px; background: rgba(255,255,255,0.06); padding: 3px; border-radius: 10px; }
+.pr-tabs button { border: 0; background: transparent; color: var(--code-dim); padding: 5px 12px; border-radius: 8px; cursor: pointer; font-family: var(--f-mono); font-size: 0.82rem; font-weight: 600; }
+.pr-tabs button[aria-selected="true"] { background: rgba(255,255,255,0.14); color: #fff; }
+.pr-bar .sp { flex: 1; }
+.pr-btn { border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06); color: #fff; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 700; display: inline-flex; gap: 6px; align-items: center; }
+.pr-btn:hover { background: rgba(255,255,255,0.14); }
+.pr-btn.run { background: #3FCB97; border-color: #3FCB97; color: #0E0F22; }
+.pr-btn svg { width: 15px; height: 15px; }
+.pr-split { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.editor { width: 100%; min-height: 300px; height: 100%; resize: vertical; background: #12132A; color: var(--code-ink); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 12px; font-family: var(--f-mono); font-size: 0.86rem; line-height: 1.55; tab-size: 2; white-space: pre; overflow: auto; }
+.resultado { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.resultado iframe { width: 100%; height: 300px; border: 0; border-radius: 10px; background: #fff; }
+.consola { background: #0A0B1A; border-radius: 10px; font-family: var(--f-mono); font-size: 0.78rem; max-height: 130px; min-height: 44px; overflow: auto; padding: 6px 10px; }
+.consola .t { color: var(--code-dim); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; }
+.consola div { white-space: pre-wrap; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 2px 0; }
+.consola .error { color: #FF8A80; } .consola .warn { color: #FFD180; }
+.pr-note { font-size: 0.78rem; color: var(--code-dim); margin-top: 6px; }
+
+/* entrega */
+.entrega { padding: 14px 18px 18px; background: var(--surface-2); border-top: 1px solid var(--line); display: grid; gap: 10px; }
+.entrega label { font-weight: 700; font-size: 0.92rem; display: block; margin-bottom: 4px; }
+.entrega input[type="url"], .entrega textarea, .field { width: 100%; border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 9px 12px; }
+.entrega textarea { min-height: 90px; resize: vertical; }
+.done-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.done-btn { border: 2px solid var(--b); color: var(--b); background: var(--surface); font-weight: 700; padding: 8px 16px; border-radius: 10px; cursor: pointer; }
+.done-btn[aria-pressed="true"] { background: var(--b); color: #fff; }
+.save-note { font-size: 0.82rem; color: var(--ink-2); }
+.pager { display: flex; justify-content: space-between; gap: 10px; margin-top: 26px; flex-wrap: wrap; }
+.pager a { flex: 1; min-width: 200px; text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 16px; }
+.pager a:hover { border-color: var(--ink-2); }
+.pager small { display: block; color: var(--ink-2); font-size: 0.8rem; }
+.pager .nx { text-align: right; }
+
+/* vista de los tres niveles */
+.tres { display: grid; gap: 14px; }
+.tres .col { border-left: 5px solid var(--line); padding: 4px 0 4px 16px; }
+.tres .col.b { border-color: var(--b); } .tres .col.i { border-color: var(--i); } .tres .col.v { border-color: var(--v); }
+.tres h3 { font-size: 1.1rem; margin-bottom: 6px; }
+
+/* tablas */
+.tabla-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+table.t { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+table.t th, table.t td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.t th { background: var(--surface-2); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-2); }
+table.t tr:last-child td { border-bottom: 0; }
+.pill { display: inline-block; text-decoration: none; font-size: 0.78rem; font-weight: 700; padding: 2px 9px; border-radius: 999px; margin: 1px 2px 1px 0; }
+.pill.b { background: var(--b-t); color: var(--b); } .pill.i { background: var(--i-t); color: var(--i); } .pill.v { background: var(--v-t); color: var(--v); }
+.pill.on.b { background: var(--b); color: #fff; } .pill.on.i { background: var(--i); color: #fff; } .pill.on.v { background: var(--v); color: #fff; }
+.th-b { color: var(--b) !important; } .th-i { color: var(--i) !important; } .th-v { color: var(--v) !important; }
+.gl dt { font-weight: 700; font-family: var(--f-display); font-size: 1.05rem; margin-top: 12px; }
+.gl dd { margin: 2px 0 0; color: var(--ink-2); }
+.toast { position: fixed; bottom: 20px; left: 50%; transform: translate(-50%, 20px); background: var(--ink); color: var(--bg); padding: 10px 18px; border-radius: 10px; opacity: 0; pointer-events: none; transition: 0.25s; z-index: 50; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1100px) {
+  .pr-split { grid-template-columns: 1fr; }
+  .editor { min-height: 220px; }
+}
+@media (max-width: 900px) {
+  #menuBtn { display: grid; }
+  .shell { grid-template-columns: 1fr; }
+  .side { position: fixed; left: 0; top: var(--top); width: min(320px, 88vw); z-index: 25; transform: translateX(-102%); transition: transform 0.25s; box-shadow: 0 10px 40px rgba(0,0,0,0.25); }
+  .side.open { transform: none; }
+  .top nav { display: none; }
+  .lvl-pick .lbl { display: none; }
+  .brand .long { display: none; }
+}
+@media (max-width: 520px) {
+  .seg button { padding: 4px 9px; }
+  .tabs [role="tab"] { padding: 8px 10px; font-size: 0.9rem; }
+  .tabs .alltab { margin-left: 0; }
+  main { padding-top: 18px; }
+}
+@media print {
+  .top, .side, .practica, .entrega, .pager, .tabs { display: none !important; }
+  .shell { display: block; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="top">
+  <button class="icon-btn" id="menuBtn" aria-label="Abrir índice de temas" aria-expanded="false" aria-controls="side">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <a class="brand" href="#inicio">
+    <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1A1C2E"/><rect x="12" y="38" width="10" height="14" rx="2" fill="#3FCB97"/><rect x="27" y="26" width="10" height="26" rx="2" fill="#7C9DF5"/><rect x="42" y="12" width="10" height="40" rx="2" fill="#EC6DBE"/></svg>
+    <span>Diseño Web <span class="long">· Taller</span></span>
+  </a>
+  <nav aria-label="Secciones">
+    <a href="#inicio" data-v="inicio">Inicio</a>
+    <a href="#programa" data-v="programa">Programa</a>
+    <a href="#entregas" data-v="entregas">Mis entregas</a>
+    <a href="#glosario" data-v="glosario">Glosario</a>
+  </nav>
+  <span class="sp"></span>
+  <div class="lvl-pick">
+    <span class="lbl" id="lvlLbl">Mi nivel</span>
+    <div class="seg" role="group" aria-labelledby="lvlLbl" id="seg">
+      <button data-l="b" aria-pressed="true" title="Básico">B<span class="sr">ásico</span></button>
+      <button data-l="i" aria-pressed="false" title="Intermedio">I<span class="sr">ntermedio</span></button>
+      <button data-l="v" aria-pressed="false" title="Avanzado">A<span class="sr">vanzado</span></button>
+    </div>
+  </div>
+  <button class="icon-btn" id="themeBtn" aria-label="Cambiar entre modo claro y oscuro">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+  </button>
+</header>
+
+<div class="shell">
+  <aside class="side" id="side" aria-label="Temas del programa"></aside>
+  <main id="main" tabindex="-1"><div class="wrap" id="view"></div></main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* =====================================================================
+ *  CONTENIDOS DEL TALLER
+ *  Cada tema del programa tiene tres niveles: b (básico), i (intermedio)
+ *  y v (avanzado). Cada nivel tiene:
+ *    x: explicación (formato: **negrita**, ~código~, líneas con "- " = lista)
+ *    e: ejercicio { t: título, c: consigna, k: [criterios], p: pista,
+ *                   h: HTML inicial, s: CSS inicial, j: JS inicial }
+ *  Si un ejercicio no tiene h, s ni j, es de respuesta escrita.
+ * ===================================================================== */
+var UNIDADES = [
+  { n: '1', t: 'Fundamentos de diseño web' },
+  { n: '2', t: 'Fundamentos de HTML y CSS' },
+  { n: '3', t: 'Diseño web interactivo' },
+  { n: '4', t: 'Diseño web avanzado' },
+  { n: '5', t: 'Proyecto web' }
+];
+
+var TEMAS = [];
+function tema(o) { TEMAS.push(o); }
+
+/* ============================ UNIDAD 1 ============================ */
+tema({ id: '1.1', u: '1', t: 'Introducción al diseño web',
+a: `**Pensalo como un delivery.** Vos (el navegador) hacés un pedido escribiendo una dirección. El local (el servidor) prepara el pedido y te lo manda. Lo que llega son archivos de texto que tu navegador arma en la pantalla.`,
+b: { x: `Internet es la red que conecta computadoras de todo el mundo. La **web** es uno de sus servicios: páginas que pedís y ves en un navegador.
+- **Navegador (cliente):** el programa que pide la página (Chrome, Firefox, Edge).
+- **Servidor:** la computadora que guarda la página y la envía.
+- **URL:** la dirección de la página, por ejemplo ~https://www.utu.edu.uy~.
+- **Diseño web:** decidir cómo se ve, cómo se ordena y cómo se usa una página.`,
+  e: { t: 'El viaje de una página', c: `Escribí, con tus palabras y en orden, qué pasa desde que escribís una dirección en el navegador hasta que ves la página. Usá las palabras navegador, servidor y URL.`,
+    k: ['Están las tres palabras: navegador, servidor y URL', 'Los pasos están en orden', 'Lo explicás como se lo contarías a un compañero'],
+    p: `Empezá así: "1. Escribo la URL en el navegador. 2. ..."` } },
+i: { x: `Toda página web se hace con tres lenguajes que trabajan juntos, como un cuerpo:
+- **HTML** es el esqueleto: dice qué hay (títulos, textos, imágenes, botones).
+- **CSS** es la ropa: dice cómo se ve (colores, tamaños, lugar).
+- **JavaScript** es el movimiento: dice qué hace cuando lo usás (clics, mensajes, cambios).
+
+Una URL también tiene partes: ~https://~ (protocolo seguro), ~www.ejemplo.com~ (dominio) y ~/fotos/playa.html~ (ruta al archivo).`,
+  e: { t: 'Las tres capas', c: `El código de abajo tiene las tres capas. Tocá **Ejecutar** y probá el botón. Después cambiá: el texto del título (HTML), el color de fondo (CSS) y el mensaje del botón (JS). Anotá en el código, con un comentario, cuál de las tres capas tocaste en cada cambio.`,
+    k: ['Cambiaste algo en HTML, en CSS y en JS', 'El botón sigue funcionando', 'Cada cambio tiene su comentario'],
+    p: `Los comentarios en HTML son ~<!-- así -->~, en CSS ~/* así */~ y en JS ~// así~.`,
+    h: `<h1>Mi primera página</h1>
+<p>Esta página tiene esqueleto, ropa y movimiento.</p>
+<button id="boton">Tocame</button>`,
+    s: `body {
+  font-family: sans-serif;
+  background-color: lightyellow;
+  padding: 20px;
+}
+h1 {
+  color: darkblue;
+}`,
+    j: `document.getElementById('boton').addEventListener('click', function () {
+  alert('¡Hola! Esto lo hace JavaScript');
+});` } },
+v: { x: `Los navegadores traen **herramientas para desarrolladores** (DevTools). Se abren con **F12** o clic derecho → **Inspeccionar**.
+- La pestaña **Elementos** muestra el HTML y el CSS de la página.
+- La pestaña **Red** (Network) muestra cada archivo que el navegador le pidió al servidor: HTML, CSS, JS, imágenes y fuentes, con su peso y lo que tardó.
+
+Así ves que una página no es "un solo archivo": son decenas de pedidos que el navegador junta.`,
+  e: { t: 'Detective de la pestaña Red', c: `Abrí la página de UTU (o otra que uses mucho). Abrí DevTools → **Red** y recargá con F5. Respondé:
+- ¿Cuántos pedidos (requests) hizo la página?
+- ¿Cuánto pesa en total (transferred)?
+- ¿Cuál es el archivo más pesado y de qué tipo es?
+- ¿Qué podrías hacer para que cargue más rápido?`,
+    k: ['Las cuatro preguntas tienen respuesta', 'Los números salen de DevTools, no inventados', 'La propuesta de mejora tiene sentido'],
+    p: `Hacé clic en la columna "Tamaño" (Size) para ordenar los archivos del más pesado al más liviano.` } }
+});
+
+tema({ id: '1.2', u: '1', t: 'Conceptos de usabilidad y accesibilidad',
+a: `**Pensá en la entrada de un edificio.** Una buena entrada se encuentra fácil (usabilidad) y tiene rampa, escalera y ascensor para que entre todo el mundo (accesibilidad). Una página web es igual.`,
+b: { x: `- **Usabilidad:** que la página sea fácil de usar. Encontrás lo que buscás sin perderte.
+- **Accesibilidad:** que la pueda usar todo el mundo, también personas que no ven bien, que usan lector de pantalla o que no pueden usar el mouse.
+
+Dos reglas para empezar: toda imagen lleva un texto alternativo con ~alt~ (lo lee el lector de pantalla) y el texto tiene que contrastar con el fondo.`,
+  e: { t: 'Arreglá la página', c: `Esta página tiene dos problemas de accesibilidad: la imagen no tiene ~alt~ y el texto gris claro casi no se lee. Arreglá los dos.`,
+    k: ['La imagen tiene un alt que describe lo que muestra', 'El texto se lee bien sobre el fondo'],
+    p: `Un buen alt describe la imagen en pocas palabras: ~alt="Perro marrón corriendo en la playa"~.`,
+    h: `<h1>Mi mascota</h1>
+<img src="https://picsum.photos/id/237/400/250">
+<p class="texto">Se llama Luna y le encanta correr.</p>`,
+    s: `body { font-family: sans-serif; background: white; padding: 20px; }
+.texto { color: #dddddd; font-size: 18px; }` } },
+i: { x: `Otras reglas que mejoran mucho una página:
+- **Tamaño de letra:** al menos 16 px para el texto común.
+- **Enlaces que dicen a dónde van:** "Ver horarios de clase" es mejor que "clic aquí".
+- **Títulos en orden:** un ~h1~, después ~h2~, después ~h3~. El lector de pantalla los usa para saltar.
+- **El color no puede ser la única pista:** si un error se marca solo en rojo, alguien daltónico no lo ve. Agregá texto o un ícono.`,
+  e: { t: 'Cuatro problemas', c: `La página tiene cuatro problemas de usabilidad o accesibilidad. Encontralos, arreglalos y escribí en un comentario HTML cuáles eran.`,
+    k: ['Encontraste los cuatro problemas', 'Los arreglaste en el código', 'El comentario los explica'],
+    p: `Mirá el tamaño de letra, el texto del enlace, el orden de los títulos y el mensaje que solo usa color.`,
+    h: `<h3>Horarios</h3>
+<h1>Liceo</h1>
+<p class="chico">Las clases empiezan a las 8:00.</p>
+<a href="#">Clic aquí</a>
+<p class="error">Campo obligatorio</p>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+.chico { font-size: 10px; }
+.error { color: red; }` } },
+v: { x: `Una página accesible se tiene que poder usar **solo con el teclado**: Tab para avanzar, Shift + Tab para volver, Enter para activar.
+- Los elementos con foco necesitan un **indicador visible** (~:focus-visible~). Nunca borres el contorno sin poner otro.
+- Cada campo de un formulario necesita un ~<label>~ unido con ~for~ e ~id~.
+- Un botón que solo tiene un ícono necesita ~aria-label~ para que el lector de pantalla sepa qué hace.
+- Usá ~<button>~ para acciones, no un ~<div>~ con clic: el div no recibe foco.`,
+  e: { t: 'Formulario solo con teclado', c: `Probá el formulario usando solo Tab y Enter: no se puede. Arreglalo para que:
+- cada campo tenga su ~label~;
+- el "botón" sea un ~<button>~ real;
+- el foco se vea claramente;
+- el botón de la lupa tenga ~aria-label~.`,
+    k: ['Se puede completar y enviar solo con teclado', 'Cada campo tiene label unido con for/id', 'El foco se ve con claridad', 'El botón de ícono tiene aria-label'],
+    p: `Para el foco probá: ~:focus-visible { outline: 3px solid orange; outline-offset: 2px; }~`,
+    h: `<form>
+  Nombre <input type="text">
+  Correo <input type="email">
+  <div class="boton" onclick="alert('Enviado')">Enviar</div>
+</form>
+<button class="lupa">🔍</button>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+input { display: block; margin-bottom: 10px; }
+*:focus { outline: none; }
+.boton { background: navy; color: white; padding: 8px 16px; display: inline-block; cursor: pointer; }` } }
+});
+
+tema({ id: '1.3', u: '1', t: 'Herramientas y software para diseño web',
+a: `**Como un taller de carpintería.** Necesitás un banco de trabajo (el editor de código), un lugar para mirar lo que hacés (el navegador) y herramientas de medir (DevTools).`,
+b: { x: `Para hacer páginas web alcanza con:
+- **Un editor de código:** donde escribís. En este curso usamos **CodePen** (en el navegador, sin instalar nada) y **Visual Studio Code** (se instala en la compu).
+- **Un navegador:** donde ves el resultado.
+
+En CodePen tenés tres paneles (HTML, CSS y JS) y el resultado abajo. Para guardar tu trabajo necesitás una cuenta gratis: el botón **Save** te da un link para entregar.`,
+  e: { t: 'Mi primer Pen', c: `Tocá **Abrir en CodePen**, iniciá sesión y cambiá el texto por tu nombre y tu comida favorita. Guardá con **Save** y pegá el link del Pen abajo.`,
+    k: ['El Pen está guardado (el link termina en un código raro)', 'Aparecen tu nombre y tu comida favorita'],
+    p: `Si no tenés cuenta, usá "Sign up" con tu correo del liceo o con tu cuenta de Google.`,
+    h: `<h1>Hola, soy ...</h1>
+<p>Mi comida favorita es ...</p>`,
+    s: `body { font-family: sans-serif; text-align: center; padding-top: 40px; }` } },
+i: { x: `**Visual Studio Code** (VS Code) es el editor que usan los profesionales. Lo mejor es instalarle la extensión **Live Server**: abre tu página en el navegador y la recarga sola cada vez que guardás.
+
+Ordená tus proyectos así:
+- una carpeta por proyecto;
+- el archivo principal se llama ~index.html~;
+- carpetas ~css~, ~js~ e ~img~;
+- nombres en minúscula, sin espacios ni tildes: ~mi-pagina.html~, no ~Mi Página.html~.`,
+  e: { t: 'Carpeta de proyecto', c: `Tocá **Descargar para VS Code**. Creá una carpeta ~mi-proyecto~ con las subcarpetas ~css~, ~js~ e ~img~. Poné el ~index.html~ adentro y abrilo con Live Server. Después escribí abajo cómo quedó el árbol de carpetas.`,
+    k: ['La estructura de carpetas es correcta', 'Los nombres no tienen espacios ni tildes', 'La página se abre con Live Server'],
+    p: `Live Server: clic derecho sobre index.html → "Open with Live Server".`,
+    h: `<h1>Proyecto en VS Code</h1>
+<p>Si ves esto con Live Server, ¡funciona!</p>`,
+    s: `body { font-family: sans-serif; padding: 20px; background: #eef6ff; }` } },
+v: { x: `Las DevTools no son solo para mirar, también sirven para **probar sin romper nada**:
+- En **Elementos** podés cambiar CSS en vivo y ver el resultado al instante. Los cambios se borran al recargar.
+- En **Consola** ves los errores de JavaScript (en rojo) y podés escribir código para probarlo.
+- El **modo dispositivo** (ícono del celular) muestra la página como en un teléfono.
+
+Los profesionales además usan **Git** para guardar versiones y **GitHub** para compartir el código y publicar páginas gratis.`,
+  e: { t: 'Probador de estilos', c: `Ejecutá el código y abrí la consola de la zona de práctica (abajo). Hay un error. Encontralo y arreglalo. Después agregá un ~console.log~ que muestre cuántos párrafos tiene la página.`,
+    k: ['La consola ya no muestra errores', 'El botón cambia el color', 'El console.log muestra el número correcto de párrafos'],
+    p: `~document.querySelectorAll('p').length~ cuenta los párrafos.`,
+    h: `<h1>Probador</h1>
+<p>Primer párrafo</p>
+<p>Segundo párrafo</p>
+<p>Tercer párrafo</p>
+<button id="cambiar">Cambiar color</button>`,
+    s: `body { font-family: sans-serif; padding: 20px; }`,
+    j: `document.getElementById('cambiar').addEventListener('click', function () {
+  document.body.style.backgroundColor = 'lightgreen';
+  consol.log('Color cambiado');
+});` } }
+});
+
+tema({ id: '1.4', u: '1', t: 'Creación de la estructura básica de una página web',
+a: `**Como una carta.** Tiene un sobre con datos que no se leen en la carta (el ~head~) y la carta en sí, que es lo que ve la persona (el ~body~).`,
+b: { x: `Toda página HTML tiene la misma estructura:
+- ~<!DOCTYPE html>~ avisa que es HTML moderno.
+- ~<html>~ envuelve todo.
+- ~<head>~ tiene información que no se ve en la página, como el ~<title>~ (el nombre de la pestaña).
+- ~<body>~ tiene todo lo que se ve.
+
+Casi todas las etiquetas se abren y se cierran: ~<body>~ ... ~</body>~.`,
+  e: { t: 'El esqueleto', c: `Tocá **Descargar para VS Code**: el archivo trae la estructura completa. Abrilo y cambiá el título de la pestaña por "Mi primera página" y el contenido del body por un título y un párrafo sobre vos. En la zona de práctica alcanza con escribir el contenido del body.`,
+    k: ['La pestaña muestra "Mi primera página"', 'El body tiene un título y un párrafo', 'Todas las etiquetas están cerradas'],
+    p: `El título de la pestaña va dentro de ~<title>~, en el head.`,
+    h: `<h1>Sobre mí</h1>
+<p>Escribí acá algo sobre vos.</p>`,
+    s: `` } },
+i: { x: `En el ~head~ van datos importantes:
+- ~<meta charset="UTF-8">~ hace que se vean bien las tildes y la ñ.
+- ~<meta name="viewport" content="width=device-width, initial-scale=1">~ hace que la página se adapte al celular.
+- ~<html lang="es">~ avisa el idioma (el lector de pantalla pronuncia mejor).
+- ~<link rel="stylesheet" href="css/estilos.css">~ conecta un archivo CSS aparte.`,
+  e: { t: 'Un head completo', c: `En VS Code, armá un ~index.html~ con el head completo (charset, viewport, title y link a ~css/estilos.css~) y creá el archivo ~estilos.css~ con un color de fondo. En la zona de práctica, escribí el head que usaste en un comentario y un body con un párrafo que use tildes y ñ.`,
+    k: ['El head tiene charset, viewport, title y link', 'El CSS externo funciona (se ve el color de fondo)', 'Las tildes y la ñ se ven bien'],
+    p: `En VS Code escribí ~!~ y apretá Tab: aparece la estructura completa sola.`,
+    h: `<!-- Pegá acá tu head:
+
+-->
+<p>El ñandú corrió rápido por el campo.</p>`,
+    s: `body { background: #fff4e6; font-family: sans-serif; }` } },
+v: { x: `HTML moderno usa **etiquetas semánticas**: tienen nombre que dice qué son. Ayudan a los buscadores y a los lectores de pantalla.
+- ~<header>~ encabezado del sitio
+- ~<nav>~ menú de navegación
+- ~<main>~ contenido principal (uno solo por página)
+- ~<section>~ una sección con su título
+- ~<article>~ algo que se entiende solo (una noticia, un posteo)
+- ~<aside>~ información al costado
+- ~<footer>~ pie de página`,
+  e: { t: 'Del div a la semántica', c: `Esta página está hecha solo con ~div~. Reemplazá cada uno por la etiqueta semántica que corresponde. El aspecto tiene que quedar igual.`,
+    k: ['No queda ningún div', 'Cada parte usa la etiqueta correcta', 'Hay un solo main', 'El CSS sigue funcionando (actualizá los selectores)'],
+    p: `Si cambiás ~<div class="pie">~ por ~<footer>~, en el CSS podés seguir usando ~.pie~ si le dejás la clase.`,
+    h: `<div class="encabezado">Club de Robótica</div>
+<div class="menu"><a href="#">Inicio</a> · <a href="#">Proyectos</a></div>
+<div class="principal">
+  <div class="noticia"><h2>Ganamos la feria</h2><p>Nuestro robot llegó primero.</p></div>
+</div>
+<div class="pie">Liceo 2026</div>`,
+    s: `body { font-family: sans-serif; margin: 0; }
+.encabezado { background: #1A1C2E; color: white; padding: 16px; font-size: 24px; }
+.menu { background: #e2eafc; padding: 8px 16px; }
+.principal { padding: 16px; }
+.noticia { border: 1px solid #ccc; padding: 12px; border-radius: 8px; }
+.pie { text-align: center; padding: 16px; color: #555; }` } }
+});
+
+/* ============================ UNIDAD 2 ============================ */
+tema({ id: '2.1', u: '2', t: 'Elementos, etiquetas y atributos HTML',
+a: `**Las etiquetas son como cajas con cartel.** El cartel (~<h1>~) dice qué hay adentro. Los atributos son datos extra escritos en el cartel: "frágil", "para Ana".`,
+b: { x: `Un **elemento** tiene etiqueta de apertura, contenido y etiqueta de cierre: ~<p>Hola</p>~.
+- ~<h1>~ a ~<h6>~: títulos, del más importante al menos importante.
+- ~<p>~: párrafo.
+- ~<strong>~: texto importante (se ve en negrita).
+- ~<em>~: texto con énfasis (se ve en cursiva).
+- ~<br>~: salto de línea (no se cierra).`,
+  e: { t: 'Tu receta', c: `Escribí tu receta favorita con: un título ~h1~, un subtítulo ~h2~ "Ingredientes", otro ~h2~ "Preparación" y párrafos. Marcá con ~strong~ algo importante (por ejemplo "¡cuidado, quema!").`,
+    k: ['Hay un h1 y dos h2', 'Hay al menos dos párrafos', 'Usaste strong o em', 'Todas las etiquetas están cerradas'],
+    p: `Copiá la estructura del ejemplo y cambiá los textos.`,
+    h: `<h1>Tortas fritas</h1>
+<h2>Ingredientes</h2>
+<p>Harina, sal, grasa y agua tibia.</p>`,
+    s: `body { font-family: sans-serif; padding: 20px; }` } },
+i: { x: `Las **listas** ordenan información:
+- ~<ul>~ lista sin orden (con puntos).
+- ~<ol>~ lista numerada.
+- Cada ítem va en ~<li>~. Una lista puede ir **adentro** de un ~li~ (lista anidada).
+
+Los **atributos** van en la etiqueta de apertura: ~nombre="valor"~. Algunos sirven en cualquier etiqueta:
+- ~class~ agrupa elementos para darles estilo.
+- ~id~ identifica un elemento único.
+- ~title~ muestra un texto al pasar el mouse.`,
+  e: { t: 'Lista de compras', c: `Armá una lista de compras con ~ul~ y tres categorías (Almacén, Verdulería, Limpieza). Cada categoría tiene una lista anidada con productos. Después hacé una lista numerada con los pasos para hacer la compra. Usá ~class="urgente"~ en dos productos.`,
+    k: ['La ul tiene tres categorías con listas anidadas', 'Hay una ol con pasos', 'Dos productos tienen class="urgente" y se ven distintos'],
+    p: `La lista anidada va adentro del ~li~, antes de su ~</li>~.`,
+    h: `<h1>Compras</h1>
+<ul>
+  <li>Almacén
+    <ul>
+      <li>Yerba</li>
+    </ul>
+  </li>
+</ul>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+.urgente { color: crimson; font-weight: bold; }` } },
+v: { x: `Más detalles que separan un código prolijo de uno con errores:
+- **Elementos vacíos** no tienen cierre: ~<br>~, ~<img>~, ~<input>~, ~<hr>~, ~<meta>~.
+- **Bloque vs. en línea:** ~p~, ~h1~, ~div~, ~ul~ ocupan todo el ancho (bloque). ~a~, ~strong~, ~span~, ~img~ van dentro del texto (en línea).
+- ~<div>~ es una caja de bloque genérica; ~<span>~ es una caja en línea genérica. Se usan cuando no hay una etiqueta con significado.
+- Las etiquetas se cierran **en orden inverso**: ~<p><strong>hola</strong></p>~, nunca ~<p><strong>hola</p></strong>~.
+
+El validador ~validator.w3.org~ revisa tu HTML y te dice los errores.`,
+  e: { t: 'Cazador de errores', c: `Este código tiene cinco errores de HTML. Encontralos y corregilos. Después pegalo en validator.w3.org (pestaña "Validate by Direct Input") y verificá que no queden errores.`,
+    k: ['Encontraste y corregiste los cinco errores', 'El validador no marca errores en el body', 'Explicás en un comentario cuáles eran'],
+    p: `Revisá: un cierre cruzado, un título que cierra con otro número, un elemento vacío "cerrado", un atributo sin comillas cerradas y un li fuera de lista.`,
+    h: `<h1>Mi club</h2>
+<p>Somos <strong>muchos</p></strong>
+<img src="https://picsum.photos/200" alt="foto></img>
+<li>Fútbol</li>
+<ul>
+  <li>Básquet</li>
+</ul>`,
+    s: `body { font-family: sans-serif; padding: 20px; }` } }
+});
+
+tema({ id: '2.2', u: '2', t: 'Estructura básica de un documento HTML',
+a: `**Como un árbol genealógico.** Cada etiqueta que está dentro de otra es su "hija". El ~html~ es el abuelo de todos.`,
+b: { x: `El código se escribe **ordenado** para poder leerlo:
+- **Sangría (indentación):** lo que está adentro de otra etiqueta se corre un poco a la derecha (2 espacios o Tab).
+- **Comentarios:** ~<!-- esto no se ve en la página -->~. Sirven para dejar notas.
+- **Una cosa por línea** en las partes grandes.
+
+En VS Code, **Shift + Alt + F** acomoda el código solo.`,
+  e: { t: 'Ordená el desorden', c: `El código funciona pero está todo amontonado. Ordenalo con sangría, una etiqueta grande por línea y agregá tres comentarios que expliquen cada parte.`,
+    k: ['Cada nivel de anidamiento tiene su sangría', 'Hay al menos tres comentarios útiles', 'La página se ve igual que antes'],
+    p: `En la zona de práctica también podés usar Tab para la sangría.`,
+    h: `<header><h1>Banda escolar</h1></header><main><section><h2>Integrantes</h2><ul><li>Ana - batería</li><li>Leo - guitarra</li></ul></section><section><h2>Próximo show</h2><p>Viernes a las 19 h.</p></section></main><footer><p>Liceo 2026</p></footer>`,
+    s: `body { font-family: sans-serif; padding: 20px; }` } },
+i: { x: `El navegador convierte tu HTML en un **árbol** llamado **DOM**:
+- **Padre:** la etiqueta que contiene a otra.
+- **Hijo:** la que está adentro.
+- **Hermanos:** las que tienen el mismo padre.
+
+Ejemplo: en ~<ul><li>A</li><li>B</li></ul>~ el ~ul~ es padre de los dos ~li~, que son hermanos. Entender el árbol es clave para CSS y JavaScript.`,
+  e: { t: 'Dibujá el árbol', c: `Mirá el código de abajo y escribí el árbol: quién es padre de quién. Podés usar guiones para mostrar los niveles. Respondé además: ¿quiénes son hermanos del ~nav~?`,
+    k: ['El árbol tiene todos los elementos', 'Los niveles están bien', 'Respondiste quiénes son hermanos del nav'],
+    p: `Ejemplo de formato:
+body
+- header
+-- h1`,
+    h: `<body>
+  <header>
+    <h1>Tienda</h1>
+    <nav><a href="#">Inicio</a> <a href="#">Ofertas</a></nav>
+  </header>
+  <main>
+    <p>Bienvenidos</p>
+  </main>
+</body>`,
+    s: `` } },
+v: { x: `Detalles de un documento profesional:
+- **Entidades HTML** para caracteres especiales: ~&lt;~ muestra <, ~&copy;~ muestra ©, ~&nbsp;~ es un espacio que no se corta.
+- **Etiquetas de metadatos** en el head: ~<meta name="description">~ (lo que muestra Google), ~<link rel="icon">~ (el ícono de la pestaña).
+- Una **plantilla base** que reusás en cada página del sitio para que todas tengan el mismo encabezado, menú y pie.`,
+  e: { t: 'Plantilla del sitio', c: `Creá una plantilla base para un sitio de tres páginas: encabezado con nombre del sitio, menú con tres enlaces (~index.html~, ~galeria.html~, ~contacto.html~), un main vacío con un comentario "CONTENIDO" y un pie con © y el año usando entidades. Mostrá en un párrafo el texto ~<h1>~ tal cual (que no se convierta en título).`,
+    k: ['Encabezado, menú, main y pie con semántica', 'El © está escrito con entidad', 'El texto <h1> se ve como texto', 'En un comentario pusiste el meta description que usarías'],
+    p: `Para que se vea ~<h1>~ escribí ~&lt;h1&gt;~.`,
+    h: `<header>
+  <!-- nombre del sitio -->
+</header>
+`,
+    s: `body { font-family: sans-serif; margin: 0; }
+header, footer { background: #1A1C2E; color: white; padding: 12px 16px; }
+nav a { color: #9FD3FF; margin-right: 12px; }
+main { padding: 16px; min-height: 120px; }` } }
+});
+
+tema({ id: '2.3', u: '2', t: 'Enlaces, imágenes y multimedia',
+a: `**Los enlaces son puertas** que llevan a otra página. **Las imágenes son cuadros** colgados en la pared: el ~src~ dice dónde está guardado el cuadro.`,
+b: { x: `- **Enlace:** ~<a href="https://www.wikipedia.org">Ir a Wikipedia</a>~. El ~href~ es el destino; el texto es lo que se ve.
+- **Imagen:** ~<img src="foto.jpg" alt="Descripción">~. El ~src~ es la dirección de la imagen y el ~alt~ la describe. No se cierra.
+
+Podés usar imágenes de internet copiando su dirección (clic derecho → Copiar dirección de imagen).`,
+  e: { t: 'Mi animal favorito', c: `Hacé una página sobre tu animal favorito con un título, dos imágenes con ~alt~ y un enlace a una página donde se pueda leer más (por ejemplo Wikipedia).`,
+    k: ['Hay dos imágenes que se ven', 'Las dos tienen alt descriptivo', 'El enlace funciona y su texto dice a dónde va'],
+    p: `Si la imagen no aparece, revisá que la dirección termine en .jpg, .png o .webp, o usá ~https://picsum.photos/400/250~.`,
+    h: `<h1>El carpincho</h1>
+<img src="https://picsum.photos/id/1025/400/250" alt="Perro con una manta">
+<p>Escribí acá algo sobre tu animal.</p>
+<a href="https://es.wikipedia.org">Leer más en Wikipedia</a>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+img { max-width: 100%; border-radius: 8px; }` } },
+i: { x: `- **Ruta absoluta:** la dirección completa, ~https://sitio.com/foto.jpg~.
+- **Ruta relativa:** desde donde está tu archivo, ~img/foto.jpg~ (en la carpeta img) o ~../index.html~ (una carpeta arriba).
+- ~target="_blank"~ abre el enlace en otra pestaña.
+- **Enlaces internos:** ~<a href="#contacto">~ salta al elemento con ~id="contacto"~ en la misma página.
+- ~<figure>~ y ~<figcaption>~ ponen una imagen con su epígrafe.`,
+  e: { t: 'Menú que salta', c: `Hacé una página larga con tres secciones (Inicio, Galería, Contacto), cada una con su ~id~. Arriba, un menú con enlaces internos a cada sección. En Galería, dos imágenes con ~figure~ y ~figcaption~. En Contacto, un enlace externo que abra en otra pestaña.`,
+    k: ['Los tres enlaces del menú saltan a su sección', 'Las imágenes usan figure y figcaption', 'El enlace externo abre en otra pestaña'],
+    p: `El href lleva numeral: ~href="#galeria"~. El id no: ~id="galeria"~.`,
+    h: `<nav>
+  <a href="#inicio">Inicio</a>
+</nav>
+<section id="inicio">
+  <h2>Inicio</h2>
+  <p>Bienvenidos.</p>
+</section>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+section { min-height: 400px; border-top: 2px dashed #ccc; }
+nav { position: sticky; top: 0; background: white; padding: 8px 0; }
+html { scroll-behavior: smooth; }` } },
+v: { x: `HTML trae reproductores propios:
+- ~<video src="video.mp4" controls poster="portada.jpg"></video>~
+- ~<audio src="sonido.mp3" controls></audio>~
+- ~<iframe>~ inserta otra página adentro de la tuya (un video de YouTube, un mapa).
+
+Atributos útiles: ~controls~ (botones), ~muted~, ~loop~, ~width~ y ~height~ (reservan el espacio y la página no "salta"), y ~loading="lazy"~ en imágenes e iframes (cargan cuando llegás con el scroll).`,
+  e: { t: 'Rincón multimedia', c: `Armá una página con: un video con controles y póster, un audio con controles, un video de YouTube insertado con iframe y tres imágenes con ~loading="lazy"~, ~width~ y ~height~.`,
+    k: ['Video y audio con controles funcionan', 'El iframe de YouTube se ve', 'Las imágenes tienen loading, width y height'],
+    p: `En YouTube: Compartir → Insertar → copiás el código del iframe.`,
+    h: `<h1>Rincón multimedia</h1>
+<video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" controls width="400"></video>
+<audio src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" controls></audio>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+video, iframe, img { max-width: 100%; display: block; margin-bottom: 12px; }` } }
+});
+
+tema({ id: '2.4', u: '2', t: 'Selectores, propiedades y valores en CSS',
+a: `**CSS es como dar órdenes a un grupo.** Primero decís a quién (selector: "todos los de buzo azul"), después qué hacer (propiedad: "levantar la mano") y cómo (valor: "la derecha").`,
+b: { x: `Una regla CSS tiene esta forma:
+
+~selector { propiedad: valor; }~
+
+- El **selector** elige qué elementos: ~p~ elige todos los párrafos.
+- La **propiedad** es qué cambiás: ~color~, ~background-color~, ~font-size~.
+- El **valor** es cómo: ~red~, ~#ff0000~, ~20px~.
+
+Cada línea termina con **punto y coma**.`,
+  e: { t: 'Pintá la página', c: `Con selectores de etiqueta, hacé que: el fondo de la página sea celeste, los ~h1~ sean azul oscuro, los párrafos tengan letra de 18px y los enlaces sean naranjas.`,
+    k: ['Hay cuatro reglas con selectores de etiqueta', 'Cada declaración termina en punto y coma', 'Se ven los cuatro cambios'],
+    p: `El fondo de la página se cambia en el selector ~body~.`,
+    h: `<h1>Colores</h1>
+<p>Este párrafo va a cambiar.</p>
+<p>Este también.</p>
+<a href="#">Un enlace</a>`,
+    s: `body {
+  /* fondo celeste */
+}
+` } },
+i: { x: `Selectores más precisos:
+- **Clase:** ~.tarjeta~ elige todo lo que tenga ~class="tarjeta"~. Se repite todas las veces que quieras.
+- **Id:** ~#portada~ elige el elemento con ~id="portada"~. Hay uno solo por página.
+- **Agrupar:** ~h1, h2, h3 { ... }~ aplica lo mismo a varios.
+- **Descendiente:** ~nav a { ... }~ elige solo los enlaces que están dentro de un nav.`,
+  e: { t: 'Tarjetas con clase', c: `Hay tres tarjetas. Con una clase, dales a todas borde, fondo blanco y espacio interior. Con otra clase, destacá la tarjeta del medio. Con un descendiente, poné en verde solo los enlaces que están dentro de las tarjetas.`,
+    k: ['Las tres tarjetas comparten una clase con estilo', 'La del medio tiene una clase extra', 'Solo los enlaces de las tarjetas son verdes'],
+    p: `Un elemento puede tener dos clases: ~class="tarjeta destacada"~.`,
+    h: `<a href="#">Enlace afuera</a>
+<div>
+  <h3>Plan básico</h3>
+  <a href="#">Elegir</a>
+</div>
+<div>
+  <h3>Plan medio</h3>
+  <a href="#">Elegir</a>
+</div>
+<div>
+  <h3>Plan full</h3>
+  <a href="#">Elegir</a>
+</div>`,
+    s: `body { font-family: sans-serif; background: #eef1f6; padding: 20px; }
+` } },
+v: { x: `- **Pseudoclases:** eligen un estado o una posición. ~a:hover~ (mouse encima), ~input:focus~ (con foco), ~li:nth-child(2n)~ (los pares), ~li:first-child~.
+- **La cascada:** si dos reglas chocan, gana la **más específica**. Id le gana a clase, clase le gana a etiqueta. Si empatan, gana la que está **más abajo**.
+- **Herencia:** algunas propiedades, como ~color~ y ~font-family~, pasan de padres a hijos.`,
+  e: { t: '¿Quién gana?', c: `Antes de ejecutar, anotá en un comentario de qué color creés que va a quedar cada párrafo. Ejecutá y comprobá. Después agregá: filas alternadas en la tabla con ~nth-child~ y un ~hover~ que resalte la fila.`,
+    k: ['Escribiste tu predicción antes de ejecutar', 'Explicás por qué gana cada regla', 'La tabla tiene filas alternadas y hover'],
+    p: `Contá: id = 100 puntos, clase = 10, etiqueta = 1.`,
+    h: `<p id="uno" class="rojo">Párrafo 1</p>
+<p class="rojo azul">Párrafo 2</p>
+<p>Párrafo 3</p>
+<table>
+  <tr><td>Ana</td><td>9</td></tr>
+  <tr><td>Bruno</td><td>7</td></tr>
+  <tr><td>Carla</td><td>10</td></tr>
+  <tr><td>Diego</td><td>8</td></tr>
+</table>`,
+    s: `p { color: green; }
+.rojo { color: red; }
+.azul { color: blue; }
+#uno { color: purple; }
+body p { color: orange; }
+table { border-collapse: collapse; }
+td { padding: 6px 12px; }` } }
+});
+
+tema({ id: '2.5', u: '2', t: 'Estilización de elementos HTML con CSS',
+a: `**El mismo cuarto, distinta decoración.** El HTML son los muebles; con CSS elegís pintura, letras y marcos sin mover nada de lugar.`,
+b: { x: `Propiedades de texto y bordes que más vas a usar:
+- ~font-size: 20px;~ tamaño de letra.
+- ~font-family: Arial, sans-serif;~ tipo de letra.
+- ~font-weight: bold;~ negrita.
+- ~text-align: center;~ alineación.
+- ~border: 2px solid black;~ borde (grosor, estilo, color).
+- ~border-radius: 10px;~ esquinas redondeadas.`,
+  e: { t: 'Cartel del evento', c: `Convertí este texto en un cartel lindo para la feria del liceo: título grande y centrado, fecha en negrita, todo el cartel con borde y esquinas redondeadas.`,
+    k: ['Usaste al menos cinco propiedades distintas', 'El título está centrado y grande', 'El cartel tiene borde redondeado'],
+    p: `Ponele una clase al div y dale estilo con ~.cartel { ... }~.`,
+    h: `<div class="cartel">
+  <h1>Feria de Ciencias</h1>
+  <p class="fecha">Viernes 14 de noviembre</p>
+  <p>Gimnasio del liceo · Entrada libre</p>
+</div>`,
+    s: `.cartel {
+}
+` } },
+i: { x: `**Tres formas de poner CSS:**
+- **Externo** (la mejor): un archivo ~.css~ conectado con ~<link>~. Sirve para todo el sitio.
+- **Interno:** dentro de ~<style>~ en el head.
+- **En línea:** ~<p style="color:red">~. Evitalo: es difícil de mantener.
+
+**Unidades:**
+- ~px~: fijo.
+- ~%~: relativo al padre.
+- ~rem~: relativo al tamaño de letra de la página (1rem suele ser 16px). Es la mejor para textos porque respeta si la persona agrandó la letra.`,
+  e: { t: 'De píxeles a rem', c: `Este CSS usa todo en px y tiene estilos en línea. Pasá todos los tamaños de letra a ~rem~, sacá los ~style~ del HTML y llevalos al CSS con clases.`,
+    k: ['No quedan atributos style en el HTML', 'Los tamaños de letra están en rem', 'La página se ve parecida a antes'],
+    p: `Dividí por 16: 32px = 2rem, 24px = 1.5rem, 14px = 0.875rem.`,
+    h: `<h1 style="color: teal">Noticias</h1>
+<h2>Deportes</h2>
+<p>El equipo ganó el torneo.</p>
+<p style="color: gray; font-size: 14px">Publicado ayer</p>`,
+    s: `h1 { font-size: 32px; }
+h2 { font-size: 24px; }
+p { font-size: 16px; }` } },
+v: { x: `Las **variables CSS** (custom properties) guardan un valor para usarlo en muchos lugares:
+
+~:root { --principal: #2D58CF; }~
+~h1 { color: var(--principal); }~
+
+Si cambiás la variable, cambia en todo el sitio. Es la base de un **sistema de diseño**: una paleta, una escala de tamaños y espacios que se repiten.
+
+También podés estilizar tablas (~border-collapse~, ~th~) y formularios (~input~, ~button~) para que combinen con la página.`,
+  e: { t: 'Paleta con variables', c: `Definí en ~:root~ al menos cinco variables (dos colores, fondo, texto y un radio de borde). Usalas para estilizar la tabla y el formulario. Probá que cambiando solo una variable cambia todo el diseño.`,
+    k: ['Hay al menos cinco variables en :root', 'Tabla y formulario usan var()', 'Cambiando una variable cambia el diseño completo'],
+    p: `El encabezado de la tabla se estiliza con ~th~ y el botón con ~button~.`,
+    h: `<table>
+  <tr><th>Producto</th><th>Precio</th></tr>
+  <tr><td>Alfajor</td><td>$40</td></tr>
+  <tr><td>Refresco</td><td>$60</td></tr>
+</table>
+<form>
+  <label for="n">Nombre</label>
+  <input id="n">
+  <button>Pedir</button>
+</form>`,
+    s: `:root {
+  --principal: #2D58CF;
+}
+body { font-family: sans-serif; padding: 20px; }` } }
+});
+
+tema({ id: '2.6', u: '2', t: 'Diseño de layouts: cajas, márgenes y posicionamiento',
+a: `**Todo es una caja, como un cuadro con marco.** Está la foto (contenido), el paspartú blanco (padding), el marco (border) y el espacio en la pared hasta el próximo cuadro (margin).`,
+b: { x: `Cada elemento es una caja con cuatro capas, de adentro hacia afuera:
+- **content:** el contenido.
+- **padding:** relleno entre el contenido y el borde.
+- **border:** el borde.
+- **margin:** espacio de afuera, que separa de otras cajas.
+
+~padding: 20px;~ pone 20px en los cuatro lados. ~margin: 10px 20px;~ pone 10px arriba y abajo, 20px a los costados.`,
+  e: { t: 'La tarjeta de perfil', c: `Dale a la tarjeta: padding de 20px, borde de 3px, margen de 30px y fondo blanco. Abrí DevTools (en tu navegador, sobre el resultado) y mirá el dibujo del modelo de caja en la pestaña Estilos o Calculado.`,
+    k: ['La tarjeta tiene padding, border y margin', 'El texto no queda pegado al borde', 'Hay separación entre la tarjeta y el resto'],
+    p: `Usá colores distintos de fondo en body y tarjeta para ver bien el margen.`,
+    h: `<div class="tarjeta">
+  <h2>Martina</h2>
+  <p>4.º año · Le gusta programar</p>
+</div>
+<p>Texto de afuera</p>`,
+    s: `body { background: #dfe7f5; font-family: sans-serif; }
+.tarjeta {
+}` } },
+i: { x: `- ~display~ cambia cómo se comporta la caja: ~block~ (ocupa toda la fila), ~inline~ (va en el texto; no acepta width), ~inline-block~ (en línea pero acepta width y height), ~none~ (desaparece).
+- ~width~ y ~max-width~ fijan el ancho. ~max-width: 600px~ deja que se achique en el celular.
+- ~margin: 0 auto;~ centra una caja de bloque con ancho.
+- ~box-sizing: border-box;~ hace que el ancho incluya padding y borde. Casi todos los sitios lo ponen para todo: ~* { box-sizing: border-box; }~`,
+  e: { t: 'Contenido centrado', c: `Centrá el contenido en una columna de máximo 600px. Convertí los enlaces del menú en botones ~inline-block~ con padding. Agregá ~box-sizing: border-box~ y fijate cómo cambia el ancho de la caja amarilla.`,
+    k: ['El contenido está centrado y no pasa de 600px', 'Los enlaces del menú parecen botones', 'Usaste box-sizing y explicaste en un comentario qué cambió'],
+    p: `El contenedor necesita ~max-width~ y ~margin: 0 auto~.`,
+    h: `<div class="contenedor">
+  <nav><a href="#">Inicio</a><a href="#">Fotos</a><a href="#">Contacto</a></nav>
+  <div class="amarilla">Caja de 300px de ancho con padding de 30px</div>
+  <p>Este texto debería quedar en una columna centrada.</p>
+</div>`,
+    s: `body { font-family: sans-serif; background: #f2f2f2; }
+.contenedor { background: white; padding: 16px; }
+nav a { background: #2D58CF; color: white; text-decoration: none; margin-right: 6px; }
+.amarilla { width: 300px; padding: 30px; background: gold; }` } },
+v: { x: `~position~ saca una caja de su lugar normal:
+- ~relative~: se mueve desde su lugar con ~top~, ~left~... y sirve de **referencia** para sus hijos.
+- ~absolute~: se ubica respecto al padre ~relative~ más cercano. Ideal para etiquetas encima de una foto.
+- ~fixed~: queda fija en la pantalla aunque hagas scroll (botón de WhatsApp).
+- ~sticky~: se mueve normal hasta que llega a un borde y ahí se queda pegada (menús).
+- ~z-index~: decide qué caja queda adelante cuando se superponen.`,
+  e: { t: 'Etiquetas y menú pegado', c: `Hacé que: el menú quede pegado arriba al hacer scroll (sticky), la tarjeta tenga una etiqueta "NUEVO" en la esquina superior derecha de la foto (absolute) y haya un botón redondo fijo abajo a la derecha (fixed).`,
+    k: ['El menú queda pegado al bajar', 'La etiqueta está sobre la foto, en la esquina', 'El botón fijo no se mueve con el scroll', 'Nada importante queda tapado (usaste z-index si hacía falta)'],
+    p: `El padre de la etiqueta necesita ~position: relative~.`,
+    h: `<nav class="menu">Tienda del liceo</nav>
+<div class="tarjeta">
+  <img src="https://picsum.photos/id/96/300/180" alt="Lentes de sol">
+  <span class="etiqueta">NUEVO</span>
+  <p>Lentes de sol</p>
+</div>
+<p style="height: 900px">Bajá para probar el scroll...</p>
+<button class="flotante">?</button>`,
+    s: `body { font-family: sans-serif; margin: 0; }
+.menu { background: #1A1C2E; color: white; padding: 14px; }
+.tarjeta { width: 300px; margin: 20px; }
+.tarjeta img { display: block; }
+.etiqueta { background: crimson; color: white; padding: 4px 8px; font-size: 0.8rem; }
+.flotante { width: 50px; height: 50px; border-radius: 50%; }` } }
+});
+
+tema({ id: '2.7', u: '2', t: 'CSS avanzado: fuentes, colores y efectos',
+a: `**Como la ropa y el maquillaje en el teatro.** El mismo actor (el HTML) cambia de personaje según el vestuario, la luz y los efectos.`,
+b: { x: `**Colores:** se escriben por nombre (~tomato~), en hexadecimal (~#ff6347~) o en rgb (~rgb(255, 99, 71)~). Las páginas tipo Coolors te dan paletas que combinan.
+
+**Fuentes de Google Fonts:** elegís una en fonts.google.com, copiás el ~<link>~ y lo pegás en el HTML. Después la usás en el CSS: ~font-family: 'Poppins', sans-serif;~`,
+  e: { t: 'Paleta y fuente propias', c: `Elegí una paleta de tres colores en coolors.co y una fuente de Google Fonts. Aplicalas a la página de la banda: un color para el fondo, otro para el título y otro para los botones. Usá la fuente en los títulos.`,
+    k: ['Usaste tres colores en hexadecimal', 'La fuente de Google se ve en los títulos', 'El texto se lee bien sobre el fondo'],
+    p: `El link de Google Fonts va en el panel HTML, arriba de todo.`,
+    h: `<link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+<h1>Los Desenchufados</h1>
+<p>Banda de rock del liceo</p>
+<button>Escuchar</button>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+h1 { font-family: 'Bungee', sans-serif; }` } },
+i: { x: `Efectos que hacen ver una página más moderna:
+- ~box-shadow: 0 4px 12px rgba(0,0,0,0.2);~ sombra (x, y, desenfoque, color).
+- ~text-shadow~: sombra en el texto.
+- ~border-radius: 50%;~ círculo.
+- ~background: linear-gradient(to right, #ff9a9e, #fad0c4);~ degradado.
+- ~opacity: 0.5;~ transparencia (0 invisible, 1 normal).
+- El último número de ~rgba()~ también es transparencia, pero solo de ese color.`,
+  e: { t: 'Botones con estilo', c: `Diseñá tres botones distintos: uno con degradado, uno con sombra, y uno "fantasma" (fondo transparente y solo borde). Los tres con esquinas redondeadas. Además, hacé que la foto de perfil sea un círculo con sombra.`,
+    k: ['Los tres botones usan efectos distintos', 'La foto es un círculo con sombra', 'Los efectos son prolijos (no exagerados)'],
+    p: `Para un círculo perfecto, la imagen tiene que tener el mismo ancho que alto.`,
+    h: `<img class="perfil" src="https://picsum.photos/id/64/150/150" alt="Persona sonriendo">
+<button class="b1">Degradado</button>
+<button class="b2">Sombra</button>
+<button class="b3">Fantasma</button>`,
+    s: `body { font-family: sans-serif; padding: 30px; background: #f6f6fb; }
+button { padding: 12px 20px; font-size: 1rem; border: none; margin: 8px; cursor: pointer; }
+.perfil { display: block; margin-bottom: 20px; }` } },
+v: { x: `Movimiento solo con CSS:
+- ~transition: transform 0.3s ease;~ hace que un cambio (por ejemplo en ~:hover~) sea suave en vez de instantáneo.
+- ~transform~ mueve (~translateY(-5px)~), agranda (~scale(1.1)~) o gira (~rotate(10deg)~) sin mover a los demás.
+- ~@keyframes~ define una animación con pasos, y ~animation~ la aplica:
+
+~@keyframes latido { 50% { transform: scale(1.2); } }~
+~.corazon { animation: latido 1s infinite; }~
+
+Respetá a quien no quiere movimiento: ~@media (prefers-reduced-motion: reduce)~.`,
+  e: { t: 'Tarjetas vivas', c: `Hacé que cada tarjeta suba un poco y gane sombra al pasar el mouse (transition + transform). Creá una animación con ~@keyframes~ para el corazón. Agregá ~prefers-reduced-motion~ para apagar las animaciones.`,
+    k: ['El hover de las tarjetas es suave', 'El corazón se anima con keyframes', 'prefers-reduced-motion apaga la animación'],
+    p: `La transition va en el estado normal (~.tarjeta~), no en el ~:hover~.`,
+    h: `<div class="grilla">
+  <div class="tarjeta">Fotos</div>
+  <div class="tarjeta">Música</div>
+  <div class="tarjeta">Juegos</div>
+</div>
+<p class="corazon">❤</p>`,
+    s: `body { font-family: sans-serif; padding: 30px; }
+.tarjeta { display: inline-block; width: 120px; padding: 30px 10px; margin: 8px; text-align: center; background: white; border-radius: 12px; border: 1px solid #ddd; }
+.corazon { font-size: 3rem; display: inline-block; }` } }
+});
+
+tema({ id: '2.8', u: '2', t: 'Diseño responsive y adaptación a dispositivos',
+a: `**Como el agua que toma la forma del vaso.** Una página responsive se acomoda a la pantalla: celular, tablet o computadora.`,
+b: { x: `Más de la mitad de las visitas son desde el celular. Para empezar:
+- En el head va ~<meta name="viewport" content="width=device-width, initial-scale=1">~ (sin esto el celular muestra la página chiquita).
+- Las imágenes con ~max-width: 100%;~ nunca se salen de la pantalla.
+- Usá ~max-width~ en vez de ~width~ fijo para las cajas.
+- Probá con el **modo dispositivo** de DevTools (ícono del celular) o abriendo tu Pen en el teléfono.`,
+  e: { t: 'Que entre en el celular', c: `Esta página se rompe en el celular: la imagen y la caja se salen de la pantalla. Arreglala con ~max-width~ y probala achicando la ventana o con el modo dispositivo.`,
+    k: ['La imagen no se sale en pantallas chicas', 'La caja se achica en el celular', 'No aparece scroll horizontal'],
+    p: `Cambiá ~width: 800px~ por ~max-width: 800px~.`,
+    h: `<div class="caja">
+  <h1>Excursión a Colonia</h1>
+  <img src="https://picsum.photos/id/1040/900/400" alt="Calle antigua de piedra">
+  <p>Salimos el lunes a las 7:00 desde la puerta del liceo.</p>
+</div>`,
+    s: `body { font-family: sans-serif; margin: 0; padding: 10px; }
+.caja { width: 800px; background: #fff4e6; padding: 20px; }
+img { width: 900px; }` } },
+i: { x: `Las **media queries** aplican CSS solo cuando la pantalla cumple una condición:
+
+~@media (min-width: 768px) { ... }~
+
+Lo de adentro se aplica en pantallas de **768px o más**. Puntos de corte comunes:
+- 480px celulares grandes
+- 768px tablets
+- 1024px computadoras
+
+Con media queries cambiás tamaños de letra, ocultás cosas o pasás de una columna a varias.`,
+  e: { t: 'Una, dos, tres columnas', c: `Hacé que las tarjetas estén una debajo de la otra en el celular, de a dos desde 600px y de a tres desde 900px. Además, que el título sea más grande en computadora.`,
+    k: ['En celular hay una columna', 'Desde 600px hay dos', 'Desde 900px hay tres', 'El título cambia de tamaño'],
+    p: `Dale a ~.tarjeta~ un ~width~ distinto en cada media query: 100%, 48% y 31%.`,
+    h: `<h1>Talleres</h1>
+<div class="tarjeta">Robótica</div>
+<div class="tarjeta">Fotografía</div>
+<div class="tarjeta">Teatro</div>
+<div class="tarjeta">Música</div>
+<div class="tarjeta">Ajedrez</div>
+<div class="tarjeta">Huerta</div>`,
+    s: `* { box-sizing: border-box; }
+body { font-family: sans-serif; padding: 10px; }
+.tarjeta { display: inline-block; width: 100%; padding: 30px; margin-bottom: 8px; background: #e2eafc; border-radius: 8px; }
+` } },
+v: { x: `- **Mobile first:** escribís primero el CSS para el celular y usás ~min-width~ para agregar cosas en pantallas grandes. Queda un código más simple.
+- **Unidades del viewport:** ~vw~ es un porcentaje del ancho de la pantalla, ~vh~ del alto.
+- ~clamp(min, ideal, max)~ hace tamaños fluidos con límites: ~font-size: clamp(1.5rem, 5vw, 3rem);~ crece con la pantalla pero nunca menos de 1.5rem ni más de 3rem.`,
+  e: { t: 'Portada fluida', c: `Hacé una portada mobile first: título con ~clamp()~, una sección de alto ~60vh~, y un menú que en el celular está en columna y desde 700px pasa a fila. Probalo en tres anchos y anotá en un comentario qué cambia en cada uno.`,
+    k: ['El CSS base es para celular y las media queries usan min-width', 'El título usa clamp()', 'El menú pasa de columna a fila', 'Hay un comentario con las pruebas'],
+    p: `Para el menú en fila, desde 700px: ~nav a { display: inline-block; }~`,
+    h: `<nav>
+  <a href="#">Inicio</a>
+  <a href="#">Cursos</a>
+  <a href="#">Contacto</a>
+</nav>
+<section class="portada">
+  <h1>Aprendé diseño web</h1>
+</section>`,
+    s: `body { font-family: sans-serif; margin: 0; }
+nav a { display: block; padding: 10px; background: #1A1C2E; color: white; text-decoration: none; }
+.portada { background: linear-gradient(135deg, #2D58CF, #A12C7B); color: white; padding: 20px; }` } }
+});
+
+/* ============================ UNIDAD 3 ============================ */
+tema({ id: '3.1', u: '3', t: 'Introducción a JavaScript y su rol en el diseño web',
+a: `**HTML y CSS arman un auto quieto y lindo. JavaScript es el motor:** hace que la página reaccione cuando alguien la usa.`,
+b: { x: `**JavaScript** (JS) es un lenguaje de programación que corre en el navegador. Sirve para que la página **haga cosas**: responder a un clic, mostrar un mensaje, cambiar un texto.
+- ~alert('Hola')~ muestra una ventanita con un mensaje.
+- ~console.log('Hola')~ escribe un mensaje en la **consola**, que es donde los programadores miran qué está pasando.
+- Cada instrucción termina con **punto y coma**.`,
+  e: { t: 'Botón que saluda', c: `Ejecutá el código y tocá el botón. Después cambiá el mensaje del alert por un saludo tuyo y agregá un ~console.log~ que diga "Alguien tocó el botón". Mirá la consola debajo del resultado.`,
+    k: ['El alert muestra tu saludo', 'El mensaje aparece en la consola cada vez que tocás', 'No hay errores en rojo'],
+    p: `Los textos van entre comillas: ~'así'~.`,
+    h: `<h1>Mi primer programa</h1>
+<button id="saludo">Saludar</button>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+button { font-size: 1.2rem; padding: 10px 20px; }`,
+    j: `document.getElementById('saludo').addEventListener('click', function () {
+  alert('Hola');
+});` } },
+i: { x: `- El JS va dentro de ~<script>~, normalmente **al final del body**, para que el HTML ya esté cargado cuando el código lo busque.
+- Comentarios: ~// una línea~ y ~/* varias líneas */~.
+- ~prompt('¿Cómo te llamás?')~ le pide un dato a la persona.
+- Para mostrar algo **en la página** (no en un alert) cambiás el texto de un elemento con ~textContent~:
+
+~document.getElementById('salida').textContent = 'Hola';~`,
+  e: { t: 'Saludo personalizado', c: `Cuando tocás el botón, el programa pregunta el nombre con ~prompt~ y escribe en el párrafo "¡Hola, NOMBRE! Bienvenido/a". Comentá cada línea del JS explicando qué hace.`,
+    k: ['Pide el nombre con prompt', 'El saludo aparece en la página, no en un alert', 'Cada línea del JS tiene su comentario'],
+    p: `Para unir textos usá ~+~: ~'¡Hola, ' + nombre + '!'~.`,
+    h: `<button id="boton">Presentarme</button>
+<p id="salida">Acá va a aparecer tu saludo.</p>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+#salida { font-size: 1.4rem; color: #2D58CF; }`,
+    j: `document.getElementById('boton').addEventListener('click', function () {
+  // completá acá
+});` } },
+v: { x: `- En un proyecto real el JS va en un archivo aparte: ~<script src="js/script.js" defer><\/script>~. Con ~defer~ podés ponerlo en el head y espera a que cargue el HTML.
+- **Tipos de datos:** texto (~'hola'~, string), número (~42~), booleano (~true~ / ~false~), arreglo (~[1, 2, 3]~), objeto (~{ nombre: 'Ana' }~), ~undefined~ y ~null~.
+- ~typeof~ te dice el tipo de un valor.
+- Ojo: ~prompt~ siempre devuelve **texto**. ~'5' + '3'~ da ~'53'~. Para convertir a número: ~Number('5')~.`,
+  e: { t: 'El problema del 5 + 3', c: `El programa suma dos números pero da un resultado raro. Usá ~console.log~ y ~typeof~ para mostrar el tipo de cada dato, explicá el problema en un comentario y arreglalo con ~Number()~. Agregá un aviso si alguien escribe algo que no es un número (~isNaN~).`,
+    k: ['La consola muestra el typeof de los datos', 'La suma da el resultado correcto', 'Avisa si no se escribe un número', 'El comentario explica el error'],
+    p: `~isNaN(Number('hola'))~ da ~true~.`,
+    h: `<input id="a" placeholder="Número 1">
+<input id="b" placeholder="Número 2">
+<button id="sumar">Sumar</button>
+<p id="r"></p>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+input { width: 100px; }`,
+    j: `document.getElementById('sumar').addEventListener('click', function () {
+  var a = document.getElementById('a').value;
+  var b = document.getElementById('b').value;
+  document.getElementById('r').textContent = 'Resultado: ' + (a + b);
+});` } }
+});
+
+tema({ id: '3.2', u: '3', t: 'Variables, operadores y estructuras de control',
+a: `**Una variable es una caja con etiqueta** donde guardás algo para usarlo después. Las estructuras de control son **los cruces de caminos**: "si llueve, llevo paraguas; si no, no".`,
+b: { x: `- ~let edad = 14;~ crea una variable que puede cambiar.
+- ~const nombre = 'Sofi';~ crea una que no cambia.
+- **Operadores matemáticos:** ~+~ ~-~ ~*~ (por) ~/~ (dividido).
+- Con textos, ~+~ los une: ~'Hola ' + nombre~.
+
+El nombre de una variable no lleva espacios ni tildes: ~precioTotal~, no ~precio total~.`,
+  e: { t: 'Calculadora de cumpleaños', c: `Completá el programa para que calcule en qué año naciste restando tu edad al año actual, y cuántos días viviste aproximadamente (edad × 365). Mostrá los dos resultados en la página.`,
+    k: ['Usás variables con nombres claros', 'Los dos cálculos dan bien', 'Los resultados aparecen en la página'],
+    p: `~let anioNacimiento = 2026 - edad;~`,
+    h: `<p id="r1"></p>
+<p id="r2"></p>`,
+    s: `body { font-family: sans-serif; padding: 20px; font-size: 1.2rem; }`,
+    j: `let edad = 14;
+let anioActual = 2026;
+
+// calculá acá
+
+document.getElementById('r1').textContent = 'Naciste en ...';
+document.getElementById('r2').textContent = 'Viviste unos ... días';` } },
+i: { x: `**if / else** decide qué hacer según una condición:
+
+~if (nota >= 7) { ... } else { ... }~
+
+- **Comparar:** ~>~ ~<~ ~>=~ ~<=~ ~===~ (igual) ~!==~ (distinto).
+- **Combinar:** ~&&~ (y: las dos tienen que cumplirse), ~||~ (o: alcanza con una).
+- **else if** agrega más caminos.`,
+  e: { t: 'Juicio de notas', c: `Según la nota que se escribe (1 a 12), mostrá: "Excelente" (10 a 12), "Aprobado" (7 a 9), "A recuperar" (1 a 6) o "Nota no válida" si está fuera de rango. Cambiá también el color del mensaje según el resultado.`,
+    k: ['Los cuatro casos funcionan', 'Usás else if', 'Usás && o || para el caso no válido', 'El color cambia según el resultado'],
+    p: `Fuera de rango: ~if (nota < 1 || nota > 12)~`,
+    h: `<input id="nota" type="number" placeholder="Nota">
+<button id="ver">Ver</button>
+<p id="msj"></p>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+#msj { font-size: 1.5rem; font-weight: bold; }`,
+    j: `document.getElementById('ver').addEventListener('click', function () {
+  let nota = Number(document.getElementById('nota').value);
+  let msj = document.getElementById('msj');
+  // escribí los if acá
+});` } },
+v: { x: `- **Arreglos:** una lista de valores: ~let notas = [8, 10, 6];~. ~notas.length~ dice cuántos hay; ~notas[0]~ es el primero.
+- **for** repite un bloque: ~for (let i = 0; i < 5; i++) { ... }~
+- **while** repite mientras se cumpla una condición.
+- **Funciones** agrupan código para reusarlo:
+
+~function promedio(lista) { ... return resultado; }~`,
+  e: { t: 'Tabla y promedio', c: `Programá dos funciones: ~tabla(n)~ que muestre la tabla de multiplicar de n del 1 al 10 en una lista HTML, y ~promedio(lista)~ que reciba un arreglo de notas y devuelva el promedio con un decimal. Mostrá el promedio de ~[8, 10, 6, 9, 7]~.`,
+    k: ['tabla(n) usa un for', 'La tabla aparece como lista en la página', 'promedio devuelve el valor con return', 'El promedio da 8.0'],
+    p: `~resultado.toFixed(1)~ redondea a un decimal. Para agregar a la lista: ~lista.innerHTML += '<li>' + texto + '</li>';~`,
+    h: `<input id="n" type="number" value="7">
+<button id="hacer">Tabla</button>
+<ul id="lista"></ul>
+<p id="prom"></p>`,
+    s: `body { font-family: sans-serif; padding: 20px; }`,
+    j: `function tabla(n) {
+  let lista = document.getElementById('lista');
+  lista.innerHTML = '';
+  // usá un for
+}
+
+function promedio(notas) {
+  // sumá con un for y devolvé el promedio
+}
+
+document.getElementById('hacer').addEventListener('click', function () {
+  tabla(Number(document.getElementById('n').value));
+});
+
+document.getElementById('prom').textContent = 'Promedio: ' + promedio([8, 10, 6, 9, 7]);` } }
+});
+
+tema({ id: '3.3', u: '3', t: 'Manipulación del DOM y eventos',
+a: `**El DOM es el control remoto de la página.** Con JavaScript agarrás el control (seleccionás un elemento) y apretás botones (cambiás texto, color o lo que quieras).`,
+b: { x: `- **Seleccionar:** ~document.querySelector('#titulo')~ o ~document.getElementById('titulo')~.
+- **Cambiar texto:** ~elemento.textContent = 'Nuevo';~
+- **Escuchar un evento:** ~boton.addEventListener('click', function () { ... });~
+
+Un **evento** es algo que pasa: un clic, una tecla, el mouse que entra.`,
+  e: { t: 'Contador de goles', c: `Hacé un marcador: un botón suma un gol al equipo A, otro al equipo B y un tercero reinicia todo en 0. Los números se actualizan en la página.`,
+    k: ['Cada botón suma a su equipo', 'El botón reiniciar vuelve a 0 a 0', 'Usás variables para guardar los goles'],
+    p: `~golesA = golesA + 1;~ y después mostrás ~golesA~ con textContent.`,
+    h: `<h2>Peñarol <span id="a">0</span> - <span id="b">0</span> Nacional</h2>
+<button id="golA">Gol Peñarol</button>
+<button id="golB">Gol Nacional</button>
+<button id="reset">Reiniciar</button>`,
+    s: `body { font-family: sans-serif; padding: 20px; text-align: center; }
+h2 { font-size: 2rem; }
+button { padding: 10px; margin: 4px; }`,
+    j: `let golesA = 0;
+let golesB = 0;
+
+document.getElementById('golA').addEventListener('click', function () {
+  // completá
+});` } },
+i: { x: `- **Clases:** ~el.classList.add('activo')~, ~remove~, y ~toggle~ (pone o saca).
+- **Estilos:** ~el.style.color = 'red';~ (mejor usar clases).
+- **Leer un campo:** ~input.value~.
+- Eventos útiles: ~input~ (cada vez que escriben), ~change~, ~mouseover~.
+
+Cambiar clases es la forma prolija: el diseño queda en el CSS y el JS solo dice cuándo.`,
+  e: { t: 'Modo oscuro y vista previa', c: `Agregá un botón que active y desactive el modo oscuro con ~classList.toggle~. Además, mientras alguien escribe su nombre en el campo, el título tiene que ir mostrando "Hola, NOMBRE" en tiempo real (evento ~input~).`,
+    k: ['El botón alterna modo oscuro con toggle', 'El diseño del modo oscuro está en el CSS', 'El título cambia mientras se escribe'],
+    p: `Para el modo oscuro: ~document.body.classList.toggle('oscuro');~`,
+    h: `<h1 id="titulo">Hola</h1>
+<input id="nombre" placeholder="Tu nombre">
+<button id="tema">Modo oscuro</button>`,
+    s: `body { font-family: sans-serif; padding: 20px; transition: background 0.3s; }
+.oscuro { background: #14152A; color: #ECECF7; }`,
+    j: `// completá acá` } },
+v: { x: `Crear elementos nuevos desde JS:
+
+~let li = document.createElement('li');~
+~li.textContent = 'Comprar pan';~
+~lista.appendChild(li);~
+
+- ~el.remove()~ borra un elemento.
+- El evento ~submit~ de un formulario + ~e.preventDefault()~ evita que la página se recargue.
+- Con ~keydown~ detectás teclas (~e.key === 'Enter'~).`,
+  e: { t: 'Lista de tareas', c: `Programá una lista de tareas: al enviar el formulario se agrega la tarea a la lista; al hacer clic en una tarea se tacha (clase ~hecha~); cada tarea tiene un botón ✕ que la borra. No se pueden agregar tareas vacías. Mostrá cuántas tareas quedan pendientes.`,
+    k: ['Agrega tareas sin recargar la página', 'Tacha con clic y borra con ✕', 'No acepta tareas vacías', 'El contador de pendientes se actualiza'],
+    p: `Para que el clic en ✕ no tache la tarea también, usá ~e.stopPropagation()~ en el botón.`,
+    h: `<form id="f">
+  <input id="t" placeholder="Nueva tarea">
+  <button>Agregar</button>
+</form>
+<ul id="lista"></ul>
+<p id="pend">Pendientes: 0</p>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+li { padding: 6px; cursor: pointer; }
+.hecha { text-decoration: line-through; color: gray; }`,
+    j: `let form = document.getElementById('f');
+let lista = document.getElementById('lista');
+
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+  // completá
+});` } }
+});
+
+tema({ id: '3.4', u: '3', t: 'Validación de formularios con JavaScript',
+a: `**Como el portero de un boliche** que revisa la entrada antes de dejarte pasar. La validación revisa los datos antes de enviarlos.`,
+b: { x: `HTML ya trae validación sin programar:
+- ~required~: el campo es obligatorio.
+- ~type="email"~: tiene que parecer un correo.
+- ~type="number" min="1" max="12"~: número entre 1 y 12.
+- ~minlength="3"~: mínimo de letras.
+- ~pattern~: un formato especial.
+
+Si algo está mal, el navegador no deja enviar y muestra un aviso.`,
+  e: { t: 'Inscripción al torneo', c: `Agregá validación HTML: nombre obligatorio de al menos 3 letras, correo válido, edad entre 12 y 18, y una casilla obligatoria "Acepto el reglamento". Probá enviar con datos mal.`,
+    k: ['No se puede enviar vacío', 'El correo tiene que ser válido', 'La edad tiene límites', 'La casilla es obligatoria'],
+    p: `Todos los atributos van en el ~<input>~.`,
+    h: `<form>
+  <label for="nom">Nombre</label>
+  <input id="nom">
+  <label for="mail">Correo</label>
+  <input id="mail">
+  <label for="edad">Edad</label>
+  <input id="edad">
+  <label><input type="checkbox"> Acepto el reglamento</label>
+  <button>Inscribirme</button>
+</form>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+label, input, button { display: block; margin-bottom: 8px; }
+input:invalid { border: 2px solid crimson; }
+input:valid { border: 2px solid seagreen; }` } },
+i: { x: `Con JavaScript controlás vos la validación y los mensajes:
+1. Escuchás el ~submit~ del formulario.
+2. Revisás cada campo con ~if~.
+3. Si hay error: ~e.preventDefault()~ (no se envía) y mostrás el mensaje **al lado del campo**.
+
+Un buen mensaje dice qué hacer: "Escribí un correo con @", no solo "Error".`,
+  e: { t: 'Mensajes propios', c: `Validá con JS: el nombre no puede estar vacío y la contraseña tiene que tener al menos 8 caracteres. Si hay errores, mostralos en el ~span~ de cada campo y no envíes. Si está todo bien, mostrá "¡Registro exitoso!".`,
+    k: ['Los errores aparecen junto a su campo', 'No se envía si hay errores', 'Los mensajes explican qué hacer', 'Muestra el éxito si está todo bien'],
+    p: `~password.value.length < 8~`,
+    h: `<form id="reg" novalidate>
+  <label for="u">Usuario</label>
+  <input id="u"><span class="err" id="eu"></span>
+  <label for="p">Contraseña</label>
+  <input id="p" type="password"><span class="err" id="ep"></span>
+  <button>Registrarme</button>
+</form>
+<p id="ok"></p>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+label, input { display: block; margin-top: 8px; }
+.err { color: crimson; font-size: 0.9rem; }
+#ok { color: seagreen; font-weight: bold; }`,
+    j: `document.getElementById('reg').addEventListener('submit', function (e) {
+  e.preventDefault();
+  // validá acá
+});` } },
+v: { x: `- **Validación en tiempo real:** con el evento ~input~ revisás mientras la persona escribe.
+- **Expresiones regulares** (regex) revisan formatos: ~/[A-Z]/.test(texto)~ da ~true~ si hay una mayúscula; ~/[0-9]/~ busca números.
+- **Accesibilidad:** marcá el campo con error con ~aria-invalid="true"~ y conectá el mensaje con ~aria-describedby~.
+
+Importante: la validación del navegador ayuda, pero un sitio real **también** valida en el servidor, porque el JS se puede saltar.`,
+  e: { t: 'Medidor de contraseña', c: `Mientras se escribe la contraseña, mostrá una barra y una lista de requisitos que se marcan con ✔ al cumplirse: 8 caracteres, una mayúscula, un número y un símbolo. La barra cambia de color (rojo, naranja, verde). El botón se habilita solo con los cuatro cumplidos.`,
+    k: ['Los requisitos se marcan en tiempo real', 'La barra cambia de ancho y color', 'El botón solo se habilita con todo cumplido', 'Usás aria-invalid o aria-describedby'],
+    p: `Símbolo: ~/[^A-Za-z0-9]/.test(v)~. Botón: ~boton.disabled = true~.`,
+    h: `<label for="pw">Contraseña</label>
+<input id="pw" type="password" aria-describedby="reqs">
+<div class="barra"><div id="nivel"></div></div>
+<ul id="reqs">
+  <li id="r1">8 caracteres</li>
+  <li id="r2">Una mayúscula</li>
+  <li id="r3">Un número</li>
+  <li id="r4">Un símbolo</li>
+</ul>
+<button id="btn" disabled>Crear cuenta</button>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+.barra { height: 10px; background: #eee; border-radius: 5px; margin: 8px 0; max-width: 300px; }
+#nivel { height: 100%; width: 0; border-radius: 5px; transition: width 0.3s; }
+.ok { color: seagreen; }`,
+    j: `let pw = document.getElementById('pw');
+
+pw.addEventListener('input', function () {
+  let v = pw.value;
+  // revisá cada requisito
+});` } }
+});
+
+tema({ id: '3.5', u: '3', t: 'Efectos y animaciones con JavaScript',
+a: `**JavaScript es el director de escena** y CSS los actores. El director dice "¡ahora!" y los actores hacen el movimiento que ya ensayaron.`,
+b: { x: `El efecto más común: **mostrar y ocultar**.
+- ~el.hidden = true;~ lo oculta y ~false~ lo muestra.
+- ~el.style.display = 'none';~ también lo oculta.
+
+Un botón "Leer más" que muestra el resto del texto mejora mucho las páginas largas.`,
+  e: { t: 'Leer más', c: `Al tocar "Leer más" se muestra el texto escondido y el botón pasa a decir "Leer menos". Al tocar de nuevo, se oculta y vuelve a decir "Leer más".`,
+    k: ['El texto se muestra y se oculta', 'El texto del botón cambia', 'Funciona varias veces seguidas'],
+    p: `~extra.hidden = !extra.hidden;~ invierte el estado.`,
+    h: `<article>
+  <h2>El primer sitio web</h2>
+  <p>Lo creó Tim Berners-Lee en 1991.</p>
+  <p id="extra" hidden>Trabajaba en el CERN, en Suiza, y quería que los científicos compartieran documentos fácilmente. Esa página todavía existe.</p>
+  <button id="mas">Leer más</button>
+</article>`,
+    s: `body { font-family: sans-serif; padding: 20px; max-width: 500px; }`,
+    j: `let extra = document.getElementById('extra');
+let mas = document.getElementById('mas');
+
+mas.addEventListener('click', function () {
+  // completá
+});` } },
+i: { x: `La forma profesional: **CSS hace la animación, JS solo agrega o saca una clase.**
+
+~.aviso { opacity: 0; transform: translateY(-20px); transition: 0.4s; }~
+~.aviso.visible { opacity: 1; transform: none; }~
+
+- ~setTimeout(funcion, 3000)~ ejecuta algo **una vez** después de 3 segundos.`,
+  e: { t: 'Notificación', c: `Al tocar "Guardar", aparece una notificación deslizándose desde arriba que dice "Cambios guardados" y se va sola a los 3 segundos. Usá clases y transiciones CSS, y ~setTimeout~.`,
+    k: ['La notificación entra con animación', 'Se va sola después de 3 segundos', 'La animación está en el CSS, no en el JS'],
+    p: `~setTimeout(function () { aviso.classList.remove('visible'); }, 3000);~`,
+    h: `<button id="guardar">Guardar</button>
+<div id="aviso" class="aviso">✔ Cambios guardados</div>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+.aviso { position: fixed; top: 20px; right: 20px; background: seagreen; color: white; padding: 12px 20px; border-radius: 8px; }`,
+    j: `// completá acá` } },
+v: { x: `- ~setInterval(funcion, 3000)~ repite algo **cada** 3 segundos. ~clearInterval(id)~ lo frena.
+- Un **carrusel** muestra una imagen por vez y avanza solo o con botones.
+- Para mover algo cuadro a cuadro de forma suave existe ~requestAnimationFrame~.
+- Pausá las animaciones automáticas cuando el mouse está encima: así la persona puede leer.`,
+  e: { t: 'Carrusel', c: `Programá un carrusel de 4 imágenes: botones anterior y siguiente, avance automático cada 3 segundos con ~setInterval~, que se pause con el mouse encima, y puntitos abajo que indiquen cuál se ve. Al llegar a la última, vuelve a la primera.`,
+    k: ['Anterior y siguiente funcionan y dan la vuelta', 'Avanza solo y se pausa con el mouse', 'Los puntitos marcan la imagen actual', 'Las imágenes tienen alt'],
+    p: `Usá el operador resto: ~actual = (actual + 1) % fotos.length;~`,
+    h: `<div class="carrusel" id="car">
+  <img id="foto" src="https://picsum.photos/id/1015/500/280" alt="Río entre montañas">
+  <button id="ant">‹</button>
+  <button id="sig">›</button>
+</div>
+<div id="puntos"></div>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+.carrusel { position: relative; max-width: 500px; }
+.carrusel img { width: 100%; display: block; border-radius: 8px; }
+#ant, #sig { position: absolute; top: 45%; font-size: 1.5rem; }
+#ant { left: 8px; } #sig { right: 8px; }`,
+    j: `let fotos = [
+  { src: 'https://picsum.photos/id/1015/500/280', alt: 'Río entre montañas' },
+  { src: 'https://picsum.photos/id/1016/500/280', alt: 'Cañón rocoso' },
+  { src: 'https://picsum.photos/id/1018/500/280', alt: 'Montañas con nieve' },
+  { src: 'https://picsum.photos/id/1019/500/280', alt: 'Costa con niebla' }
+];
+let actual = 0;
+
+function mostrar() {
+  // completá
+}` } }
+});
+
+tema({ id: '3.6', u: '3', t: 'Librerías y frameworks de JavaScript',
+a: `**Una librería es una caja de herramientas prestada:** no fabricás el martillo, lo usás. **Un framework es un kit de muebles para armar:** te da la estructura y vos seguís sus reglas.`,
+b: { x: `Una **librería** es código que escribió otra persona y que podés usar en tu página. Se agrega con un ~<script src="...">~ que la trae de un **CDN** (un servidor que la comparte gratis).
+
+Ejemplo: **canvas-confetti** tira papelitos de colores con una sola línea: ~confetti();~`,
+  e: { t: 'Fiesta de confeti', c: `La librería ya está agregada en el HTML. Hacé que al tocar el botón se tire confeti. Después buscá en su página (github.com/catdad/canvas-confetti) una opción para cambiar los colores o la cantidad, y usala.`,
+    k: ['El botón tira confeti', 'Usaste al menos una opción de la librería', 'Explicás en un comentario qué es un CDN'],
+    p: `~confetti({ particleCount: 200, spread: 90 });~`,
+    h: `<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"><\/script>
+<h1>¡Terminé el curso!</h1>
+<button id="fiesta">Festejar 🎉</button>`,
+    s: `body { font-family: sans-serif; text-align: center; padding-top: 60px; }
+button { font-size: 1.4rem; padding: 12px 24px; }`,
+    j: `document.getElementById('fiesta').addEventListener('click', function () {
+  // llamá a confetti acá
+});` } },
+i: { x: `**jQuery** fue la librería más usada durante años y todavía está en muchísimos sitios. Hace más corto el código del DOM:
+- ~$('#boton')~ selecciona (como querySelector).
+- ~.on('click', function () { ... })~ escucha eventos.
+- ~.fadeToggle()~, ~.slideToggle()~ animan.
+- ~.text('Hola')~ cambia el texto.
+
+Hoy JavaScript "puro" hace casi todo esto, pero vas a encontrar jQuery en sitios existentes.`,
+  e: { t: 'Lo mismo, dos veces', c: `Con jQuery hacé que: el botón muestre y oculte la caja con ~slideToggle~ y que al pasar el mouse por cada ítem de la lista se resalte. Después escribí en un comentario cómo se haría lo primero en JavaScript puro.`,
+    k: ['slideToggle funciona', 'Los ítems se resaltan con jQuery', 'El comentario muestra la versión en JS puro'],
+    p: `~$('li').on('mouseenter', function () { $(this).addClass('luz'); });~`,
+    h: `<script src="https://code.jquery.com/jquery-3.7.1.min.js"><\/script>
+<button id="btn">Mostrar u ocultar</button>
+<div id="caja">Soy una caja con información.</div>
+<ul><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+#caja { background: #e2eafc; padding: 20px; margin: 10px 0; }
+.luz { background: gold; }`,
+    j: `$(function () {
+  // tu código jQuery acá
+});` } },
+v: { x: `Un **framework** como **React**, **Vue** o **Angular** organiza la página en **componentes**: piezas reutilizables con su propio estado. Cuando el estado cambia, el framework actualiza la pantalla solo.
+
+React normalmente usa JSX y herramientas de compilación. Para probar sin instalar nada podés usar ~React.createElement~ y cargar React desde un CDN.
+
+¿Cuándo usar un framework? En aplicaciones grandes con muchos datos que cambian. Para un sitio simple, HTML + CSS + JS alcanza.`,
+  e: { t: 'Componente contador', c: `Ejecutá el componente de React. Modificalo para que tenga un botón "−" además del "+", que no baje de 0, y usalo tres veces en la página (tres contadores independientes). Respondé en un comentario: ¿qué ventaja tiene un componente frente a copiar el HTML tres veces?`,
+    k: ['Hay botones + y −', 'No baja de 0', 'Hay tres contadores independientes', 'El comentario explica la ventaja'],
+    p: `Cada ~React.createElement(Contador, { nombre: 'Manzanas' })~ crea un contador nuevo con su propio estado.`,
+    h: `<script src="https://unpkg.com/react@18/umd/react.production.min.js"><\/script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"><\/script>
+<div id="app"></div>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+.contador { border: 1px solid #ccc; padding: 12px; margin: 8px 0; border-radius: 8px; }`,
+    j: `var h = React.createElement;
+
+function Contador(props) {
+  var estado = React.useState(0);
+  var n = estado[0], setN = estado[1];
+  return h('div', { className: 'contador' },
+    h('strong', null, props.nombre + ': ' + n + ' '),
+    h('button', { onClick: function () { setN(n + 1); } }, '+')
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('app')).render(
+  h(Contador, { nombre: 'Manzanas' })
+);` } }
+});
+
+tema({ id: '3.7', u: '3', t: 'Integración de componentes interactivos',
+a: `**Como las piezas de un auto** (puertas, ventanillas, radio). Cada componente hace una sola cosa bien y se pueden combinar en cualquier página.`,
+b: { x: `Algunos componentes interactivos vienen **en HTML, sin programar**:
+- ~<details>~ y ~<summary>~ hacen un **acordeón**: el summary es el título que se toca y lo demás se abre y se cierra.
+- ~<input type="range">~, ~type="color"~, ~type="date"~ dan controles listos.
+
+Siempre que HTML ya lo resuelve, usalo: es accesible y no se rompe.`,
+  e: { t: 'Preguntas frecuentes', c: `Armá una sección de preguntas frecuentes del liceo con al menos cuatro preguntas usando ~details~ y ~summary~. Dale estilo: borde, espacio y un cambio de color cuando está abierta (~details[open]~).`,
+    k: ['Hay cuatro preguntas que se abren y se cierran', 'Tienen estilo', 'La abierta se ve distinta'],
+    p: `~details[open] summary { color: #2D58CF; }~`,
+    h: `<h2>Preguntas frecuentes</h2>
+<details>
+  <summary>¿A qué hora entramos?</summary>
+  <p>El turno matutino entra a las 7:30.</p>
+</details>`,
+    s: `body { font-family: sans-serif; padding: 20px; max-width: 600px; }
+summary { cursor: pointer; font-weight: bold; }` } },
+i: { x: `**Pestañas (tabs):** varios paneles en el mismo lugar; se ve uno por vez según la pestaña elegida.
+
+La lógica con JS:
+1. Al tocar una pestaña, sacás la clase ~activa~ a todas.
+2. Se la ponés a la tocada.
+3. Ocultás todos los paneles y mostrás el que corresponde.
+
+Un truco: guardá en cada pestaña a qué panel corresponde con ~data-panel="fotos"~ y leelo con ~boton.dataset.panel~.`,
+  e: { t: 'Pestañas', c: `Programá las pestañas para que al tocar una se muestre su panel y se marque como activa. Usá ~data-panel~ y un ~forEach~ para recorrer los botones. Agregá una cuarta pestaña con su panel.`,
+    k: ['Se ve un panel por vez', 'La pestaña activa se distingue', 'Usás data-panel', 'Hay una cuarta pestaña que funciona'],
+    p: `~document.querySelectorAll('.tab').forEach(function (b) { ... });~`,
+    h: `<div class="tabs">
+  <button class="tab activa" data-panel="p1">Horario</button>
+  <button class="tab" data-panel="p2">Materiales</button>
+  <button class="tab" data-panel="p3">Contacto</button>
+</div>
+<div class="panel" id="p1">Lunes y miércoles de 10 a 12.</div>
+<div class="panel" id="p2" hidden>Cuaderno, pendrive y auriculares.</div>
+<div class="panel" id="p3" hidden>profe@liceo.edu.uy</div>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+.tab { padding: 10px 16px; border: none; background: #eee; cursor: pointer; }
+.tab.activa { background: #2D58CF; color: white; }
+.panel { border: 1px solid #ddd; padding: 16px; }`,
+    j: `// programá las pestañas acá` } },
+v: { x: `- ~<dialog>~ es una **ventana modal** nativa: ~dialog.showModal()~ la abre, oscurece el fondo y la tecla Esc la cierra. ~dialog.close()~ la cierra.
+- **Menú hamburguesa:** en el celular el menú se esconde y aparece al tocar ☰. El botón debe indicar su estado con ~aria-expanded="true"~ o ~"false"~.
+
+Integrar es hacer que varios componentes convivan en la misma página sin pisarse: nombres de clases claros y cada uno con su propia función.`,
+  e: { t: 'Modal y hamburguesa', c: `Integrá en la página: un menú hamburguesa que aparece en el celular (y que actualice ~aria-expanded~) y un botón "Suscribirme" que abra un ~dialog~ con un formulario y un botón para cerrarlo. Los dos tienen que funcionar con teclado.`,
+    k: ['El menú se abre y se cierra en pantallas chicas', 'aria-expanded cambia', 'El modal abre con showModal y cierra con botón y con Esc', 'Todo funciona con teclado'],
+    p: `~boton.setAttribute('aria-expanded', abierto);~`,
+    h: `<header>
+  <strong>Club de Lectura</strong>
+  <button id="hamb" aria-expanded="false" aria-controls="menu">☰</button>
+  <nav id="menu"><a href="#">Inicio</a><a href="#">Libros</a><a href="#">Reuniones</a></nav>
+</header>
+<main>
+  <button id="abrir">Suscribirme</button>
+</main>
+<dialog id="modal">
+  <h2>Suscripción</h2>
+  <label for="m">Correo</label> <input id="m" type="email">
+  <button id="cerrar">Cerrar</button>
+</dialog>`,
+    s: `body { font-family: sans-serif; margin: 0; }
+header { background: #1A1C2E; color: white; padding: 12px; }
+nav a { color: white; display: block; padding: 8px 0; }
+nav { display: none; }
+nav.abierto { display: block; }
+main { padding: 20px; }
+dialog::backdrop { background: rgba(0,0,0,0.5); }
+@media (min-width: 700px) {
+  #hamb { display: none; }
+  nav { display: inline; margin-left: 20px; }
+  nav a { display: inline; margin-right: 12px; }
+}`,
+    j: `// programá el menú y el modal` } }
+});
+
+tema({ id: '3.8', u: '3', t: 'Pruebas y depuración de JavaScript',
+a: `**Depurar es hacer de detective.** El programa no hace lo que esperás: juntás pistas (mensajes de error, valores) hasta encontrar al culpable.`,
+b: { x: `Cuando algo no anda, **mirá la consola**: los errores aparecen en rojo con el número de línea. Los más comunes:
+- **ReferenceError: x is not defined** → escribiste mal un nombre (JS distingue mayúsculas: ~Nombre~ ≠ ~nombre~).
+- **SyntaxError** → falta o sobra un paréntesis, llave o comilla.
+- **Cannot read properties of null** → el ~getElementById~ no encontró el elemento (revisá el id).`,
+  e: { t: 'Tres errores', c: `Este programa tiene tres errores, uno de cada tipo de la explicación. Usá la consola para encontrarlos y arreglalos. Anotá en un comentario cuál era cada uno y qué decía la consola.`,
+    k: ['El programa funciona', 'Están los tres errores explicados', 'Copiaste el mensaje de la consola de cada uno'],
+    p: `Arreglá un error, ejecutá de nuevo y mirá cuál aparece después.`,
+    h: `<button id="boton">Calcular</button>
+<p id="resultado"></p>`,
+    s: `body { font-family: sans-serif; padding: 20px; }`,
+    j: `let precio = 100;
+let cantidad = 3;
+
+document.getElementById('Boton').addEventListener('click', function () {
+  let total = precio * Cantidad;
+  document.getElementById('resultado').textContent = 'Total: $' + total;
+};` } },
+i: { x: `A veces no hay error rojo pero el resultado está **mal**: es un **error lógico**.
+- Poné ~console.log~ en distintos puntos para ver el valor de las variables.
+- **Probá casos:** valores normales, el valor más chico, el más grande, cero, vacío.
+- Escribí antes qué resultado esperás. Si lo que da es distinto, ahí está el problema.`,
+  e: { t: 'El promedio mentiroso', c: `La función debería calcular el promedio pero da mal. Usá ~console.log~ dentro del for para seguir los valores, encontrá los dos errores lógicos y arreglalos. Probá con ~[10]~, ~[7, 8, 9]~ y ~[]~ (este último debería mostrar "Sin notas").`,
+    k: ['Los tres casos dan el resultado correcto', 'Hay console.log que muestran el seguimiento', 'El caso vacío no da NaN'],
+    p: `Mirá desde qué número empieza el for y entre qué se divide.`,
+    h: `<p id="r"></p>`,
+    s: `body { font-family: sans-serif; padding: 20px; }`,
+    j: `function promedio(notas) {
+  let suma = 0;
+  for (let i = 1; i < notas.length; i++) {
+    suma = suma + notas[i];
+  }
+  return suma / 3;
+}
+
+document.getElementById('r').textContent = promedio([7, 8, 9]);` } },
+v: { x: `Herramientas de profesional:
+- **Puntos de interrupción (breakpoints):** en DevTools → Fuentes (Sources) hacés clic en el número de línea; el programa se frena ahí y ves el valor de cada variable paso a paso. En el código podés poner ~debugger;~.
+- **try / catch** atrapa un error para que la página no se rompa y puedas mostrar un mensaje amable.
+- **Plan de pruebas:** una tabla con qué se prueba, qué se espera y qué pasó. Sirve para no olvidarte de nada antes de entregar.`,
+  e: { t: 'Conversor a prueba de errores', c: `El conversor de pesos a dólares se rompe con ciertas entradas. Protegelo con ~try / catch~ y validaciones, y escribí un plan de pruebas de al menos 5 casos (en un comentario) con: entrada, resultado esperado y resultado obtenido. Probá también con ~debugger;~ en tu navegador.`,
+    k: ['La página nunca muestra NaN ni se rompe', 'Usás try / catch', 'El plan tiene 5 casos o más', 'Incluís casos límite: vacío, negativo, letras'],
+    p: `Dentro del try podés lanzar tu propio error: ~throw new Error('Escribí un número positivo');~`,
+    h: `<input id="pesos" placeholder="Pesos uruguayos">
+<button id="conv">Convertir</button>
+<p id="r"></p>`,
+    s: `body { font-family: sans-serif; padding: 20px; }`,
+    j: `let cotizacion = 40;
+
+document.getElementById('conv').addEventListener('click', function () {
+  let pesos = document.getElementById('pesos').value;
+  let dolares = pesos / cotizacion;
+  document.getElementById('r').textContent = 'US$ ' + dolares.toFixed(2);
+});
+
+/* PLAN DE PRUEBAS
+Entrada | Esperado | Obtenido
+*/` } }
+});
+
+/* ============================ UNIDAD 4 ============================ */
+tema({ id: '4.1', u: '4', t: 'Técnicas avanzadas de layout: grid y flexbox',
+a: `**Flexbox es una fila de gente en la parada:** ordena cosas en una línea. **Grid es un tablero de ajedrez:** ordena en filas y columnas a la vez.`,
+b: { x: `**Flexbox** ordena los hijos de una caja en fila (o en columna):
+
+~.menu { display: flex; }~
+
+- ~justify-content~ los reparte en el eje principal: ~center~, ~space-between~, ~space-around~.
+- ~align-items~ los alinea en el otro eje: ~center~, ~flex-start~.
+- ~gap: 16px;~ deja espacio entre ellos.
+- ~flex-direction: column;~ los pone en columna.`,
+  e: { t: 'Barra de navegación', c: `Con flexbox, armá la barra: el logo a la izquierda y los enlaces a la derecha, todo centrado verticalmente, con espacio entre los enlaces. Después centrá la tarjeta en el medio de la sección (horizontal y vertical).`,
+    k: ['La barra usa display: flex', 'Logo a la izquierda y enlaces a la derecha', 'Los enlaces tienen gap', 'La tarjeta está centrada en los dos ejes'],
+    p: `Logo a un lado y menú al otro: ~justify-content: space-between~. Centrar: ~justify-content: center; align-items: center;~`,
+    h: `<header class="barra">
+  <strong class="logo">🎮 GameZone</strong>
+  <nav class="links"><a href="#">Inicio</a><a href="#">Juegos</a><a href="#">Ranking</a></nav>
+</header>
+<section class="centro">
+  <div class="tarjeta">Estoy en el medio</div>
+</section>`,
+    s: `body { font-family: sans-serif; margin: 0; }
+.barra { background: #1A1C2E; color: white; padding: 12px 20px; }
+.links a { color: #9FD3FF; }
+.centro { height: 250px; background: #e2eafc; }
+.tarjeta { background: white; padding: 20px; border-radius: 10px; }` } },
+i: { x: `- ~flex-wrap: wrap;~ deja que los hijos bajen a otra línea si no entran.
+- ~flex: 1;~ en un hijo hace que crezca para ocupar el espacio que sobra. Con ~flex: 1 1 200px~ crece, se achica y parte de 200px.
+
+**Grid** arma columnas:
+
+~.galeria { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }~
+
+~1fr~ es "una parte del espacio libre": tres columnas iguales.`,
+  e: { t: 'Tarjetas y galería', c: `Primero, con flexbox + wrap, hacé que las tarjetas de precios se acomoden solas (de 3 en computadora, se bajan en el celular). Segundo, con grid, armá la galería de 6 fotos en 3 columnas, y que la primera foto ocupe dos columnas.`,
+    k: ['Las tarjetas usan flex-wrap y flex', 'La galería usa grid con repeat y fr', 'La primera foto ocupa dos columnas'],
+    p: `Para que ocupe dos columnas: ~grid-column: span 2;~`,
+    h: `<div class="precios">
+  <div class="plan">Básico</div>
+  <div class="plan">Pro</div>
+  <div class="plan">Equipo</div>
+</div>
+<div class="galeria">
+  <img src="https://picsum.photos/id/10/400/250" alt="Bosque">
+  <img src="https://picsum.photos/id/11/400/250" alt="Campo">
+  <img src="https://picsum.photos/id/12/400/250" alt="Playa">
+  <img src="https://picsum.photos/id/13/400/250" alt="Costa">
+  <img src="https://picsum.photos/id/14/400/250" alt="Mar">
+  <img src="https://picsum.photos/id/15/400/250" alt="Cascada">
+</div>`,
+    s: `body { font-family: sans-serif; padding: 16px; }
+.plan { background: #e2eafc; padding: 40px 20px; text-align: center; border-radius: 10px; }
+.galeria img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 6px; }
+.galeria { margin-top: 24px; }` } },
+v: { x: `- ~grid-template-areas~ dibuja el diseño con nombres:
+
+~grid-template-areas: "cab cab" "menu main" "pie pie";~
+
+y cada parte se ubica con ~grid-area: cab;~.
+- **Grid que se adapta solo, sin media queries:**
+
+~grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));~
+
+Mete tantas columnas como entren, de al menos 200px.
+- Se combinan: grid para la página entera, flexbox para cosas en una línea (menú, botones).`,
+  e: { t: 'Diseño de página completo', c: `Armá el layout con ~grid-template-areas~: encabezado arriba, menú lateral a la izquierda, contenido principal y pie. En el celular todo en una columna (cambiá las áreas con una media query). Dentro del main, las tarjetas usan ~auto-fit~ y ~minmax~.`,
+    k: ['El layout usa grid-template-areas', 'En celular queda en una columna', 'Las tarjetas se acomodan solas con auto-fit', 'El menú lateral usa flexbox en columna'],
+    p: `En celular: ~grid-template-areas: "cab" "menu" "main" "pie";~`,
+    h: `<div class="pagina">
+  <header>Mi Portal</header>
+  <aside><a href="#">Inicio</a><a href="#">Noticias</a><a href="#">Ayuda</a></aside>
+  <main>
+    <div class="t">1</div><div class="t">2</div><div class="t">3</div>
+    <div class="t">4</div><div class="t">5</div>
+  </main>
+  <footer>2026</footer>
+</div>`,
+    s: `body { font-family: sans-serif; margin: 0; }
+header, footer { background: #1A1C2E; color: white; padding: 16px; }
+aside { background: #e2eafc; padding: 16px; }
+main { padding: 16px; }
+.t { background: #f6e2ef; padding: 30px; border-radius: 8px; text-align: center; }` } }
+});
+
+tema({ id: '4.2', u: '4', t: 'Optimización del rendimiento y carga de páginas',
+a: `**Como armar la mochila para una excursión:** si llevás cosas que no usás, caminás lento. Una página con archivos pesados de más tarda en cargar, sobre todo con datos móviles.`,
+b: { x: `Lo que más pesa en una página suelen ser las **imágenes**. Para que carguen rápido:
+- **JPG** para fotos, **PNG** para imágenes con transparencia, **SVG** para íconos y logos, **WebP** (más liviano) para casi todo.
+- No uses una foto de 4000 píxeles para mostrarla a 400. Achicala antes.
+- Comprimila con **squoosh.app**: ves el antes y el después, y cuánto bajó el peso.`,
+  e: { t: 'A dieta', c: `Bajá una foto grande de tu celular o de internet. Pasala por squoosh.app: cambiá el tamaño a 1200 px de ancho y el formato a WebP. Respondé: ¿cuánto pesaba antes? ¿cuánto pesa ahora? ¿qué porcentaje bajó? ¿se nota la diferencia a simple vista?`,
+    k: ['Los pesos son reales (con KB o MB)', 'Calculaste el porcentaje', 'Opinás sobre la calidad'],
+    p: `Porcentaje que bajó = (antes − después) ÷ antes × 100.` } },
+i: { x: `En el código también se gana velocidad:
+- ~loading="lazy"~ en imágenes que están abajo: cargan cuando llegás.
+- ~width~ y ~height~ en las imágenes: el navegador reserva el lugar y la página no "salta".
+- Menos archivos: juntá tu CSS en uno solo.
+- **Minificar:** quitar espacios y comentarios de CSS y JS para producción.
+- El JS con ~defer~ no frena la carga del HTML.
+- Fuentes: cargá solo los pesos que usás (400 y 700, no los nueve).`,
+  e: { t: 'Revisión de código', c: `Esta página hace casi todo mal para el rendimiento. Corregí lo que puedas en el código y escribí en un comentario la lista de mejoras que hiciste y por qué cada una ayuda.`,
+    k: ['Las imágenes de abajo tienen loading="lazy"', 'Todas tienen width y height', 'La fuente pide solo los pesos usados', 'El comentario explica al menos cinco mejoras'],
+    p: `Mirá el link de Google Fonts: pide todos los pesos de la fuente.`,
+    h: `<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<h1>Galería de viajes</h1>
+<img src="https://picsum.photos/id/1036/2400/1600" alt="Montaña nevada">
+<p style="height: 600px">Bajá...</p>
+<img src="https://picsum.photos/id/1039/2400/1600" alt="Cascada">
+<img src="https://picsum.photos/id/1043/2400/1600" alt="Bosque">`,
+    s: `body { font-family: 'Roboto', sans-serif; padding: 20px; }
+img { width: 400px; display: block; margin-bottom: 12px; }
+/* este comentario largo no hace falta en producción */` } },
+v: { x: `**Lighthouse** viene en Chrome (DevTools → Lighthouse). Analiza una página y le da puntaje de 0 a 100 en:
+- **Rendimiento** (qué tan rápido carga)
+- **Accesibilidad**
+- **Prácticas recomendadas**
+- **SEO** (si los buscadores la entienden)
+
+Además te dice qué arreglar. Métricas importantes: **LCP** (cuánto tarda en verse lo principal) y **CLS** (cuánto "salta" la página mientras carga).`,
+  e: { t: 'Auditoría Lighthouse', c: `Publicá un trabajo tuyo (o usá la vista completa de un Pen: Change view → Full Page). Corré Lighthouse en modo celular. Anotá los cuatro puntajes, elegí tres sugerencias, aplicalas, volvé a medir y anotá los puntajes nuevos.`,
+    k: ['Están los puntajes de antes y después', 'Elegiste tres sugerencias y explicás qué hiciste', 'Al menos un puntaje mejoró'],
+    p: `Corré Lighthouse en una ventana de incógnito: las extensiones del navegador cambian el resultado.` } }
+});
+
+tema({ id: '4.3', u: '4', t: 'Sitios web dinámicos y bases de datos',
+a: `**Una página estática es un cartel impreso:** dice siempre lo mismo. **Una dinámica es una pizarra** que se actualiza con datos guardados en un fichero (la base de datos).`,
+b: { x: `- **Sitio estático:** los archivos HTML son siempre iguales para todo el mundo (un portafolio).
+- **Sitio dinámico:** la página se arma con datos que cambian (Instagram, una tienda, el CREA).
+
+Los datos se guardan en una **base de datos**, que funciona como planillas:
+- Una **tabla** por cada cosa (usuarios, productos).
+- Cada **fila** es un registro (un producto).
+- Cada **columna** es un dato (nombre, precio, stock).`,
+  e: { t: 'Diseñá la base', c: `Elegí un sitio que uses (una tienda, una app de música, el CREA). Respondé: ¿es estático o dinámico y por qué? Después diseñá una tabla de su base de datos con 4 columnas y escribí 3 filas de ejemplo.`,
+    k: ['Justificás si es estático o dinámico', 'La tabla tiene nombre y 4 columnas con sentido', 'Hay 3 filas de ejemplo'],
+    p: `Ejemplo: tabla CANCIONES → titulo | artista | duracion | reproducciones` } },
+i: { x: `En JavaScript los datos se guardan como **arreglo de objetos**, igual que una tabla:
+
+~let productos = [ { nombre: 'Buzo', precio: 1200 }, { nombre: 'Gorro', precio: 450 } ];~
+
+Con un ~for~ (o ~forEach~) recorrés los datos y **generás el HTML** de cada uno. Así, para agregar un producto no tocás el HTML: agregás un dato. Eso es lo que hace un sitio dinámico.`,
+  e: { t: 'Catálogo desde datos', c: `Completá el código para que las tarjetas se generen desde el arreglo. Agregá dos productos más al arreglo. Después agregá un botón que muestre solo los productos de menos de $1000 (~filter~).`,
+    k: ['Las tarjetas salen del arreglo', 'Agregar un producto al arreglo agrega una tarjeta', 'El filtro funciona', 'Hay un botón para ver todos de nuevo'],
+    p: `~productos.filter(function (p) { return p.precio < 1000; })~ devuelve un arreglo nuevo.`,
+    h: `<button id="baratos">Menos de $1000</button>
+<button id="todos">Ver todos</button>
+<div id="catalogo"></div>`,
+    s: `body { font-family: sans-serif; padding: 16px; }
+#catalogo { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 12px; }
+.prod { border: 1px solid #ddd; border-radius: 8px; padding: 12px; }`,
+    j: `let productos = [
+  { nombre: 'Buzo del liceo', precio: 1200 },
+  { nombre: 'Gorro', precio: 450 },
+  { nombre: 'Taza', precio: 380 }
+];
+
+function mostrar(lista) {
+  let cat = document.getElementById('catalogo');
+  cat.innerHTML = '';
+  lista.forEach(function (p) {
+    // creá la tarjeta de cada producto
+  });
+}
+
+mostrar(productos);` } },
+v: { x: `Para que los datos **no se borren al recargar** la página:
+- ~localStorage~ guarda texto en el navegador: ~localStorage.setItem('clave', 'valor')~ y ~getItem('clave')~.
+- Para guardar arreglos u objetos se convierten a texto con **JSON**: ~JSON.stringify(datos)~ para guardar y ~JSON.parse(texto)~ para recuperar.
+
+Ojo: localStorage solo vive en **ese navegador**. Un sitio real guarda los datos en un **servidor** con una base de datos (MySQL, PostgreSQL, Firebase) y la página los pide con una API.`,
+  e: { t: 'Libreta que recuerda', c: `Hacé una libreta de notas: se escribe una nota, se agrega a la lista y se guarda en localStorage. Al recargar la página, las notas siguen ahí. Cada nota se puede borrar (y se borra también del almacenamiento). Mostrá la fecha de cada nota.`,
+    k: ['Las notas sobreviven a la recarga', 'Usás JSON.stringify y JSON.parse', 'Borrar actualiza localStorage', 'Cada nota muestra su fecha'],
+    p: `Al empezar: ~let notas = JSON.parse(localStorage.getItem('notas')) || [];~ Fecha: ~new Date().toLocaleDateString()~`,
+    h: `<form id="f">
+  <input id="txt" placeholder="Escribí una nota">
+  <button>Guardar</button>
+</form>
+<ul id="lista"></ul>`,
+    s: `body { font-family: sans-serif; padding: 16px; }
+li { background: #fbebd6; margin: 6px 0; padding: 8px; border-radius: 6px; list-style: none; }
+small { color: #777; margin-left: 8px; }`,
+    j: `let notas = JSON.parse(localStorage.getItem('notas')) || [];
+
+function guardar() {
+  localStorage.setItem('notas', JSON.stringify(notas));
+}
+
+function dibujar() {
+  // mostrá las notas en la lista
+}
+
+dibujar();` } }
+});
+
+tema({ id: '4.4', u: '4', t: 'Diseño responsive avanzado',
+a: `**Como un sillón que se convierte en cama:** el mismo mueble se reacomoda según el espacio. Un buen diseño responsive no solo se achica: se **reorganiza**.`,
+b: { x: `Repaso y un paso más:
+- Probá tu página en **al menos tres anchos**: celular (375px), tablet (768px) y computadora (1280px).
+- En el modo dispositivo de DevTools elegís modelos de celular.
+- **Botones y enlaces de al menos 44px** de alto en el celular: el dedo es más grande que el mouse.
+- Nada de letra más chica que 16px en el celular.`,
+  e: { t: 'Revisión en tres pantallas', c: `Probá esta página en los tres anchos con el modo dispositivo. Arreglá: los botones chicos, la letra chica en celular y la tabla que se sale de la pantalla. Escribí en un comentario qué viste en cada ancho.`,
+    k: ['Los botones tienen al menos 44px de alto', 'La letra es legible en celular', 'La tabla no rompe el ancho', 'El comentario describe los tres anchos'],
+    p: `Para la tabla, envolvela en un div con ~overflow-x: auto~.`,
+    h: `<h1>Horarios del gimnasio</h1>
+<button>Inscribirme</button> <button>Ver precios</button>
+<table>
+  <tr><th>Lunes</th><th>Martes</th><th>Miércoles</th><th>Jueves</th><th>Viernes</th><th>Sábado</th></tr>
+  <tr><td>Funcional 8:00</td><td>Spinning 9:00</td><td>Yoga 10:00</td><td>Funcional 8:00</td><td>Zumba 19:00</td><td>Libre</td></tr>
+</table>`,
+    s: `body { font-family: sans-serif; padding: 10px; font-size: 12px; }
+button { font-size: 10px; padding: 2px 4px; }
+table { border-collapse: collapse; }
+td, th { border: 1px solid #ccc; padding: 8px; white-space: nowrap; }` } },
+i: { x: `Imágenes que se adaptan:
+- ~object-fit: cover;~ hace que la imagen llene su caja sin deformarse (recorta lo que sobra).
+- ~aspect-ratio: 16 / 9;~ mantiene la proporción de una caja.
+- ~<picture>~ muestra **otra imagen** según la pantalla:
+
+~<picture><source media="(min-width: 800px)" srcset="grande.jpg"><img src="chica.jpg" alt="..."></picture>~
+
+Así el celular baja una imagen liviana y la compu una grande.`,
+  e: { t: 'Imágenes inteligentes', c: `Usá ~picture~ para que el banner muestre una imagen vertical en el celular y una horizontal desde 800px. En la grilla de productos, que todas las fotos tengan la misma proporción (~aspect-ratio~) y no se deformen (~object-fit~).`,
+    k: ['El banner cambia de imagen según el ancho', 'Las fotos de la grilla tienen igual proporción', 'Ninguna se ve deformada'],
+    p: `Imagen vertical: ~https://picsum.photos/id/1011/500/700~. Horizontal: ~https://picsum.photos/id/1011/1200/400~.`,
+    h: `<img class="banner" src="https://picsum.photos/id/1011/1200/400" alt="Lago con montañas">
+<div class="grilla">
+  <img src="https://picsum.photos/id/20/400/600" alt="Escritorio">
+  <img src="https://picsum.photos/id/21/600/300" alt="Zapatos">
+  <img src="https://picsum.photos/id/22/400/400" alt="Persona caminando">
+</div>`,
+    s: `body { font-family: sans-serif; margin: 0; }
+.banner { width: 100%; display: block; }
+.grilla { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 8px; }
+.grilla img { width: 100%; }` } },
+v: { x: `- **Container queries:** el componente se adapta al ancho **de su contenedor**, no de la pantalla. Así la misma tarjeta se ve bien en una columna angosta o en una ancha.
+
+~.zona { container-type: inline-size; }~
+~@container (min-width: 400px) { .tarjeta { display: flex; } }~
+
+- Combinado con ~clamp()~ y grid ~auto-fit~, se logran diseños que casi no necesitan media queries.`,
+  e: { t: 'Tarjeta camaleón', c: `La misma tarjeta está en una columna angosta y en una ancha. Con container queries, hacé que en la angosta la foto vaya arriba del texto y en la ancha al costado. Usá ~clamp()~ para el tamaño del título de la tarjeta.`,
+    k: ['Usás container-type y @container', 'La tarjeta cambia según su contenedor, no según la pantalla', 'El título usa clamp()'],
+    p: `Las dos columnas necesitan ~container-type: inline-size~.`,
+    h: `<div class="layout">
+  <aside class="zona">
+    <div class="tarjeta"><img src="https://picsum.photos/id/30/300/200" alt="Taza de café"><div><h3>Café</h3><p>Taller de barismo los sábados.</p></div></div>
+  </aside>
+  <main class="zona">
+    <div class="tarjeta"><img src="https://picsum.photos/id/30/300/200" alt="Taza de café"><div><h3>Café</h3><p>Taller de barismo los sábados.</p></div></div>
+  </main>
+</div>`,
+    s: `body { font-family: sans-serif; margin: 0; padding: 12px; }
+.layout { display: grid; grid-template-columns: 1fr 2fr; gap: 12px; }
+.tarjeta { border: 1px solid #ddd; border-radius: 10px; overflow: hidden; }
+.tarjeta img { width: 100%; display: block; }
+.tarjeta div { padding: 10px; }` } }
+});
+
+tema({ id: '4.5', u: '4', t: 'Diseño de interfaces de usuario intuitivas',
+a: `**Una buena interfaz es como una puerta bien hecha:** sabés si se empuja o se tira sin leer ningún cartel.`,
+b: { x: `Principios para que la interfaz se entienda sola:
+- **Jerarquía visual:** lo más importante es más grande, más fuerte o tiene más color.
+- **Consistencia:** los botones se ven igual en todas las páginas; el menú está siempre en el mismo lugar.
+- **Que parezca lo que es:** un botón parece botón (fondo, borde); un enlace se distingue del texto.
+- **Menos es más:** si todo resalta, nada resalta.`,
+  e: { t: 'Crítica de una app', c: `Elegí una app o sitio que uses todos los días. Respondé:
+- ¿Qué es lo primero que ves al abrirla? ¿Por qué?
+- Encontrá un ejemplo de consistencia (algo que se repite igual).
+- Encontrá algo confuso o difícil de encontrar.
+- ¿Cómo lo mejorarías?`,
+    k: ['Respondiste las cuatro preguntas', 'Los ejemplos son concretos', 'La mejora tiene sentido'],
+    p: `Sacá una captura y miralá de lejos: lo que más resalta es lo que ganó la jerarquía.` } },
+i: { x: `Una interfaz intuitiva **responde**:
+- **Estados de los botones:** normal, ~:hover~ (mouse encima), ~:focus-visible~ (con teclado), ~:active~ (apretado), ~:disabled~ (no disponible).
+- **Feedback:** después de cada acción, algo cambia: un mensaje, un color, un ícono de carga.
+- **Íconos con texto:** un ícono solo puede no entenderse; "🗑 Borrar" no deja dudas.
+- **Acciones peligrosas** (borrar) se ven distintas y piden confirmación.`,
+  e: { t: 'Botones que responden', c: `Diseñá los cinco estados del botón principal. Hacé que el botón "Enviar" muestre "Enviando…" y quede deshabilitado 2 segundos, y después "¡Enviado!". El botón "Borrar cuenta" tiene que verse peligroso y pedir confirmación (~confirm~).`,
+    k: ['El botón tiene los cinco estados', 'Enviar da feedback y se deshabilita', 'Borrar se ve distinto y pide confirmación', 'Los íconos tienen texto'],
+    p: `~if (confirm('¿Seguro? No se puede deshacer')) { ... }~`,
+    h: `<button id="enviar" class="btn">📨 Enviar</button>
+<button id="borrar" class="btn">Borrar cuenta</button>
+<p id="msj"></p>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+.btn { padding: 12px 20px; font-size: 1rem; border: none; border-radius: 8px; background: #2D58CF; color: white; cursor: pointer; }`,
+    j: `document.getElementById('enviar').addEventListener('click', function () {
+  // feedback
+});` } },
+v: { x: `Antes de programar, los diseñadores hacen:
+- **Wireframe:** boceto en blanco y negro con cajas. Solo importa dónde va cada cosa.
+- **Prototipo:** versión con colores que se puede "clickear" (en Figma, por ejemplo).
+
+Principios de la psicología que se usan en interfaces:
+- **Proximidad:** lo que está cerca parece relacionado.
+- **Ley de Hick:** más opciones = más tiempo para decidir.
+- **Formularios cortos:** pedí solo lo necesario, agrupá los campos y poné el label arriba del campo.`,
+  e: { t: 'Rediseño del formulario', c: `Este formulario de inscripción es confuso. Rediseñalo aplicando proximidad, labels arriba, campos agrupados (datos personales / contacto), menos campos (sacá los innecesarios) y un botón principal claro. Explicá en un comentario cada decisión.`,
+    k: ['Los campos están agrupados con fieldset o secciones', 'Sacaste campos innecesarios y explicaste por qué', 'Hay un solo botón principal claro', 'Cada decisión está explicada'],
+    p: `~<fieldset><legend>Datos personales</legend>...</fieldset>~ agrupa campos.`,
+    h: `<form>
+  Nombre <input> Apellido <input> Segundo apellido <input>
+  Color favorito <input> Correo <input> Repetir correo <input>
+  Teléfono <input> Teléfono alternativo <input> Fax <input>
+  <button>Cancelar</button> <button>Borrar</button> <button>Enviar</button>
+</form>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+input { margin: 4px; }` } }
+});
+
+tema({ id: '4.6', u: '4', t: 'Multimedia y elementos interactivos avanzados',
+a: `**Pasar de un póster a un tablero de juego.** La página ya no solo se mira: se toca, se dibuja, se escucha.`,
+b: { x: `Video de calidad:
+- ~poster="imagen.jpg"~ muestra una portada antes de darle play.
+- ~<track src="subs.vtt" kind="subtitles" srclang="es" label="Español">~ agrega subtítulos (accesibilidad).
+- ~preload="none"~ evita descargar el video hasta que se usa.
+- Nunca pongas ~autoplay~ con sonido: molesta y es inaccesible. Si hace falta, ~autoplay muted~.`,
+  e: { t: 'Video accesible', c: `Mejorá el video: agregá póster, controles, ~preload~ y un párrafo de descripción para quien no lo puede ver. Agregá también un enlace para descargarlo. En un comentario explicá para qué sirve ~<track>~.`,
+    k: ['El video tiene poster, controls y preload', 'Hay descripción en texto', 'El comentario explica track'],
+    p: `Póster: ~https://picsum.photos/id/152/640/360~`,
+    h: `<h2>Cómo florece una flor</h2>
+<video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" width="400" autoplay></video>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+video { max-width: 100%; }` } },
+i: { x: `- **SVG en línea:** dibujos hechos con código (~<circle>~, ~<rect>~, ~<path>~). No pierden calidad al agrandarse y se pueden colorear con CSS (~fill~) y animar con ~:hover~.
+- **Mapas:** OpenStreetMap y Google Maps dan un ~<iframe>~ para insertar (en OpenStreetMap: Compartir → HTML).`,
+  e: { t: 'Ícono SVG y mapa', c: `Dibujá con SVG un ícono simple (una casa con techo, cuerpo y puerta, o una cara) y hacé que cambie de color con hover desde el CSS. Insertá un mapa de OpenStreetMap de tu ciudad o de tu liceo.`,
+    k: ['El ícono usa al menos tres figuras SVG', 'Cambia de color con CSS', 'El mapa se ve y tiene title'],
+    p: `~<rect x="20" y="50" width="60" height="40" fill="tomato"/>~ dibuja un rectángulo.`,
+    h: `<svg width="100" height="100" viewBox="0 0 100 100" class="icono">
+  <polygon points="10,50 50,10 90,50" class="techo"/>
+</svg>
+<iframe title="Mapa de Montevideo" width="400" height="250" src="https://www.openstreetmap.org/export/embed.html?bbox=-56.25,-34.93,-56.10,-34.86&layer=mapnik"></iframe>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+.techo { fill: crimson; transition: fill 0.3s; }
+.icono:hover .techo { fill: darkorange; }
+iframe { display: block; max-width: 100%; border: 0; margin-top: 12px; }` } },
+v: { x: `- **Canvas:** un lienzo donde dibujás con JS píxel por píxel. Sirve para juegos, gráficos y apps de dibujo:
+
+~let ctx = canvas.getContext('2d');~
+~ctx.fillRect(10, 10, 50, 50);~
+
+- **Controles propios para video:** ~video.play()~, ~video.pause()~, ~video.currentTime~ y ~video.volume~ permiten hacer tu propio reproductor.`,
+  e: { t: 'Pizarra digital', c: `Programá una pizarra en canvas: se dibuja arrastrando el mouse, se puede elegir el color con ~<input type="color">~ y el grosor con ~<input type="range">~, y un botón la borra. Desafío: que funcione también con el dedo en el celular (eventos ~pointer~).`,
+    k: ['Se dibuja arrastrando', 'Cambian color y grosor', 'El botón borra todo', 'Desafío: funciona con el dedo'],
+    p: `Usá ~pointerdown~, ~pointermove~ y ~pointerup~: sirven para mouse y dedo. Posición: ~e.offsetX~, ~e.offsetY~.`,
+    h: `<input type="color" id="color" value="#2D58CF">
+<input type="range" id="grosor" min="1" max="30" value="5">
+<button id="borrar">Borrar</button>
+<canvas id="lienzo" width="500" height="300"></canvas>`,
+    s: `body { font-family: sans-serif; padding: 12px; }
+canvas { display: block; margin-top: 8px; border: 2px solid #ccc; border-radius: 8px; touch-action: none; max-width: 100%; background: white; }`,
+    j: `let lienzo = document.getElementById('lienzo');
+let ctx = lienzo.getContext('2d');
+let dibujando = false;
+
+lienzo.addEventListener('pointerdown', function (e) {
+  dibujando = true;
+  ctx.beginPath();
+  ctx.moveTo(e.offsetX, e.offsetY);
+});
+
+// completá pointermove y pointerup` } }
+});
+
+tema({ id: '4.7', u: '4', t: 'APIs y servicios web',
+a: `**Una API es el mozo de un restaurante.** Vos (tu página) no entrás a la cocina (el servidor): le pedís al mozo con el menú (la documentación) y él te trae el plato (los datos).`,
+b: { x: `Una **API** es una forma de pedirle datos a otro servicio: el clima, fotos, noticias, monedas.
+
+Los datos llegan en **JSON**, un formato de texto parecido a los objetos de JavaScript:
+
+~{ "ciudad": "Montevideo", "temperatura": 18, "lluvia": false }~
+
+- Las claves van entre comillas dobles.
+- Los valores pueden ser texto, número, true/false, listas ~[ ]~ u objetos ~{ }~.`,
+  e: { t: 'Leer JSON', c: `Abrí en el navegador esta dirección: ~https://dog.ceo/api/breeds/image/random~. Respondé: ¿qué datos trae? ¿cuáles son las claves y sus valores? Recargá tres veces: ¿qué cambia? Después pensá: ¿qué API te gustaría que existiera para un proyecto tuyo y qué datos traería?`,
+    k: ['Identificaste las claves y los valores', 'Notaste qué cambia al recargar', 'Propusiste una API con datos de ejemplo en JSON'],
+    p: `Firefox muestra el JSON ordenado. En Chrome marcá "Dar formato" (pretty print).` } },
+i: { x: `~fetch~ pide datos a una API:
+
+~fetch('https://dog.ceo/api/breeds/image/random')~
+~  .then(function (r) { return r.json(); })~
+~  .then(function (datos) { console.log(datos.message); });~
+
+1. ~fetch~ hace el pedido.
+2. El primer ~then~ convierte la respuesta a JSON.
+3. El segundo ~then~ usa los datos.
+
+Mientras espera, mostrá "Cargando…": las APIs pueden tardar.`,
+  e: { t: 'Perrito al azar', c: `Completá el código para que el botón traiga una foto de perro al azar y la muestre. Mientras carga, el botón dice "Cargando…". Después cambiá la dirección para pedir solo una raza (la documentación está en dog.ceo/dog-api).`,
+    k: ['El botón trae una foto nueva', 'Muestra "Cargando…" mientras espera', 'Pediste una raza específica', 'La imagen tiene alt'],
+    p: `Una raza: ~https://dog.ceo/api/breed/beagle/images/random~`,
+    h: `<button id="traer">Traer perrito</button>
+<div><img id="perro" alt="Foto de un perro" width="300"></div>`,
+    s: `body { font-family: sans-serif; padding: 20px; text-align: center; }
+#perro { max-width: 100%; margin-top: 12px; border-radius: 10px; }`,
+    j: `let boton = document.getElementById('traer');
+
+boton.addEventListener('click', function () {
+  boton.textContent = 'Cargando…';
+  fetch('https://dog.ceo/api/breeds/image/random')
+    .then(function (r) { return r.json(); })
+    .then(function (datos) {
+      // mostrá la foto y volvé a poner el texto del botón
+    });
+});` } },
+v: { x: `- ~async / await~ hace el código más fácil de leer:
+
+~async function cargar() { let r = await fetch(url); let datos = await r.json(); }~
+
+- ~try / catch~ atrapa el error si no hay internet o la API falla. Siempre mostrá un mensaje amable.
+- Muchas APIs reciben **parámetros** en la dirección después de ~?~: ~?latitude=-34.9&longitude=-56.16~.
+- Algunas piden una **clave (API key)**. Nunca la publiques en GitHub.`,
+  e: { t: 'El clima de hoy', c: `Usá la API de Open-Meteo (gratis, sin clave) para mostrar la temperatura actual y el viento de Montevideo con ~async/await~. Agregá un selector de ciudades (Montevideo, Salto, Rivera, Maldonado) que cambie los datos. Manejá el error con ~try/catch~.`,
+    k: ['Usás async/await', 'Muestra temperatura y viento', 'El selector cambia de ciudad', 'Si falla, se ve un mensaje amable'],
+    p: `Coordenadas: Salto (-31.38, -57.96), Rivera (-30.90, -55.55), Maldonado (-34.90, -54.95). Los datos llegan en ~datos.current.temperature_2m~.`,
+    h: `<select id="ciudad">
+  <option value="-34.90,-56.16">Montevideo</option>
+</select>
+<div id="clima">Elegí una ciudad</div>`,
+    s: `body { font-family: sans-serif; padding: 20px; }
+#clima { font-size: 1.6rem; margin-top: 12px; }`,
+    j: `async function cargar(lat, lon) {
+  let url = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon + '&current=temperature_2m,wind_speed_10m';
+  // completá con try / catch
+}
+
+cargar(-34.90, -56.16);` } }
+});
+
+tema({ id: '4.8', u: '4', t: 'Prácticas modernas y tendencias en diseño web',
+a: `**Como la moda:** algunas cosas son pasajeras y otras llegan para quedarse. Hoy se quedan la accesibilidad, el modo oscuro, la velocidad y respetar las preferencias de cada persona.`,
+b: { x: `Tendencias actuales:
+- **Diseño minimalista:** mucho espacio en blanco, pocas cosas, bien elegidas.
+- **Modo oscuro:** casi todas las apps lo tienen.
+- **Tipografías grandes y con personalidad** en los títulos.
+- **Accesibilidad primero:** ya no es un extra, es obligatoria en muchos países.
+- **Diseño para el celular primero** (mobile first).
+- **Microinteracciones:** pequeñas animaciones que confirman lo que hiciste (un corazón que late al darle "me gusta").`,
+  e: { t: 'Cazador de tendencias', c: `Elegí tres sitios o apps actuales. Para cada uno, anotá qué tendencias de la lista usa, con un ejemplo concreto. Después elegí la tendencia que más te gusta y explicá cómo la usarías en tu proyecto final.`,
+    k: ['Analizaste tres sitios', 'Cada tendencia tiene un ejemplo concreto', 'Explicás cómo la usarías en tu proyecto'],
+    p: `Mirá también cómo se ven esos sitios en el celular.` } },
+i: { x: `El navegador sabe qué prefiere cada persona y tu CSS puede respetarlo:
+- ~@media (prefers-color-scheme: dark)~ → la persona usa modo oscuro en su sistema.
+- ~@media (prefers-reduced-motion: reduce)~ → la persona pidió menos animaciones.
+
+Con **variables CSS** el modo oscuro es fácil: solo cambiás los valores de las variables dentro de la media query.`,
+  e: { t: 'Tema automático', c: `Definí variables para fondo, texto, tarjeta y acento. Hacé que la página cambie sola a modo oscuro según la preferencia del sistema. Agregá ~prefers-reduced-motion~ para apagar la animación. Probalo cambiando el tema de tu computadora o celular.`,
+    k: ['Los colores salen de variables', 'Cambia sola con prefers-color-scheme', 'prefers-reduced-motion apaga la animación'],
+    p: `En DevTools: tres puntitos → More tools → Rendering → "Emulate CSS prefers-color-scheme".`,
+    h: `<div class="tarjeta">
+  <h2>Noticias del liceo</h2>
+  <p>Se viene la semana de la ciencia.</p>
+  <span class="nuevo">NUEVO</span>
+</div>`,
+    s: `:root {
+  --fondo: #f4f4f8;
+  --texto: #1a1c2e;
+}
+body { background: var(--fondo); color: var(--texto); font-family: sans-serif; padding: 20px; }
+.tarjeta { padding: 20px; border-radius: 12px; }
+.nuevo { display: inline-block; animation: brillo 1s infinite alternate; }
+@keyframes brillo { to { transform: scale(1.2); } }` } },
+v: { x: `Prácticas de los equipos profesionales:
+- **Componentes reutilizables** y **sistemas de diseño** (como Material Design): las mismas piezas en todo el sitio.
+- **Frameworks de CSS** como Tailwind (clases chiquitas que se combinan) o Bootstrap.
+- **PWA:** sitios que se instalan como app y funcionan sin internet.
+- **Control de versiones** con Git y GitHub.
+- **IA** para generar ideas, imágenes o código. Ojo: siempre revisá y entendé lo que te da, y respetá derechos de autor.`,
+  e: { t: 'Interruptor de tema', c: `Hacé un botón que cambie entre claro y oscuro manualmente, que **recuerde** la elección con localStorage y que, si la persona nunca eligió, use la preferencia del sistema. Agregá en un comentario tu opinión: ¿qué ventajas y riesgos tiene usar IA para programar?`,
+    k: ['El botón alterna el tema', 'La elección se recuerda al recargar', 'Sin elección usa la del sistema', 'El comentario muestra ventajas y riesgos'],
+    p: `~window.matchMedia('(prefers-color-scheme: dark)').matches~ te dice la preferencia del sistema. Poné el tema en ~document.documentElement.dataset.tema~.`,
+    h: `<button id="tema">🌓 Cambiar tema</button>
+<h1>Mi portfolio</h1>
+<p>Proyectos de diseño web.</p>`,
+    s: `:root { --fondo: white; --texto: #1a1c2e; }
+[data-tema="oscuro"] { --fondo: #14152a; --texto: #ececf7; }
+body { background: var(--fondo); color: var(--texto); font-family: sans-serif; padding: 20px; transition: background 0.3s; }`,
+    j: `// 1. ¿Hay algo guardado en localStorage?
+// 2. Si no, ¿qué prefiere el sistema?
+// 3. Al tocar el botón, cambiar y guardar` } }
+});
+
+/* ============================ UNIDAD 5 ============================ */
+tema({ id: '5.1', u: '5', t: 'Diseño e implementación de un proyecto web',
+a: `**Como organizar un cumpleaños:** antes de comprar nada, decidís para quién es, qué se va a hacer, quién se encarga de qué y para cuándo.`,
+b: { x: `El proyecto final es un **sitio web real** que van a publicar. Primero se planifica:
+- **Tema:** algo que les interese (un club, una banda, un juego, un emprendimiento del barrio).
+- **Objetivo:** ¿para qué sirve el sitio?
+- **Mapa del sitio:** las páginas o secciones que va a tener y cómo se conectan.`,
+  e: { t: 'Idea y mapa del sitio', c: `Escribí: el tema de tu sitio, su objetivo en una oración y el mapa del sitio con al menos tres secciones (con qué va a tener cada una).`,
+    k: ['El tema es claro', 'El objetivo cabe en una oración', 'El mapa tiene al menos tres secciones con su contenido'],
+    p: `Ejemplo: "Sitio del club de ajedrez para que nuevos socios se inscriban". Secciones: Inicio, Horarios, Inscripción.` } },
+i: { x: `Un **brief** es el documento que ordena el proyecto:
+- **Público:** ¿quién lo va a usar? (edad, qué necesita, desde qué dispositivo)
+- **Objetivo y contenido** de cada sección.
+- **Roles del equipo:** diseño, contenidos, programación, pruebas. Todos programan algo.
+- **Cronograma:** qué se hace cada semana hasta la entrega.`,
+  e: { t: 'El brief del equipo', c: `Escriban el brief completo: público, objetivo, secciones con contenido, roles de cada integrante y un cronograma por semana hasta la entrega.`,
+    k: ['El público está descrito', 'Cada integrante tiene un rol', 'El cronograma tiene fechas reales', 'Las secciones tienen contenido definido'],
+    p: `Pensá en la persona que va a usar el sitio: ¿qué busca en los primeros 5 segundos?` } },
+v: { x: `Organización como equipo profesional:
+- **Tablero de tareas** (Trello, GitHub Projects o una planilla) con columnas "Por hacer", "Haciendo", "Hecho".
+- **Tareas chicas:** "Hacer el menú responsive" en vez de "Hacer la página".
+- **Definición de terminado:** qué tiene que cumplir una tarea para estar hecha (se ve en celular, pasa el validador, tiene alt…).
+- **Repositorio en GitHub** desde el día uno.`,
+  e: { t: 'Tablero y criterios', c: `Armen el tablero con al menos 12 tareas chicas repartidas entre el equipo y escriban su "definición de terminado" (mínimo 5 criterios). Pegá el link al tablero y al repositorio.`,
+    k: ['El tablero tiene 12 tareas o más, con responsable', 'Hay definición de terminado con 5 criterios', 'El repositorio existe'],
+    p: `Una tarea está bien escrita si alguien la puede terminar en una clase.` } }
+});
+
+tema({ id: '5.2', u: '5', t: 'Diseño de la interfaz y estructura de las páginas',
+a: `**Como el plano de una casa:** primero se dibuja dónde va cada ambiente, después se construye y al final se pinta.`,
+b: { x: `- **Wireframe:** dibujá en papel cada sección con cajas: dónde va el título, el menú, las imágenes, los textos. Sin colores.
+- **Estructura HTML semántica:** pasá el wireframe a código con ~header~, ~nav~, ~main~, ~section~ y ~footer~.`,
+  e: { t: 'Del papel al HTML', c: `Hacé el wireframe en papel (sacale una foto para entregar). Después escribí la estructura HTML de tu página principal con etiquetas semánticas y textos de prueba.`,
+    k: ['El wireframe muestra todas las secciones', 'El HTML usa etiquetas semánticas', 'La estructura coincide con el wireframe'],
+    p: `Si el texto final todavía no está, usá textos de prueba cortos.`,
+    h: `<header>
+  <h1>Nombre del sitio</h1>
+  <nav></nav>
+</header>
+<main>
+  <section id="inicio"></section>
+</main>
+<footer></footer>`,
+    s: `body { font-family: sans-serif; margin: 0; }
+header, section, footer { border: 2px dashed #aaa; padding: 20px; margin: 8px; }` } },
+i: { x: `Una **guía de estilo** define la identidad visual del sitio:
+- **Paleta:** 2 o 3 colores principales + neutros (fondo y texto). Revisá el contraste.
+- **Tipografías:** una para títulos y una para textos, como máximo.
+- **Componentes:** cómo se ven los botones, las tarjetas y los enlaces.
+
+Todo en **variables CSS**, así cambiar algo es fácil.`,
+  e: { t: 'Guía de estilo', c: `Definí en ~:root~ la paleta y las tipografías de tu proyecto, y armá una página de muestra con: títulos h1 a h3, un párrafo, un enlace, un botón principal, uno secundario y una tarjeta.`,
+    k: ['Paleta y tipografías en variables', 'Están todos los componentes de muestra', 'El contraste de texto es bueno'],
+    p: `Probá el contraste en webaim.org/resources/contrastchecker.`,
+    h: `<h1>Título 1</h1>
+<h2>Título 2</h2>
+<h3>Título 3</h3>
+<p>Párrafo de prueba con un <a href="#">enlace</a>.</p>
+<button class="btn">Principal</button>
+<button class="btn sec">Secundario</button>
+<div class="tarjeta">Tarjeta</div>`,
+    s: `:root {
+  --primario: #2D58CF;
+  --texto: #1A1C2E;
+  --fondo: #FFFFFF;
+}
+body { font-family: sans-serif; color: var(--texto); background: var(--fondo); padding: 20px; }` } },
+v: { x: `El layout completo y responsive:
+- Grid con ~grid-template-areas~ para la estructura general.
+- Mobile first con media queries o container queries.
+- Plantilla compartida: el mismo encabezado, menú y pie en todas las páginas.
+- Un prototipo en Figma antes de programar ayuda a que el equipo esté de acuerdo.`,
+  e: { t: 'Layout del proyecto', c: `Programá el layout completo de tu página principal: estructura con grid y áreas, menú responsive y todas las secciones con su contenido real. Probalo en tres anchos.`,
+    k: ['Usa grid-template-areas', 'Funciona en celular, tablet y computadora', 'El menú es responsive', 'Pasa el validador de HTML'],
+    p: `Arrancá del layout del tema 4.1 avanzado y adaptalo.`,
+    h: `<div class="pagina">
+  <header>Sitio</header>
+  <nav>Menú</nav>
+  <main>Contenido</main>
+  <footer>Pie</footer>
+</div>`,
+    s: `* { box-sizing: border-box; }
+body { margin: 0; font-family: sans-serif; }
+.pagina { display: grid; min-height: 100vh; }` } }
+});
+
+tema({ id: '5.3', u: '5', t: 'Funcionalidades interactivas y multimedia',
+a: `**Los condimentos de la comida.** El plato ya está (la estructura y el diseño); ahora le agregás lo que lo hace especial, sin pasarte.`,
+b: { x: `Tu proyecto tiene que tener, como mínimo:
+- **Un elemento interactivo:** un acordeón con ~details~, un botón "Leer más" o un menú desplegable.
+- **Multimedia:** imágenes optimizadas con alt y, si va, un video o un mapa.`,
+  e: { t: 'Primer toque interactivo', c: `Agregá a tu proyecto un elemento interactivo y una sección multimedia. Pegá el link a tu Pen o repositorio.`,
+    k: ['Hay un elemento interactivo que funciona', 'Hay multimedia con alt o descripción', 'Encaja con el diseño del sitio'],
+    p: `Reusá el código de los temas 3.5 y 3.7 básico.`,
+    h: `<section>
+  <h2>Preguntas frecuentes</h2>
+  <details><summary>Pregunta</summary><p>Respuesta</p></details>
+</section>`,
+    s: `body { font-family: sans-serif; padding: 20px; }` } },
+i: { x: `Nivel intermedio: **dos componentes con JavaScript** que tengan sentido para tu sitio. Ideas:
+- Formulario de contacto con validación.
+- Modo oscuro.
+- Galería o carrusel.
+- Pestañas o filtros.
+
+Cada componente en su propia función, con nombres claros.`,
+  e: { t: 'Dos componentes JS', c: `Programá dos componentes con JS en tu proyecto. Explicá en comentarios qué hace cada función. Pegá el link.`,
+    k: ['Dos componentes JS funcionan', 'Cada uno está en su función', 'El código está comentado', 'No hay errores en la consola'],
+    p: `Probá cada componente solo en un Pen antes de juntarlos.`,
+    h: `<!-- Pegá acá tu componente para probarlo -->`,
+    s: ``,
+    j: `// componente 1
+
+// componente 2` } },
+v: { x: `Nivel avanzado: el sitio usa **datos**.
+- Contenido que se genera desde un arreglo de objetos (catálogo, agenda, ranking).
+- Datos guardados con localStorage (favoritos, carrito, preferencias).
+- O datos de una API real (clima, fotos, frases).
+
+Siempre con estado de carga y manejo de errores.`,
+  e: { t: 'Datos en el proyecto', c: `Integrá en tu proyecto una funcionalidad que use datos: generados desde un arreglo, guardados con localStorage o traídos de una API. Explicá en el README qué hace y de dónde salen los datos.`,
+    k: ['La funcionalidad usa datos de verdad', 'Hay estado de carga y error (si usa API)', 'Está explicada en el README'],
+    p: `Mirá los temas 4.3 y 4.7, nivel intermedio y avanzado.`,
+    h: `<div id="app">Cargando…</div>`,
+    s: ``,
+    j: `// tu funcionalidad con datos` } }
+});
+
+tema({ id: '5.4', u: '5', t: 'Pruebas, depuración y optimización del proyecto',
+a: `**El ensayo general antes del estreno:** se prueba todo como si fuera de verdad para que el día del show no haya sorpresas.`,
+b: { x: `Lista de chequeo básica:
+- ¿Todos los enlaces funcionan?
+- ¿Todas las imágenes cargan y tienen alt?
+- ¿Se ve bien en el celular?
+- ¿Hay faltas de ortografía?
+- ¿La consola muestra errores?`,
+  e: { t: 'Lista de chequeo', c: `Revisá tu sitio con la lista de chequeo. Para cada punto escribí: ✔ si está bien, o qué problema encontraste y cómo lo arreglaste.`,
+    k: ['Revisaste los cinco puntos', 'Cada problema tiene su arreglo', 'El sitio quedó sin errores en consola'] } },
+i: { x: `**Prueba con usuarios:** le pedís a alguien que no conoce el sitio que haga una tarea ("encontrá el horario del sábado") mientras mirás **sin ayudar**.
+- Anotá dónde duda, dónde se equivoca y cuánto tarda.
+- Lo que a vos te parece obvio, a otra persona puede no serlo.
+- Después, priorizá los arreglos: primero lo que impide usar el sitio.`,
+  e: { t: 'Prueba con compañeros', c: `Hacé que dos compañeros de otro equipo prueben tu sitio con tres tareas cada uno. Registrá: tarea, ¿la logró?, tiempo, dónde dudó. Después escribí los tres arreglos que vas a hacer, en orden de importancia.`,
+    k: ['Hay registro de dos personas y tres tareas', 'Se anotaron dudas y tiempos', 'Los arreglos están priorizados'] } },
+v: { x: `Calidad profesional antes de publicar:
+- **Validador de HTML** (validator.w3.org) sin errores.
+- **Lighthouse** en modo celular: apuntá a 90 o más en accesibilidad y buenas prácticas.
+- **Navegación solo con teclado** de principio a fin.
+- **Probar en dos navegadores** distintos y en un celular real.
+- Imágenes comprimidas y en WebP.`,
+  e: { t: 'Informe de calidad', c: `Hacé un informe de calidad de tu sitio: resultado del validador, puntajes de Lighthouse (antes y después de mejorar), prueba con teclado y prueba en dos navegadores. Indicá qué arreglaste en cada caso.`,
+    k: ['El validador no da errores', 'Accesibilidad de Lighthouse en 90 o más', 'Se puede usar todo con teclado', 'Está probado en dos navegadores'] } }
+});
+
+tema({ id: '5.5', u: '5', t: 'Publicación del proyecto final',
+a: `**Abrir las puertas del local.** Todo el trabajo se hizo para este momento: que cualquiera, en cualquier lugar, pueda entrar a tu sitio.`,
+b: { x: `La forma más simple de compartir tu sitio es **CodePen**: guardá el Pen, entrá a **Change View → Full Page** y copiá esa dirección. Así se ve como una página normal, sin el editor.
+
+Antes de compartir: revisá que tenga título, que todo funcione y que no tenga datos personales que no quieras mostrar.`,
+  e: { t: 'Compartir en CodePen', c: `Publicá tu sitio en CodePen en vista de página completa y pegá el link. Probalo desde el celular de un compañero.`,
+    k: ['El link abre la vista de página completa', 'Funciona desde otro celular', 'No muestra datos personales'] } },
+i: { x: `**GitHub Pages** publica gratis tu sitio con una dirección propia: ~https://tu-usuario.github.io/mi-sitio/~
+1. Creá un repositorio público.
+2. Subí los archivos (el principal se llama ~index.html~).
+3. Settings → Pages → Branch: main → Save.
+4. Esperá un par de minutos y entrá al link.`,
+  e: { t: 'Publicar en GitHub Pages', c: `Publicá tu proyecto en GitHub Pages. Pegá el link del sitio publicado y el del repositorio.`,
+    k: ['El sitio publicado funciona', 'Las imágenes cargan (rutas relativas correctas)', 'El repositorio es público'],
+    p: `Si las imágenes no cargan, revisá mayúsculas en los nombres: GitHub distingue ~Foto.jpg~ de ~foto.jpg~.` } },
+v: { x: `Cerrar como profesional:
+- **README** en el repositorio: qué es el sitio, quiénes lo hicieron, qué tecnologías usa, capturas y el link.
+- **Presentación oral:** muestren el sitio funcionando, expliquen una decisión de diseño y una dificultad que resolvieron.
+- **Mejora continua:** anoten qué harían en una versión 2.`,
+  e: { t: 'README y presentación', c: `Escriban el README completo del repositorio y preparen una presentación de 5 minutos: demo en vivo, una decisión de diseño, un problema que resolvieron y qué harían en la versión 2. Pegá el link del README.`,
+    k: ['El README tiene descripción, equipo, tecnologías, capturas y link', 'La presentación incluye demo en vivo', 'Explican una decisión y un problema resuelto', 'Proponen mejoras para una versión 2'] } }
+});
+
+/* ============================ RÚBRICA DEL PROYECTO ============================ */
+var RUBRICA = [
+  ['Estructura HTML', 'Usa etiquetas básicas correctamente y todas las imágenes tienen alt.', 'Usa etiquetas semánticas y la página se entiende con el lector de pantalla.', 'Pasa el validador sin errores y se navega por completo con teclado.'],
+  ['Diseño con CSS', 'Tiene colores y tipografías que combinan y el texto se lee bien.', 'Usa variables, flexbox o grid y una guía de estilo coherente.', 'Layout con grid-template-areas, efectos y transiciones prolijas.'],
+  ['Responsive', 'Se ve completo en el celular, sin scroll horizontal.', 'Usa media queries para reorganizar el contenido.', 'Mobile first, imágenes adaptativas y tamaños fluidos.'],
+  ['Interactividad', 'Tiene un elemento interactivo que funciona.', 'Tiene dos componentes con JavaScript bien organizados.', 'Usa datos (arreglo, localStorage o API) con manejo de errores.'],
+  ['Proceso y publicación', 'Está publicado y el link funciona.', 'Publicado en GitHub Pages, con pruebas de usuario hechas.', 'README completo, informe de calidad y presentación con demo.']
+];
+
+/* ================================ GLOSARIO ================================ */
+var GLOSARIO = [
+  ['API', 'Forma de pedirle datos a otro servicio desde tu página.'],
+  ['Atributo', 'Dato extra en una etiqueta HTML, como href o alt.'],
+  ['Breakpoint', 'Ancho de pantalla donde el diseño cambia con una media query.'],
+  ['CDN', 'Servidor que comparte librerías y archivos para usarlos con un link.'],
+  ['Cliente', 'El programa que pide la página: el navegador.'],
+  ['CodePen', 'Editor online con paneles HTML, CSS y JS y el resultado en vivo.'],
+  ['Consola', 'Parte de las DevTools donde se ven mensajes y errores de JavaScript.'],
+  ['CSS', 'Lenguaje que define cómo se ve una página: colores, tamaños, lugar.'],
+  ['DevTools', 'Herramientas del navegador para inspeccionar y probar una página (F12).'],
+  ['DOM', 'El árbol de elementos que arma el navegador a partir del HTML.'],
+  ['Evento', 'Algo que pasa en la página: un clic, una tecla, un envío.'],
+  ['Flexbox', 'Forma de ordenar elementos en una fila o columna.'],
+  ['Framework', 'Estructura de código con reglas propias para hacer apps grandes (React, Vue).'],
+  ['GitHub Pages', 'Servicio gratis de GitHub para publicar sitios web.'],
+  ['Grid', 'Forma de ordenar elementos en filas y columnas a la vez.'],
+  ['HTML', 'Lenguaje que define qué hay en una página: títulos, textos, imágenes.'],
+  ['JavaScript', 'Lenguaje que hace que la página reaccione y haga cosas.'],
+  ['JSON', 'Formato de texto para intercambiar datos entre programas.'],
+  ['Librería', 'Código hecho por otros que podés agregar a tu página.'],
+  ['localStorage', 'Espacio del navegador para guardar datos que no se borran al recargar.'],
+  ['Media query', 'Regla de CSS que se aplica solo si la pantalla cumple una condición.'],
+  ['Responsive', 'Diseño que se adapta a cualquier tamaño de pantalla.'],
+  ['Selector', 'La parte de una regla CSS que elige qué elementos estilizar.'],
+  ['Semántica', 'Usar etiquetas que dicen qué es el contenido (header, nav, main).'],
+  ['Servidor', 'Computadora que guarda la página y la envía cuando se la piden.'],
+  ['URL', 'La dirección de una página web.'],
+  ['Variable', 'Espacio con nombre donde un programa guarda un valor.'],
+  ['VS Code', 'Editor de código gratuito que se instala en la computadora.'],
+  ['Wireframe', 'Boceto de una página hecho con cajas, sin colores.']
+];
+
+</script>
+<script>
+(function () {
+  'use strict';
+  var NIV = { b: 'Básico', i: 'Intermedio', v: 'Avanzado' };
+  var NIV_LARGO = { b: 'Nivel básico', i: 'Nivel intermedio', v: 'Nivel avanzado' };
+  var PREF = 'dw3:';
+  var view = document.getElementById('view');
+  var side = document.getElementById('side');
+
+  /* ---------- almacenamiento seguro ---------- */
+  function lsGet(k, def) { try { var v = localStorage.getItem(PREF + k); return v === null ? def : JSON.parse(v); } catch (e) { return def; } }
+  function lsSet(k, v) { try { localStorage.setItem(PREF + k, JSON.stringify(v)); } catch (e) {} }
+  function est(id, l) { return lsGet('e:' + id + ':' + l, {}); }
+  function setEst(id, l, o) { lsSet('e:' + id + ':' + l, o); }
+
+  /* ---------- utilidades ---------- */
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function inline(s) {
+    return esc(s).replace(/~([^~]+)~/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
+  }
+  function md(s) {
+    var lines = String(s || '').split('\n'), out = '', list = null, para = [];
+    function flushP() { if (para.length) { out += '<p>' + para.map(inline).join('<br>') + '</p>'; para = []; } }
+    function flushL() { if (list) { out += '</' + list + '>'; list = null; } }
+    lines.forEach(function (ln) {
+      var m;
+      if (/^\s*$/.test(ln)) { flushP(); flushL(); return; }
+      if ((m = ln.match(/^- (.*)$/))) { flushP(); if (list !== 'ul') { flushL(); out += '<ul>'; list = 'ul'; } out += '<li>' + inline(m[1]) + '</li>'; return; }
+      if ((m = ln.match(/^\d+\. (.*)$/))) { flushP(); if (list !== 'ol') { flushL(); out += '<ol>'; list = 'ol'; } out += '<li>' + inline(m[1]) + '</li>'; return; }
+      flushL(); para.push(ln);
+    });
+    flushP(); flushL();
+    return out;
+  }
+  function trimCode(s) { return String(s || '').replace(/^\n+/, '').replace(/\s+$/, ''); }
+  function esCodigo(e) { return e.h !== undefined || e.s !== undefined || e.j !== undefined; }
+  function temaPorId(id) { for (var i = 0; i < TEMAS.length; i++) if (TEMAS[i].id === id) return i; return -1; }
+  function toast(t) { var el = document.getElementById('toast'); el.textContent = t; el.classList.add('show'); clearTimeout(toast._t); toast._t = setTimeout(function () { el.classList.remove('show'); }, 2200); }
+  var ICON = {
+    play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>',
+    reset: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>',
+    pen: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 2 2 8.5v7L12 22l10-6.5v-7z"/><path d="M12 22v-6.5M22 8.5l-10 7-10-7M2 15.5l10-7 10 7M12 2v6.5"/></svg>',
+    dl: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 21h16"/></svg>'
+  };
+
+  /* ---------- nivel global y tema visual ---------- */
+  var nivel = lsGet('nivel', 'b');
+  function pintarSeg() { document.querySelectorAll('#seg button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.l === nivel ? 'true' : 'false'); }); }
+  document.getElementById('seg').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    nivel = b.dataset.l; lsSet('nivel', nivel); pintarSeg();
+    var m = location.hash.match(/^#t\/([\d.]+)\/[biv]$/);
+    if (m) location.hash = '#t/' + m[1] + '/' + nivel; else render();
+    toast('Tu nivel: ' + NIV[nivel]);
+  });
+  pintarSeg();
+  var temaVis = lsGet('theme', null);
+  if (temaVis) document.documentElement.dataset.theme = temaVis;
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    var oscuroAhora = document.documentElement.dataset.theme ? document.documentElement.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    temaVis = oscuroAhora ? 'light' : 'dark';
+    document.documentElement.dataset.theme = temaVis; lsSet('theme', temaVis);
+  });
+  var menuBtn = document.getElementById('menuBtn');
+  menuBtn.addEventListener('click', function () {
+    var abierto = side.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+  });
+  function cerrarMenu() { side.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); }
+
+  /* ---------- índice lateral ---------- */
+  function dotsHTML(id) {
+    return '<span class="dots" aria-hidden="true">' + ['b', 'i', 'v'].map(function (l) { return '<i data-l="' + l + '" class="' + (est(id, l).done ? 'on' : '') + '"></i>'; }).join('') + '</span>';
+  }
+  function renderSide(actual) {
+    var h = '';
+    UNIDADES.forEach(function (u) {
+      h += '<h2>Unidad ' + u.n + ' · ' + esc(u.t) + '</h2><ul>';
+      TEMAS.filter(function (t) { return t.u === u.n; }).forEach(function (t) {
+        var nd = ['b', 'i', 'v'].filter(function (l) { return est(t.id, l).done; }).map(function (l) { return NIV[l]; });
+        h += '<li><a href="#t/' + t.id + '/' + nivel + '"' + (t.id === actual ? ' aria-current="true"' : '') + '><span class="num">' + t.id + '</span><span class="tt">' + esc(t.t) + (nd.length ? '<span class="sr"> (terminado: ' + nd.join(', ') + ')</span>' : '') + '</span>' + dotsHTML(t.id) + '</a></li>';
+      });
+      h += '</ul>';
+    });
+    side.innerHTML = h;
+  }
+
+  /* ---------- progreso ---------- */
+  function progreso(filtro) {
+    var r = { b: 0, i: 0, v: 0, total: 0 };
+    TEMAS.forEach(function (t) { if (filtro && !filtro(t)) return; r.total++; ['b', 'i', 'v'].forEach(function (l) { if (est(t.id, l).done) r[l]++; }); });
+    return r;
+  }
+  function barra(p) {
+    var max = p.total * 3 || 1;
+    return '<div class="bar" role="img" aria-label="Terminados: ' + p.b + ' básicos, ' + p.i + ' intermedios, ' + p.v + ' avanzados de ' + p.total + ' temas"><span class="sb" style="width:' + (p.b / max * 100) + '%"></span><span class="si" style="width:' + (p.i / max * 100) + '%"></span><span class="sv" style="width:' + (p.v / max * 100) + '%"></span></div>';
+  }
+
+  /* ---------- vistas ---------- */
+  function vInicio() {
+    var p = progreso();
+    var h = '<section class="hero"><div class="kicker">1.er año · BTP Soporte Técnico Informático</div>' +
+      '<h1>Taller de Diseño Web</h1>' +
+      '<p>Los ' + TEMAS.length + ' contenidos del programa, y <b>cada uno en tres niveles</b>. Todo el grupo trabaja el mismo tema en la misma clase, pero cada uno en el escalón que le corresponde.</p>' +
+      '<a class="btn primary" href="#t/' + TEMAS[0].id + '/' + nivel + '">Empezar por el tema ' + TEMAS[0].id + '</a>' +
+      '<div class="stairs" aria-hidden="true"><div class="stair b"><b>Básico</b><span>La idea y el primer paso.</span></div><div class="stair i"><b>Intermedio</b><span>Más herramientas, más control.</span></div><div class="stair v"><b>Avanzado</b><span>Como lo hacen los profesionales.</span></div></div></section>';
+    h += '<h2 class="section-title">Cómo se usa</h2><div class="grid2">' +
+      '<div class="card"><h3>1. Elegí tu nivel</h3><p>Arriba a la derecha marcás <b>B</b>, <b>I</b> o <b>A</b>. Cada tema se abre en ese nivel, pero podés pasar a otro con las pestañas cuando quieras.</p></div>' +
+      '<div class="card"><h3>2. Leé y practicá</h3><p>Cada nivel trae una explicación corta y un ejercicio. Escribís en la zona de práctica y ves el resultado al instante.</p></div>' +
+      '<div class="card"><h3>3. CodePen o VS Code</h3><p><b>Abrir en CodePen</b> crea un Pen con tu código para guardarlo. <b>Descargar para VS Code</b> baja un index.html listo para Live Server.</p></div>' +
+      '<div class="card"><h3>4. Entregá</h3><p>Pegá el link, marcá <b>Lo terminé</b> y en <a href="#entregas">Mis entregas</a> copiás el resumen para CREA.</p></div></div>';
+    h += '<h2 class="section-title">Tu avance</h2><p class="muted">' + (p.b + p.i + p.v) + ' de ' + (p.total * 3) + ' ejercicios terminados. Verde: básico · azul: intermedio · rosa: avanzado.</p>' + barra(p);
+    h += '<div class="grid2">';
+    UNIDADES.forEach(function (u) {
+      var pu = progreso(function (t) { return t.u === u.n; });
+      var primero = TEMAS.filter(function (t) { return t.u === u.n; })[0];
+      h += '<div class="card unit-card"><a href="#t/' + primero.id + '/' + nivel + '"><span class="muted">Unidad ' + u.n + ' · ' + pu.total + ' temas</span><h3>' + esc(u.t) + '</h3>' + barra(pu) + '</a></div>';
+    });
+    h += '</div>';
+    return h;
+  }
+
+  function vPrograma() {
+    var h = '<h1 class="tema-h1">Programa en tres niveles</h1><p class="muted">Cada contenido del programa oficial tiene su versión básica, intermedia y avanzada. Tocá un nivel para ir directo.</p>';
+    h += '<div class="tabla-wrap"><table class="t"><thead><tr><th>N.º</th><th>Contenido</th><th>Niveles</th></tr></thead><tbody>';
+    UNIDADES.forEach(function (u) {
+      h += '<tr><td colspan="3" style="background:var(--surface-2)"><b>Unidad ' + u.n + ' · ' + esc(u.t) + '</b></td></tr>';
+      TEMAS.filter(function (t) { return t.u === u.n; }).forEach(function (t) {
+        h += '<tr><td><code>' + t.id + '</code></td><td>' + esc(t.t) + '</td><td style="white-space:nowrap">' + ['b', 'i', 'v'].map(function (l) {
+          return '<a class="pill ' + l + (est(t.id, l).done ? ' on' : '') + '" href="#t/' + t.id + '/' + l + '" title="' + esc(t[l].e.t) + '">' + NIV[l] + '</a>';
+        }).join('') + '</td></tr>';
+      });
+    });
+    h += '</tbody></table></div>';
+    h += '<h2 class="section-title" id="rubrica">Rúbrica del proyecto final</h2><p class="muted">Los mismos tres niveles sirven para evaluar el proyecto de la Unidad 5.</p>';
+    h += '<div class="tabla-wrap"><table class="t"><thead><tr><th>Criterio</th><th class="th-b">Básico</th><th class="th-i">Intermedio</th><th class="th-v">Avanzado</th></tr></thead><tbody>';
+    RUBRICA.forEach(function (r) { h += '<tr><td><b>' + esc(r[0]) + '</b></td><td>' + esc(r[1]) + '</td><td>' + esc(r[2]) + '</td><td>' + esc(r[3]) + '</td></tr>'; });
+    h += '</tbody></table></div>';
+    h += '<p class="muted" style="margin-top:18px">Fuente: <a href="https://planeamientoeducativo.utu.edu.uy/sites/planeamientoeducativo.utu.edu.uy/files/2025-04/Dise%C3%B1o_Web_T7I_TP.pdf">Programa de Diseño Web, BTP Soporte Técnico Informático (DGETP-UTU)</a>.</p>';
+    return h;
+  }
+
+  function vGlosario() {
+    var h = '<h1 class="tema-h1">Glosario</h1><label class="sr" for="glq">Buscar en el glosario</label><input id="glq" class="field" type="search" placeholder="Buscar una palabra…" style="max-width:360px"><dl class="gl" id="gl">';
+    GLOSARIO.forEach(function (g) { h += '<div data-q="' + esc((g[0] + ' ' + g[1]).toLowerCase()) + '"><dt>' + esc(g[0]) + '</dt><dd>' + esc(g[1]) + '</dd></div>'; });
+    return h + '</dl>';
+  }
+
+  function listaEntregas() {
+    var items = [];
+    TEMAS.forEach(function (t) { ['b', 'i', 'v'].forEach(function (l) { var s = est(t.id, l); if (s.done) items.push({ t: t, l: l, s: s }); }); });
+    return items;
+  }
+  function vEntregas() {
+    var items = listaEntregas();
+    var datos = lsGet('alumno', { nombre: '', grupo: '' });
+    var h = '<h1 class="tema-h1">Mis entregas</h1><p class="muted">Lo que marcaste como terminado. Completá tu nombre y grupo y copiá el resumen para pegarlo en CREA.</p>';
+    h += '<div class="grid2" style="margin-bottom:16px"><div><label for="nom"><b>Nombre</b></label><input id="nom" class="field" value="' + esc(datos.nombre) + '" autocomplete="name"></div><div><label for="gru"><b>Grupo</b></label><input id="gru" class="field" value="' + esc(datos.grupo) + '"></div></div>';
+    if (!items.length) return h + '<div class="card"><p>Todavía no marcaste ningún ejercicio como terminado. Cuando termines uno, tocá <b>Lo terminé</b> debajo del ejercicio.</p></div>';
+    h += '<div class="tabla-wrap"><table class="t"><thead><tr><th>Tema</th><th>Nivel</th><th>Ejercicio</th><th>Link o respuesta</th></tr></thead><tbody>';
+    items.forEach(function (it) {
+      var link = it.s.link ? '<a href="' + esc(it.s.link) + '" target="_blank" rel="noopener">' + esc(it.s.link) + '</a>' : '';
+      var resp = it.s.resp ? '<div class="muted">' + esc(it.s.resp.slice(0, 140)) + (it.s.resp.length > 140 ? '…' : '') + '</div>' : '';
+      h += '<tr><td><code>' + it.t.id + '</code></td><td><a class="pill ' + it.l + ' on" href="#t/' + it.t.id + '/' + it.l + '">' + NIV[it.l] + '</a></td><td>' + esc(it.t[it.l].e.t) + '</td><td>' + (link || resp || '<span class="muted">Sin link</span>') + (link ? resp : '') + '</td></tr>';
+    });
+    h += '</tbody></table></div><div class="done-row" style="margin-top:14px"><button class="btn primary" id="copiar">Copiar resumen para entregar</button><button class="btn" id="bajarRes">Descargar resumen (.txt)</button></div>';
+    return h;
+  }
+  function textoResumen() {
+    var d = lsGet('alumno', { nombre: '', grupo: '' });
+    var t = 'Diseño Web · Entregas\nNombre: ' + (d.nombre || '-') + '\nGrupo: ' + (d.grupo || '-') + '\nFecha: ' + new Date().toLocaleDateString('es-UY') + '\n\n';
+    listaEntregas().forEach(function (it) {
+      t += it.t.id + ' ' + it.t.t + ' · ' + NIV[it.l] + ' · ' + it.t[it.l].e.t + '\n';
+      if (it.s.link) t += '  Link: ' + it.s.link + '\n';
+      if (it.s.resp) t += '  Respuesta: ' + it.s.resp.replace(/\n/g, '\n  ') + '\n';
+      t += '\n';
+    });
+    return t;
+  }
+
+  /* ---------- vista de tema ---------- */
+  function vTema(idx, l) {
+    var t = TEMAS[idx];
+    var u = UNIDADES.filter(function (x) { return x.n === t.u; })[0];
+    var h = '<div class="crumb">Unidad ' + u.n + ' · ' + esc(u.t) + '</div><h1 class="tema-h1">' + t.id + ' · ' + esc(t.t) + '</h1>';
+    h += '<div class="analogia">' + md(t.a) + '</div>';
+    h += '<div class="tabs" role="tablist" aria-label="Niveles del tema">';
+    ['b', 'i', 'v'].forEach(function (x) {
+      var sel = x === l;
+      h += '<button role="tab" id="tab-' + x + '" data-l="' + x + '" aria-selected="' + sel + '" aria-controls="panel" tabindex="' + (sel ? 0 : -1) + '" class="' + (est(t.id, x).done ? 'done' : '') + '"><span class="ck" aria-hidden="true"></span>' + NIV[x] + (est(t.id, x).done ? '<span class="sr"> (terminado)</span>' : '') + '</button>';
+    });
+    h += '<button role="tab" id="tab-t" data-l="t" class="alltab" aria-selected="' + (l === 't') + '" aria-controls="panel" tabindex="' + (l === 't' ? 0 : -1) + '">Ver los tres juntos</button>';
+    h += '</div><div class="panel" id="panel" role="tabpanel" aria-labelledby="tab-' + l + '">';
+    if (l === 't') {
+      h += '<p class="muted">Vista para planificar o proyectar: los tres niveles del tema, uno debajo del otro.</p><div class="tres">';
+      ['b', 'i', 'v'].forEach(function (x) {
+        h += '<div class="col ' + x + '"><span class="lvl-badge ' + x + '">' + NIV[x] + '</span><div class="explica">' + md(t[x].x) + '</div><h3>Ejercicio: ' + esc(t[x].e.t) + '</h3><div class="explica">' + md(t[x].e.c) + '</div><a class="btn small" href="#t/' + t.id + '/' + x + '">Ir al ejercicio</a></div>';
+      });
+      h += '</div>';
+    } else {
+      h += nivelHTML(t, l);
+    }
+    h += '</div>';
+    var prev = TEMAS[idx - 1], next = TEMAS[idx + 1];
+    var ll = l === 't' ? nivel : l;
+    h += '<nav class="pager" aria-label="Temas anterior y siguiente">' +
+      (prev ? '<a href="#t/' + prev.id + '/' + ll + '"><small>← Anterior</small>' + prev.id + ' · ' + esc(prev.t) + '</a>' : '<span></span>') +
+      (next ? '<a class="nx" href="#t/' + next.id + '/' + ll + '"><small>Siguiente →</small>' + next.id + ' · ' + esc(next.t) + '</a>' : '<span></span>') + '</nav>';
+    return h;
+  }
+
+  function nivelHTML(t, l) {
+    var L = t[l], e = L.e, s = est(t.id, l), code = esCodigo(e);
+    var h = '<span class="lvl-badge ' + l + '">' + NIV_LARGO[l] + '</span><div class="explica">' + md(L.x) + '</div>';
+    h += '<section class="ejercicio ' + l + '" aria-labelledby="ejt"><div class="ej-head"><span class="tag">Ejercicio · ' + NIV[l] + (code ? ' · con código' : ' · respuesta escrita') + '</span><h3 id="ejt">' + esc(e.t) + '</h3></div>';
+    h += '<div class="ej-body">' + md(e.c);
+    h += '<p><b>Revisá que:</b></p><ul class="criterios">';
+    e.k.forEach(function (k, n) {
+      var on = s.crit && s.crit[n];
+      h += '<li><label><input type="checkbox" data-crit="' + n + '"' + (on ? ' checked' : '') + '><span>' + inline(k) + '</span></label></li>';
+    });
+    h += '</ul>';
+    if (e.p) h += '<details class="pista"><summary>Ver una pista</summary><p>' + inline(e.p) + '</p></details>';
+    h += '</div>';
+    if (code) {
+      h += '<div class="practica" aria-label="Zona de práctica"><div class="pr-bar"><div class="pr-tabs" role="tablist" aria-label="Archivo a editar">' +
+        '<button role="tab" data-f="h" aria-selected="true">HTML</button><button role="tab" data-f="s" aria-selected="false">CSS</button><button role="tab" data-f="j" aria-selected="false">JS</button></div>' +
+        '<span class="sp"></span>' +
+        '<button class="pr-btn run" id="run" title="Ctrl + Enter">' + ICON.play + 'Ejecutar</button>' +
+        '<button class="pr-btn" id="reset">' + ICON.reset + 'Restaurar</button>' +
+        '<button class="pr-btn" id="pen">' + ICON.pen + 'Abrir en CodePen</button>' +
+        '<button class="pr-btn" id="dl">' + ICON.dl + 'Descargar para VS Code</button></div>' +
+        '<div class="pr-split"><div><label class="sr" for="ed">Código</label><textarea id="ed" class="editor" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea></div>' +
+        '<div class="resultado"><iframe id="out" title="Resultado del código" sandbox="allow-scripts allow-modals allow-forms allow-same-origin allow-popups"></iframe>' +
+        '<div class="consola" id="cons" aria-live="polite"><span class="t">Consola</span></div></div></div>' +
+        '<div class="pr-note">Tu código se guarda solo en este navegador. Para entregarlo, abrilo en CodePen, guardalo con Save y pegá el link abajo.</div></div>';
+    }
+    h += '<div class="entrega">';
+    if (code) h += '<div><label for="link">Link de tu trabajo (CodePen o GitHub)</label><input id="link" type="url" inputmode="url" placeholder="https://codepen.io/…" value="' + esc(s.link || '') + '"></div>';
+    h += '<div><label for="resp">' + (code ? 'Comentarios (opcional)' : 'Tu respuesta') + '</label><textarea id="resp" placeholder="' + (code ? 'Algo que quieras contarle a tu profe…' : 'Escribí acá tu respuesta…') + '">' + esc(s.resp || '') + '</textarea></div>';
+    h += '<div class="done-row"><button class="done-btn" id="done" aria-pressed="' + (s.done ? 'true' : 'false') + '">' + (s.done ? '✓ Terminado' : 'Lo terminé') + '</button><span class="save-note" id="saved">Se guarda solo.</span></div></div>';
+    h += '</section>';
+    return h;
+  }
+
+  /* ---------- zona de práctica ---------- */
+  var CAPTURA = "<scr" + "ipt>(function(){function s(n,a){try{parent.postMessage({dwlog:1,n:n,t:Array.prototype.map.call(a,function(x){if(typeof x==='object'){try{return JSON.stringify(x)}catch(e){return String(x)}}return String(x)}).join(' ')},'*')}catch(e){}}" +
+    "['log','info','warn','error'].forEach(function(n){var o=console[n];console[n]=function(){s(n,arguments);o&&o.apply(console,arguments)}});" +
+    "window.addEventListener('error',function(e){s('error',[(e.message||'Error')+(e.lineno?' (línea '+e.lineno+')':'')])});" +
+    "window.addEventListener('unhandledrejection',function(e){s('error',['Promesa rechazada: '+(e.reason&&e.reason.message||e.reason)])});" +
+    "document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^=\"#\"]');if(a&&a.getAttribute('href').length>1){e.preventDefault();var el=document.querySelector(a.getAttribute('href'));if(el)el.scrollIntoView();}else if(a&&a.getAttribute('href')==='#'){e.preventDefault();}},true);" +
+    "document.addEventListener('submit',function(e){if(!e.defaultPrevented){e.preventDefault();s('info',['(El formulario se envió. En la zona de práctica no se recarga la página.)'])}});})();</scr" + "ipt>";
+  function docCompleto(c, titulo, conCaptura) {
+    return '<!DOCTYPE html>\n<html lang="es">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<title>' + esc(titulo) + '</title>\n' +
+      (conCaptura ? CAPTURA + '\n' : '') +
+      '<style>\n' + c.s + '\n</style>\n</head>\n<body>\n' + c.h + '\n<scr' + 'ipt>\n' + c.j + '\n</scr' + 'ipt>\n</body>\n</html>';
+  }
+  function iniciarPractica(t, l) {
+    var e = t[l].e, s = est(t.id, l);
+    var orig = { h: trimCode(e.h), s: trimCode(e.s), j: trimCode(e.j) };
+    var c = s.code ? { h: s.code.h, s: s.code.s, j: s.code.j } : { h: orig.h, s: orig.s, j: orig.j };
+    var f = 'h';
+    var ed = document.getElementById('ed'), out = document.getElementById('out'), cons = document.getElementById('cons');
+    var nombres = { h: 'HTML', s: 'CSS', j: 'JavaScript' };
+    function cargar() { ed.value = c[f]; ed.setAttribute('aria-label', 'Código ' + nombres[f]); }
+    function guardar() { var st = est(t.id, l); st.code = c; setEst(t.id, l, st); }
+    function correr() {
+      cons.innerHTML = '<span class="t">Consola</span>';
+      var doc = docCompleto(c, t.t, true);
+      window.__dwOff = doc.slice(0, doc.lastIndexOf('<scr' + 'ipt>\n')).split('\n').length;
+      out.srcdoc = doc;
+    }
+    cargar(); correr();
+    document.querySelectorAll('.pr-tabs button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        f = b.dataset.f; cargar();
+        document.querySelectorAll('.pr-tabs button').forEach(function (x) { x.setAttribute('aria-selected', x === b ? 'true' : 'false'); });
+        ed.focus();
+      });
+    });
+    var tGuardar;
+    ed.addEventListener('input', function () { c[f] = ed.value; clearTimeout(tGuardar); tGuardar = setTimeout(guardar, 400); });
+    ed.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Enter' && (ev.ctrlKey || ev.metaKey)) { ev.preventDefault(); correr(); return; }
+      if (ev.key === 'Tab' && !ev.shiftKey && !ev.altKey) {
+        ev.preventDefault();
+        var a = ed.selectionStart, z = ed.selectionEnd;
+        ed.setRangeText('  ', a, z, 'end');
+        c[f] = ed.value; guardar();
+      }
+      if (ev.key === 'Escape') { ed.blur(); }
+    });
+    document.getElementById('run').addEventListener('click', correr);
+    document.getElementById('reset').addEventListener('click', function () {
+      if (!confirm('¿Volver al código original de este ejercicio? Se pierde lo que escribiste acá.')) return;
+      c = { h: orig.h, s: orig.s, j: orig.j }; guardar(); cargar(); correr(); toast('Código restaurado');
+    });
+    document.getElementById('pen').addEventListener('click', function () {
+      var form = document.createElement('form');
+      form.method = 'POST'; form.action = 'https://codepen.io/pen/define'; form.target = '_blank';
+      var inp = document.createElement('input'); inp.type = 'hidden'; inp.name = 'data';
+      inp.value = JSON.stringify({ title: t.id + ' ' + t.t + ' · ' + NIV[l] + ' · ' + e.t, description: 'Taller de Diseño Web · ' + NIV_LARGO[l], html: c.h, css: c.s, js: c.j, editors: '111' });
+      form.appendChild(inp); document.body.appendChild(form); form.submit(); form.remove();
+    });
+    document.getElementById('dl').addEventListener('click', function () {
+      var html = docCompleto(c, t.id + ' ' + t.t + ' · ' + NIV[l], false);
+      html = html.replace('<body>\n', '<body>\n<!-- Ejercicio ' + t.id + ' · ' + NIV[l] + ': ' + e.t + ' -->\n<!-- Abrilo en VS Code y usá clic derecho → "Open with Live Server" -->\n');
+      var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+      var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'index.html';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+      toast('Se descargó index.html');
+    });
+    window.__dwOut = out; window.__dwCons = cons;
+  }
+  window.addEventListener('message', function (ev) {
+    var d = ev.data;
+    if (!d || !d.dwlog || !window.__dwOut || ev.source !== window.__dwOut.contentWindow) return;
+    var div = document.createElement('div');
+    div.className = d.n === 'error' ? 'error' : d.n === 'warn' ? 'warn' : '';
+    var txt = String(d.t).replace(/ \(línea (\d+)\)$/, function (m, n) {
+      var ln = +n - (window.__dwOff || 0);
+      return ln > 0 ? ' (línea ' + ln + ' del JS)' : '';
+    });
+    div.textContent = (d.n === 'error' ? '✖ ' : d.n === 'warn' ? '⚠ ' : '› ') + txt;
+    window.__dwCons.appendChild(div);
+    window.__dwCons.scrollTop = window.__dwCons.scrollHeight;
+  });
+
+  function iniciarEntrega(t, l) {
+    var link = document.getElementById('link'), resp = document.getElementById('resp'), done = document.getElementById('done'), saved = document.getElementById('saved');
+    function guardar(campo, valor) {
+      var s = est(t.id, l); s[campo] = valor; setEst(t.id, l, s);
+      saved.textContent = 'Guardado ✓'; clearTimeout(guardar._t); guardar._t = setTimeout(function () { saved.textContent = 'Se guarda solo.'; }, 1500);
+    }
+    if (link) link.addEventListener('input', function () { guardar('link', link.value.trim()); });
+    resp.addEventListener('input', function () { guardar('resp', resp.value); });
+    document.querySelectorAll('[data-crit]').forEach(function (cb) {
+      cb.addEventListener('change', function () { var s = est(t.id, l); s.crit = s.crit || []; s.crit[+cb.dataset.crit] = cb.checked; setEst(t.id, l, s); });
+    });
+    done.addEventListener('click', function () {
+      var s = est(t.id, l); s.done = !s.done; setEst(t.id, l, s);
+      done.setAttribute('aria-pressed', s.done ? 'true' : 'false');
+      done.textContent = s.done ? '✓ Terminado' : 'Lo terminé';
+      var tab = document.getElementById('tab-' + l);
+      tab.classList.toggle('done', s.done);
+      renderSide(t.id);
+      if (s.done) {
+        var siguiente = l === 'b' ? 'i' : l === 'i' ? 'v' : null;
+        toast(siguiente ? '¡Bien! ¿Te animás al nivel ' + NIV[siguiente].toLowerCase() + '?' : '¡Bien! Completaste el nivel avanzado');
+      }
+    });
+  }
+
+  function iniciarTabs(t) {
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.tabs [role="tab"]'));
+    tabs.forEach(function (b, i) {
+      b.addEventListener('click', function () { location.hash = '#t/' + t.id + '/' + b.dataset.l; });
+      b.addEventListener('keydown', function (ev) {
+        var n = null;
+        if (ev.key === 'ArrowRight') n = (i + 1) % tabs.length;
+        if (ev.key === 'ArrowLeft') n = (i - 1 + tabs.length) % tabs.length;
+        if (ev.key === 'Home') n = 0;
+        if (ev.key === 'End') n = tabs.length - 1;
+        if (n !== null) { ev.preventDefault(); tabs[n].focus(); tabs[n].click(); }
+      });
+    });
+  }
+
+  /* ---------- enrutador ---------- */
+  var ultimoTema = null;
+  function render() {
+    window.__dwOut = null;
+    var hash = location.hash || '#inicio';
+    var m = hash.match(/^#t\/([\d.]+)(?:\/([bivt]))?$/);
+    document.querySelectorAll('.top nav a').forEach(function (a) { a.removeAttribute('aria-current'); });
+    if (m && temaPorId(m[1]) >= 0) {
+      var idx = temaPorId(m[1]), l = m[2] || nivel, t = TEMAS[idx];
+      view.innerHTML = vTema(idx, l);
+      document.title = t.id + ' ' + t.t + ' · Diseño Web';
+      renderSide(t.id);
+      iniciarTabs(t);
+      if (l !== 't') {
+        if (esCodigo(t[l].e)) iniciarPractica(t, l);
+        iniciarEntrega(t, l);
+      }
+      if (ultimoTema !== t.id) { window.scrollTo(0, 0); }
+      else { var tb = document.getElementById('tab-' + l); if (tb) tb.focus({ preventScroll: true }); }
+      ultimoTema = t.id;
+    } else {
+      ultimoTema = null;
+      var v = hash.replace('#', '');
+      if (v === 'rubrica') v = 'programa';
+      if (!/^(inicio|programa|entregas|glosario)$/.test(v)) v = 'inicio';
+      var a = document.querySelector('.top nav a[data-v="' + v + '"]'); if (a) a.setAttribute('aria-current', 'page');
+      view.innerHTML = v === 'programa' ? vPrograma() : v === 'entregas' ? vEntregas() : v === 'glosario' ? vGlosario() : vInicio();
+      document.title = { inicio: 'Taller de Diseño Web', programa: 'Programa · Diseño Web', entregas: 'Mis entregas · Diseño Web', glosario: 'Glosario · Diseño Web' }[v];
+      renderSide(null);
+      if (hash === '#rubrica') { var r = document.getElementById('rubrica'); if (r) r.scrollIntoView(); } else window.scrollTo(0, 0);
+      if (v === 'glosario') {
+        document.getElementById('glq').addEventListener('input', function () {
+          var q = this.value.trim().toLowerCase();
+          document.querySelectorAll('#gl > div').forEach(function (d) { d.hidden = q && d.dataset.q.indexOf(q) < 0; });
+        });
+      }
+      if (v === 'entregas') {
+        ['nom', 'gru'].forEach(function (id) {
+          document.getElementById(id).addEventListener('input', function () {
+            lsSet('alumno', { nombre: document.getElementById('nom').value, grupo: document.getElementById('gru').value });
+          });
+        });
+        var cp = document.getElementById('copiar');
+        if (cp) cp.addEventListener('click', function () {
+          var txt = textoResumen();
+          if (navigator.clipboard) navigator.clipboard.writeText(txt).then(function () { toast('Resumen copiado'); }, function () { prompt('Copiá este texto:', txt); });
+          else prompt('Copiá este texto:', txt);
+        });
+        var br = document.getElementById('bajarRes');
+        if (br) br.addEventListener('click', function () {
+          var a2 = document.createElement('a'); a2.href = URL.createObjectURL(new Blob([textoResumen()], { type: 'text/plain;charset=utf-8' })); a2.download = 'entregas-diseno-web.txt'; document.body.appendChild(a2); a2.click(); a2.remove();
+        });
+      }
+    }
+    cerrarMenu();
+  }
+  window.addEventListener('hashchange', render);
+  side.addEventListener('click', function (e) { if (e.target.closest('a')) cerrarMenu(); });
+  render();
+})();
+</script>
+</body>
+</html>

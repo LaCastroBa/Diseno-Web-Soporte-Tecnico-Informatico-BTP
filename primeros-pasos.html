@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mis primeros pasos</title>
+<meta name="description" content="Tu primera página web, de a un paso por vez. Se puede hacer desde el celular.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F172A'/%3E%3Crect x='12' y='38' width='10' height='14' rx='2' fill='%2334D399'/%3E%3Crect x='27' y='26' width='10' height='26' rx='2' fill='%2360A5FA'/%3E%3Crect x='42' y='12' width='10' height='40' rx='2' fill='%23A78BFA'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: barra con progreso · tarjeta del paso actual (consigna, código, vista previa, aviso, botones) · pantalla final.
+   Pensado para celular primero: una sola columna, letra grande, sin animaciones, un paso por vez. */
+:root {
+  --bg: #EEF3F8; --surface: #FFFFFF; --surface-2: #F5F8FC; --ink: #0F172A; --ink-2: #475569; --line: #D5DEE9;
+  --ok: #047857; --ok-t: #D1FAE5; --i: #1D4ED8; --i-t: #DBEAFE; --accent: #0E7490; --accent-t: #E3F6FA;
+  --warn: #92400E; --warn-t: #FEF3C7; --code-bg: #0B1220; --code-ink: #E2E8F0;
+  --f-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+  --f-text: 'Atkinson Hyperlegible', 'Segoe UI', system-ui, sans-serif;
+  --f-mono: 'JetBrains Mono', Consolas, monospace;
+}
+:root[data-theme="dark"] {
+  --bg: #0B1120; --surface: #111B2E; --surface-2: #0E1626; --ink: #E2E8F0; --ink-2: #94A3B8; --line: #24324A;
+  --ok: #34D399; --ok-t: #0B3B2E; --i: #60A5FA; --i-t: #172554; --accent: #22D3EE; --accent-t: #083344;
+  --warn: #FCD34D; --warn-t: #3A2A06; --code-bg: #060B16;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f-text); font-size: 1.125rem; line-height: 1.6; }
+h1, h2 { font-family: var(--f-display); line-height: 1.15; margin: 0 0 0.4em; }
+button, input, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+code { font-family: var(--f-mono); font-size: 0.9em; background: var(--surface-2); border: 1px solid var(--line); padding: 0.05em 0.35em; border-radius: 5px; }
+.top { position: sticky; top: 0; z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); padding: 10px 16px; display: flex; align-items: center; gap: 12px; }
+.top b { font-family: var(--f-display); font-size: 1.05rem; }
+.top .sp { flex: 1; }
+.dots { display: flex; gap: 6px; }
+.dots i { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--line); }
+.dots i.hecho { background: var(--ok); border-color: var(--ok); }
+.dots i.ahora { border-color: var(--i); background: var(--i-t); }
+.ibtn { border: 1px solid var(--line); background: var(--surface); width: 40px; height: 40px; border-radius: 10px; cursor: pointer; display: grid; place-items: center; flex: none; }
+.ibtn svg { width: 20px; height: 20px; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 18px 16px 60px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: clamp(16px, 4vw, 28px); }
+.paso-n { font-size: 0.85rem; font-weight: 700; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.06em; }
+.consigna { font-size: 1.2rem; margin: 6px 0 14px; }
+.consigna p { margin: 0 0 0.6em; }
+.cols { display: grid; gap: 16px; }
+@media (min-width: 820px) { .cols { grid-template-columns: 1fr 1fr; } }
+label.lab { display: block; font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; }
+textarea.cod { width: 100%; min-height: 150px; resize: vertical; background: var(--code-bg); color: var(--code-ink); border: 2px solid var(--line); border-radius: 12px; padding: 14px; font-family: var(--f-mono); font-size: 1rem; line-height: 1.6; tab-size: 2; }
+iframe.previa { width: 100%; height: 260px; border: 2px solid var(--line); border-radius: 12px; background: #fff; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.chip { border: 1px solid var(--line); background: var(--surface-2); border-radius: 999px; padding: 6px 14px; cursor: pointer; font-size: 0.95rem; }
+.chip .muestra { display: inline-block; width: 14px; height: 14px; border-radius: 50%; vertical-align: -2px; margin-right: 6px; border: 1px solid rgba(0,0,0,0.2); }
+.aviso { border-radius: 12px; padding: 12px 16px; margin-top: 16px; font-weight: 700; }
+.aviso.bien { background: var(--ok-t); color: var(--ok); }
+.aviso.casi { background: var(--warn-t); color: var(--warn); }
+.aviso:empty { display: none; }
+.fila { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 16px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); padding: 10px 18px; border-radius: 12px; cursor: pointer; font-weight: 700; text-decoration: none; }
+.btn.pri { background: var(--i); border-color: var(--i); color: #fff; }
+:root[data-theme="dark"] .btn.pri { color: #0B1120; }
+.btn.ok { background: var(--ok); border-color: var(--ok); color: #fff; }
+:root[data-theme="dark"] .btn.ok { color: #0B1120; }
+.btn[disabled] { opacity: 0.5; cursor: not-allowed; }
+.calma { color: var(--ink-2); font-size: 0.95rem; margin-top: 14px; }
+.temas { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin: 12px 0; }
+.tema { text-align: left; border: 2px solid var(--line); background: var(--surface-2); border-radius: 14px; padding: 14px 16px; cursor: pointer; }
+.tema[aria-pressed="true"] { border-color: var(--i); background: var(--i-t); }
+.tema b { display: block; font-size: 1.1rem; }
+.tema span { color: var(--ink-2); font-size: 0.95rem; }
+input.campo { width: 100%; border: 2px solid var(--line); background: var(--surface); border-radius: 12px; padding: 12px 14px; font-size: 1.1rem; }
+.final h1 { font-size: clamp(1.8rem, 6vw, 2.6rem); }
+.logros { list-style: none; padding: 0; margin: 10px 0 0; }
+.logros li { padding: 4px 0; }
+.logros li::before { content: "✓ "; color: var(--ok); font-weight: 700; }
+pre.todo { background: var(--code-bg); color: var(--code-ink); border-radius: 12px; padding: 14px; overflow: auto; font-family: var(--f-mono); font-size: 0.85rem; max-height: 320px; }
+details summary { cursor: pointer; font-weight: 700; color: var(--i); margin-top: 12px; }
+.guardar { margin-top: 14px; border: 2px dashed var(--line); border-radius: 14px; padding: 14px 16px; background: var(--surface-2); }
+.guardar p { margin: 0 0 8px; }
+textarea.av { width: 100%; min-height: 86px; font-family: var(--f-mono); font-size: 0.85rem; border: 2px solid var(--line); border-radius: 10px; padding: 10px; background: var(--surface); word-break: break-all; }
+</style>
+</head>
+<body>
+<header class="top">
+  <b>Mis primeros pasos</b>
+  <span class="sp"></span>
+  <div class="dots" id="dots" role="img" aria-label="Progreso"></div>
+  <button class="ibtn" id="themeBtn" aria-label="Cambiar entre modo claro y oscuro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</header>
+<main class="wrap"><div class="card" id="vista" aria-live="polite"></div><p style="margin-top:18px;text-align:center;font-size:0.85rem;color:var(--ink-2)">Recurso Educativo Abierto · Diseño Web, 1.er año BTP Soporte Técnico Informático (DGETP-UTU) · Ed. Tec. Laura Castro · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></p></main>
+
+<script>
+(function () {
+  'use strict';
+  /* ---------- guardado (solo en este navegador) ---------- */
+  var CLAVE = 'dw3pp';
+  function cargarEstado() { try { return JSON.parse(localStorage.getItem(CLAVE)) || null; } catch (e) { return null; } }
+  function guardarEstado() { try { localStorage.setItem(CLAVE, JSON.stringify(E)); } catch (e) {} }
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function inline(s) { return esc(s).replace(/~([^~]+)~/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>'); }
+
+  var TEMAS = {
+    juego: { t: 'Un videojuego', d: 'El que más jugás', ej: 'Minecraft', q: 'el videojuego' },
+    celu: { t: 'Mi celular', d: 'El que tenés o el que querés', ej: 'Samsung Galaxy A15', q: 'el celular' },
+    app: { t: 'Una app que uso', d: 'YouTube, Spotify, TikTok…', ej: 'Spotify', q: 'la app' },
+    consola: { t: 'Una compu o consola', d: 'PC gamer, PlayStation, Switch…', ej: 'PlayStation 5', q: 'la consola o compu' }
+  };
+
+  /* ---------- los pasos ----------
+     Cada paso cambia un solo pedacito de código (k). La vista previa junta todos. */
+  function P() {
+    var tm = TEMAS[E.tema] || TEMAS.juego, nom = E.nombre || tm.ej;
+    return [
+      { k: 'h1', clase: 1, titulo: 'El título',
+        c: 'Todo lo que se ve en una página está entre **etiquetas**. ~<h1>~ abre un título y ~</h1>~ lo cierra.\nCambiá el texto que está entre las dos etiquetas por **' + esc(nom) + '**.',
+        ini: '<h1>Escribí acá</h1>',
+        check: function (s) {
+          if (!/<h1>/i.test(s)) return 'Falta la etiqueta de apertura ~<h1>~ al principio.';
+          if (!/<\/h1>/i.test(s)) return 'Falta cerrar el título: al final tiene que estar ~</h1>~ (con la barra).';
+          var m = s.match(/<h1>([\s\S]*?)<\/h1>/i), tx = m ? m[1].trim() : '';
+          if (!tx || /escrib[ií] ac[aá]/i.test(tx)) return 'Cambiá "Escribí acá" por el nombre de ' + tm.q + '.';
+          return '';
+        },
+        bien: '¡Hiciste tu primer título!' },
+      { k: 'p', clase: 1, titulo: 'Un párrafo',
+        c: 'La etiqueta ~<p>~ es para un **párrafo**: un texto común.\nEscribí entre ~<p>~ y ~</p>~ por qué te gusta ' + tm.q + '. Con una oración alcanza.',
+        ini: '<p>Me gusta porque...</p>',
+        check: function (s) {
+          if (!/<p>/i.test(s)) return 'Falta la etiqueta ~<p>~ al principio.';
+          if (!/<\/p>/i.test(s)) return 'Falta cerrar el párrafo con ~</p>~.';
+          var m = s.match(/<p>([\s\S]*?)<\/p>/i), tx = m ? m[1].trim() : '';
+          if (tx.replace(/me gusta porque\.*/i, '').trim().length < 4) return 'Completá la oración: ¿por qué te gusta?';
+          return '';
+        },
+        bien: '¡Ya tenés un título y un texto!' },
+      { k: 'color', clase: 2, titulo: 'El color del título',
+        c: 'Ahora le damos **estilo** con CSS. Esta regla dice: "a todos los ~h1~, ponerles color negro".\nCambiá la palabra ~black~ por otro color. Podés escribirlo o tocar uno de abajo.',
+        ini: 'h1 {\n  color: black;\n}',
+        chips: [['red', 'red'], ['blue', 'blue'], ['green', 'green'], ['purple', 'purple'], ['orange', 'orange'], ['#00b4d8', '#00b4d8']],
+        prop: 'color',
+        check: function (s) {
+          if (!/h1\s*\{/.test(s)) return 'Dejá el ~h1 {~ del principio: dice a quién le cambiamos el color.';
+          if (!/\}/.test(s)) return 'Falta la llave de cierre ~}~ al final.';
+          var m = s.match(/color\s*:\s*([^;}\n]+)\s*;/i);
+          if (!m) return 'Revisá la línea del color: tiene que ser ~color: rojo;~ con dos puntos y punto y coma al final.';
+          if (/^black$/i.test(m[1].trim())) return 'Cambiá ~black~ por otro color, por ejemplo ~blue~.';
+          return '';
+        },
+        bien: '¡Tu título cambió de color!' },
+      { k: 'fondo', clase: 2, titulo: 'El color de fondo',
+        c: 'Esta regla es para el ~body~, que es **toda la página**.\nCambiá ~white~ por un color de fondo. Fijate que el título se siga leyendo bien.',
+        ini: 'body {\n  background-color: white;\n}',
+        chips: [['lightblue', 'lightblue'], ['lightyellow', 'lightyellow'], ['#e8f5e9', '#e8f5e9'], ['#1e1e2e', '#1e1e2e'], ['lavender', 'lavender']],
+        prop: 'background-color',
+        check: function (s) {
+          if (!/body\s*\{/.test(s)) return 'Dejá el ~body {~ del principio.';
+          if (!/\}/.test(s)) return 'Falta la llave de cierre ~}~ al final.';
+          var m = s.match(/background-color\s*:\s*([^;}\n]+)\s*;/i);
+          if (!m) return 'Revisá la línea: ~background-color: azul;~ con dos puntos y punto y coma.';
+          if (/^white$/i.test(m[1].trim())) return 'Cambiá ~white~ por otro color.';
+          return '';
+        },
+        bien: '¡Tu página ya tiene su propio estilo!' },
+      { k: 'lista', clase: 3, titulo: 'Una lista',
+        c: '~<ul>~ es una **lista** y cada ~<li>~ es un punto de la lista.\nEscribí tres cosas que tiene ' + tm.q + ' (por ejemplo, lo que se puede hacer o sus características).',
+        ini: '<ul>\n  <li>Primera cosa</li>\n  <li>Segunda cosa</li>\n  <li>Tercera cosa</li>\n</ul>',
+        check: function (s) {
+          if (!/<ul>/i.test(s) || !/<\/ul>/i.test(s)) return 'La lista tiene que empezar con ~<ul>~ y terminar con ~</ul>~.';
+          var items = s.match(/<li>([\s\S]*?)<\/li>/gi) || [];
+          if (items.length < 3) return 'Tienen que quedar tres puntos, cada uno entre ~<li>~ y ~</li>~.';
+          var malas = items.filter(function (x) { return /(primera|segunda|tercera) cosa/i.test(x) || !x.replace(/<\/?li>/gi, '').trim(); });
+          if (malas.length) return 'Cambiá ' + (malas.length === 1 ? 'el punto que dice' : 'los puntos que dicen') + ' "…cosa" por algo tuyo.';
+          return '';
+        },
+        bien: '¡Hiciste una lista!' },
+      { k: 'img', clase: 3, titulo: 'Una imagen',
+        c: 'La etiqueta ~<img>~ muestra una imagen. En ~src~ va la **dirección** de la imagen y en ~alt~ una **descripción** corta.\nBuscá una imagen de ' + tm.q + ', mantené apretado sobre ella (o clic derecho) → **Copiar dirección de imagen** y pegala entre las comillas de ~src~. Si no encontrás una, tocá **Usar una de ejemplo**.',
+        ini: '<img src="" alt="">',
+        ejemplo: 'https://picsum.photos/id/0/400/250',
+        check: function (s) {
+          if (!/<img/i.test(s)) return 'Dejá la etiqueta ~<img~ del principio.';
+          var src = (s.match(/src\s*=\s*"([^"]*)"/i) || [])[1] || '';
+          var alt = (s.match(/alt\s*=\s*"([^"]*)"/i) || [])[1] || '';
+          if (!/^https?:\/\/\S+$/i.test(src.trim())) return 'Pegá la dirección de la imagen entre las comillas de ~src=""~. Empieza con ~https://~.';
+          if (alt.trim().length < 3) return 'Escribí en ~alt=""~ qué se ve en la imagen, por ejemplo ~alt="Pantalla de inicio del juego"~.';
+          return '';
+        },
+        bien: '¡Tu página tiene una imagen!' },
+      { k: 'boton', clase: 4, titulo: 'Un botón que hace algo',
+        c: 'Último paso: un **botón**. Lo que está en ~onclick~ es JavaScript: dice qué pasa cuando lo tocás.\nCambiá el texto del botón y el mensaje que está entre las comillas simples de ~alert(\'...\')~. Después tocá el botón en la vista previa.',
+        ini: '<button onclick="alert(\'Hola\')">Tocame</button>',
+        check: function (s) {
+          if (!/<button/i.test(s) || !/<\/button>/i.test(s)) return 'El botón tiene que empezar con ~<button~ y terminar con ~</button>~.';
+          var msj = (s.match(/alert\('([^']*)'\)/) || [])[1];
+          if (msj === undefined) return 'Revisá el ~alert(\'…\')~: el mensaje va entre comillas simples y adentro de los paréntesis.';
+          var tx = (s.match(/>([^<]*)<\/button>/i) || [])[1] || '';
+          if (/^\s*hola\s*$/i.test(msj) || /^\s*tocame\s*$/i.test(tx)) return 'Cambiá el texto ~Tocame~ y el mensaje ~Hola~ por los tuyos.';
+          return '';
+        },
+        bien: '¡Tu página ya hace algo cuando la tocan!' }
+    ];
+  }
+
+  var E = cargarEstado() || { tema: '', nombre: '', paso: -1, cod: {}, ok: {} };
+  var vista = document.getElementById('vista');
+
+  /* ---------- vista previa ---------- */
+  function paginaCompleta(paraVer) {
+    var c = E.cod, pasos = P();
+    function v(k) { var p = pasos.filter(function (x) { return x.k === k; })[0]; return c[k] != null ? c[k] : (p ? p.ini : ''); }
+    var hasta = paraVer == null ? pasos.length - 1 : paraVer;
+    function usa(k) { return pasos.findIndex(function (x) { return x.k === k; }) <= hasta; }
+    var css = 'body {\n  font-family: sans-serif;\n  padding: 16px;\n}\nimg {\n  max-width: 100%;\n  border-radius: 8px;\n}\n';
+    if (usa('color')) css += v('color') + '\n';
+    if (usa('fondo')) css += v('fondo') + '\n';
+    var html = '';
+    ['h1', 'p', 'lista', 'img', 'boton'].forEach(function (k) { if (usa(k)) html += v(k) + '\n'; });
+    return { h: html.trim(), s: css.trim() };
+  }
+  function docPrevia(cod) {
+    return '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>' + cod.s + '</style></head><body>' + cod.h + '</body></html>';
+  }
+
+  /* ---------- puntos de progreso ---------- */
+  function dots() {
+    var pasos = P(), h = '';
+    pasos.forEach(function (p, i) { h += '<i class="' + (E.ok[p.k] ? 'hecho' : i === E.paso ? 'ahora' : '') + '"></i>'; });
+    var d = document.getElementById('dots'); d.innerHTML = h;
+    var n = pasos.filter(function (p) { return E.ok[p.k]; }).length;
+    d.setAttribute('aria-label', 'Hiciste ' + n + ' de ' + pasos.length + ' pasos');
+  }
+
+  /* ---------- pantallas ---------- */
+  function inicio() {
+    var h = '<div class="paso-n">Antes de empezar</div><h1>Tu primera página web</h1>' +
+      '<div class="consigna"><p>Vas a hacer una página sobre algo que te guste, de a un paso por vez. Cada paso es corto.</p><p>No pasa nada si algo sale mal: la página te avisa qué arreglar y siempre podés volver atrás.</p></div>' +
+      '<p><b>¿Sobre qué querés que sea tu página?</b></p><div class="temas" role="group" aria-label="Tema de tu página">';
+    Object.keys(TEMAS).forEach(function (k) {
+      h += '<button class="tema" data-t="' + k + '" aria-pressed="' + (E.tema === k) + '"><b>' + TEMAS[k].t + '</b><span>' + TEMAS[k].d + '</span></button>';
+    });
+    h += '</div><label class="lab" for="nom">¿Cuál? Escribí el nombre</label><input class="campo" id="nom" value="' + esc(E.nombre) + '" placeholder="' + esc((TEMAS[E.tema] || TEMAS.juego).ej) + '">' +
+      '<div class="aviso casi" id="aviso"></div><div class="fila"><button class="btn pri" id="empezar">Empezar</button></div>' +
+      '<details class="guardar"><summary>¿Ya empezaste en otro celular o computadora? Seguí desde donde quedaste</summary>' +
+      '<p style="margin-top:10px">Pegá acá tu código de avance:</p><label class="lab" for="codAv" style="position:absolute;left:-9999px">Código de avance</label><textarea class="av" id="codAv" spellcheck="false" placeholder="PP1:…"></textarea>' +
+      '<p style="margin-top:10px">O elegí el archivo <code>mi-avance.txt</code> que descargaste:</p><input type="file" id="arAv" accept=".txt,text/plain">' +
+      '<div class="fila"><button class="btn" id="cargarAv">Seguir desde mi avance</button></div><div class="aviso" id="avAv" role="status"></div></details>';
+    vista.innerHTML = h;
+    vista.querySelectorAll('.tema').forEach(function (b) {
+      b.addEventListener('click', function () {
+        E.tema = b.dataset.t; guardarEstado();
+        document.getElementById('aviso').textContent = '';
+        vista.querySelectorAll('.tema').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        document.getElementById('nom').placeholder = TEMAS[E.tema].ej;
+        document.getElementById('nom').focus();
+      });
+    });
+    document.getElementById('nom').addEventListener('input', function () { E.nombre = this.value.trim(); guardarEstado(); });
+    function usarAvance(txt) {
+      var av = document.getElementById('avAv'), nuevo = leerAvance(txt);
+      if (!nuevo) { av.className = 'aviso casi'; av.textContent = 'Ese código no funciona. Fijate de copiarlo completo, desde PP1: hasta el final.'; return; }
+      E = nuevo; guardarEstado(); render();
+    }
+    document.getElementById('cargarAv').addEventListener('click', function () { usarAvance(document.getElementById('codAv').value); });
+    document.getElementById('arAv').addEventListener('change', function () {
+      var f = this.files && this.files[0]; if (f) f.text().then(usarAvance);
+    });
+    document.getElementById('empezar').addEventListener('click', function () {
+      var av = document.getElementById('aviso');
+      if (!E.tema) { av.textContent = 'Elegí primero sobre qué va a ser tu página.'; return; }
+      if (!E.nombre) { av.textContent = 'Escribí el nombre de ' + TEMAS[E.tema].q + '.'; document.getElementById('nom').focus(); return; }
+      E.paso = 0; guardarEstado(); render();
+    });
+  }
+
+  function paso(i) {
+    var pasos = P(), p = pasos[i], valor = E.cod[p.k] != null ? E.cod[p.k] : p.ini;
+    var h = '<div class="paso-n">Paso ' + (i + 1) + ' de ' + pasos.length + '</div><h2>' + p.titulo + '</h2>' +
+      '<div class="consigna">' + p.c.split('\n').map(function (l) { return '<p>' + inline(l) + '</p>'; }).join('') + '</div>' +
+      '<div class="cols"><div><label class="lab" for="cod">Tu código</label><textarea class="cod" id="cod" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off">' + esc(valor) + '</textarea>';
+    if (p.chips) h += '<div class="chips">' + p.chips.map(function (c) { return '<button class="chip" data-v="' + c[1] + '"><span class="muestra" style="background:' + c[1] + '"></span>' + c[0] + '</button>'; }).join('') + '</div>';
+    if (p.ejemplo) h += '<div class="chips"><button class="chip" id="ejemplo">Usar una de ejemplo</button></div>';
+    h += '</div><div><span class="lab">Así se ve tu página</span><iframe class="previa" id="previa" title="Vista previa de tu página" sandbox="allow-scripts allow-modals"></iframe></div></div>' +
+      '<div class="aviso" id="aviso" role="status"></div>' +
+      '<div class="fila">' + (i > 0 ? '<button class="btn" id="atras">← Atrás</button>' : '<button class="btn" id="atras">← Cambiar tema</button>') +
+      '<button class="btn" id="deshacer">Volver a empezar este paso</button>' +
+      '<button class="btn ok" id="listo">Listo, revisar</button></div>' +
+      '<p class="calma">Tu avance se guarda solo en este equipo. Si la próxima clase vas a usar otro celular o computadora, tocá <b>Guardar mi avance</b> antes de irte.</p>' +
+      '<div class="fila"><button class="btn" id="bGuardar">Guardar mi avance</button></div><div id="zGuardar"></div>';
+    vista.innerHTML = h;
+    var ta = document.getElementById('cod'), fr = document.getElementById('previa'), av = document.getElementById('aviso');
+    function actualizar() { E.cod[p.k] = ta.value; guardarEstado(); fr.srcdoc = docPrevia(paginaCompleta(i)); }
+    actualizar();
+    ta.addEventListener('input', function () { av.textContent = ''; av.className = 'aviso'; actualizar(); });
+    vista.querySelectorAll('.chip[data-v]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var re = new RegExp('(' + p.prop + '\\s*:\\s*)[^;}\\n]*', 'i');
+        ta.value = re.test(ta.value) ? ta.value.replace(re, '$1' + b.dataset.v) : ta.value;
+        actualizar(); ta.focus();
+      });
+    });
+    var ej = document.getElementById('ejemplo');
+    if (ej) ej.addEventListener('click', function () {
+      ta.value = ta.value.replace(/src\s*=\s*"[^"]*"/i, 'src="' + p.ejemplo + '"');
+      if (/alt\s*=\s*""/.test(ta.value)) ta.value = ta.value.replace(/alt\s*=\s*""/, 'alt="Notebook sobre un escritorio"');
+      actualizar(); ta.focus();
+    });
+    document.getElementById('deshacer').addEventListener('click', function () { ta.value = p.ini; av.textContent = ''; av.className = 'aviso'; actualizar(); ta.focus(); });
+    document.getElementById('atras').addEventListener('click', function () { E.paso = i - 1; guardarEstado(); render(); });
+    document.getElementById('bGuardar').addEventListener('click', function () { panelGuardar(document.getElementById('zGuardar')); });
+    var aprobado = false;
+    ta.addEventListener('input', function () {
+      if (aprobado) { aprobado = false; document.getElementById('listo').textContent = 'Listo, revisar'; }
+    });
+    document.getElementById('listo').addEventListener('click', function () {
+      if (aprobado) { E.paso = i + 1; guardarEstado(); render(); return; }
+      var error = p.check(ta.value);
+      if (error) {
+        av.className = 'aviso casi'; av.innerHTML = 'Casi. ' + inline(error);
+        E.ok[p.k] = false; guardarEstado(); dots(); return;
+      }
+      E.ok[p.k] = true; guardarEstado(); dots();
+      av.className = 'aviso bien'; av.innerHTML = '✓ ' + esc(p.bien);
+      var listo = document.getElementById('listo');
+      listo.textContent = i < pasos.length - 1 ? 'Siguiente paso →' : 'Ver mi página terminada →';
+      aprobado = true;
+      listo.focus();
+    });
+  }
+
+  /* ---------- entrega (usa el mismo formulario que el taller) ---------- */
+  var FORM = { accion: '', campos: {}, url: '' };
+  function leerFormulario() {
+    return fetch('index.html').then(function (r) { return r.text(); }).then(function (t) {
+      var m = t.match(/var FORMULARIO = '([^']*)'/); if (!m || !m[1]) return;
+      var u = new URL(m[1]); if (u.hostname !== 'docs.google.com') return;
+      u.searchParams.forEach(function (v, k) { if (/^entry\.\d+$/.test(k)) FORM.campos[v.trim().toUpperCase()] = k; });
+      FORM.url = m[1];
+      FORM.accion = u.origin + u.pathname.replace(/\/(viewform|prefill|edit)?\/?$/, '') + '/formResponse';
+    }).catch(function () {});
+  }
+
+  function final() {
+    var pasos = P(), cod = paginaCompleta(), tm = TEMAS[E.tema] || TEMAS.juego;
+    var html = '<!DOCTYPE html>\n<html lang="es">\n<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n  <title>' + esc(E.nombre) + '</title>\n  <style>\n' + cod.s.replace(/^/gm, '    ') + '\n  </style>\n</head>\n<body>\n' + cod.h.replace(/^/gm, '  ') + '\n</body>\n</html>';
+    var faltan = pasos.filter(function (p) { return !E.ok[p.k]; });
+    var h = '<div class="final"><div class="paso-n">Terminaste</div><h1>¡Hiciste tu primera página web!</h1>' +
+      '<p>Esta página sobre <b>' + esc(E.nombre) + '</b> la programaste vos, de a un paso por vez.</p>' +
+      '<ul class="logros"><li>Escribiste etiquetas HTML: título, párrafo, lista, imagen y botón.</li><li>Le diste estilo con CSS: color y fondo.</li><li>Hiciste un botón con JavaScript.</li></ul>' +
+      (faltan.length ? '<p class="aviso casi">Te quedó sin revisar: ' + faltan.map(function (p) { return p.titulo; }).join(', ') + '. Podés volver cuando quieras.</p>' : '') +
+      '<iframe class="previa" id="previa" title="Tu página terminada" sandbox="allow-scripts allow-modals" style="height:320px;margin-top:14px"></iframe>' +
+      '<details><summary>Ver todo tu código</summary><pre class="todo">' + esc(html) + '</pre></details>' +
+      '<div id="entrega"></div>' +
+      '<div class="fila"><button class="btn" id="bajar">Descargar mi página</button><button class="btn" id="volver">← Volver a los pasos</button><button class="btn" id="bGuardar">Guardar mi avance</button></div><div id="zGuardar"></div></div>';
+    vista.innerHTML = h;
+    document.getElementById('previa').srcdoc = docPrevia(cod);
+    document.getElementById('volver').addEventListener('click', function () { E.paso = pasos.length - 1; guardarEstado(); render(); });
+    document.getElementById('bGuardar').addEventListener('click', function () { panelGuardar(document.getElementById('zGuardar')); });
+    document.getElementById('bajar').addEventListener('click', function () {
+      var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([html], { type: 'text/html;charset=utf-8' })); a.download = 'index.html';
+      document.body.appendChild(a); a.click(); a.remove();
+    });
+    leerFormulario().then(function () {
+      if (!FORM.accion || !FORM.campos.NOMBRE) return;
+      var zona = document.getElementById('entrega'); if (!zona) return;
+      var nombre = ''; try { nombre = (JSON.parse(localStorage.getItem('dw3:alumno')) || {}).nombre || ''; } catch (e) {}
+      zona.innerHTML = '<div style="margin-top:18px;padding-top:14px;border-top:1px dashed var(--line)"><label class="lab" for="alumno">Tu nombre y apellido</label><input class="campo" id="alumno" value="' + esc(nombre) + '" autocomplete="name">' +
+        '<div class="fila"><button class="btn pri" id="entregar">Entregar a mi profe</button></div><div class="aviso" id="avEnt" role="status"></div></div>';
+      document.getElementById('entregar').addEventListener('click', function () {
+        var al = document.getElementById('alumno').value.trim(), av = document.getElementById('avEnt'), b = this;
+        if (al.length < 3) { av.className = 'aviso casi'; av.textContent = 'Escribí tu nombre y apellido.'; return; }
+        try { localStorage.setItem('dw3:alumno', JSON.stringify({ nombre: al })); } catch (e) {}
+        var datos = { NOMBRE: al, TEMA: 'Primeros pasos', NIVEL: 'Primeros pasos', EJERCICIO: 'Mi primera página: ' + E.nombre + ' (' + tm.t + ')', LINK: '', RESPUESTA: '', HTML: cod.h, CSS: cod.s, JS: '' };
+        var u = new URL(FORM.url), largo = false, codigo = '';
+        function poner(d) { Object.keys(FORM.campos).forEach(function (k) { if (k in d) u.searchParams.set(FORM.campos[k], d[k]); }); }
+        poner(datos);
+        if (u.href.length > 7000) {
+          largo = true; codigo = cod.h + '\n\n<style>\n' + cod.s + '\n</style>';
+          datos.HTML = 'BORRÁ ESTE TEXTO Y PEGÁ TU CÓDIGO CON Ctrl + V'; datos.CSS = '';
+          u = new URL(FORM.url); poner(datos);
+          try { navigator.clipboard.writeText(codigo); } catch (e) {}
+        }
+        window.open(u.href, '_blank');
+        av.className = 'aviso bien';
+        av.innerHTML = 'Se abrió el formulario de tu profe en otra pestaña, con tu página ya escrita. Bajá hasta el final y tocá <b>Enviar</b>: recién ahí le llega. ' +
+          'Si no se abrió, <a href="' + esc(u.href) + '" target="_blank" rel="noopener" style="color:inherit">tocá acá</a>.' +
+          (largo ? '<br>Tu código es largo: ya lo copiamos. En la pregunta HTML borrá el texto y pegá con Ctrl + V.' : '');
+        b.textContent = 'Entregar de nuevo';
+      });
+    });
+  }
+
+  /* ---------- código de avance: para seguir en otro equipo ---------- */
+  function codigoAvance() {
+    return 'PP1:' + btoa(unescape(encodeURIComponent(JSON.stringify(E))));
+  }
+  function leerAvance(txt) {
+    var m = String(txt || '').replace(/\s+/g, '').match(/PP1:([A-Za-z0-9+\/=]+)/);
+    if (!m) return null;
+    try {
+      var o = JSON.parse(decodeURIComponent(escape(atob(m[1]))));
+      if (!o || typeof o !== 'object' || !o.cod || !o.ok || typeof o.paso !== 'number') return null;
+      return o;
+    } catch (e) { return null; }
+  }
+  function panelGuardar(zona) {
+    var cod = codigoAvance();
+    zona.innerHTML = '<div class="guardar"><p><b>Tu código de avance</b></p>' +
+      '<p>Guardalo de una de estas formas. En el otro equipo, abrí esta misma página y tocá <b>¿Ya empezaste en otro celular o computadora?</b></p>' +
+      '<label class="lab" for="codSal" style="position:absolute;left:-9999px">Código de avance</label><textarea class="av" id="codSal" readonly>' + esc(cod) + '</textarea>' +
+      '<div class="fila"><button class="btn pri" id="copiarAv">Copiar código</button><button class="btn" id="bajarAv">Descargar archivo</button></div>' +
+      '<p class="calma">Podés pegar el código en un mensaje para vos mismo (por ejemplo en WhatsApp o en tu correo) o guardar el archivo en un pendrive.</p>' +
+      '<div class="aviso" id="avGuardar" role="status"></div></div>';
+    var av = document.getElementById('avGuardar');
+    document.getElementById('copiarAv').addEventListener('click', function () {
+      var ta = document.getElementById('codSal');
+      function ok() { av.className = 'aviso bien'; av.textContent = '✓ Copiado. Ahora pegalo donde lo vayas a guardar.'; }
+      if (navigator.clipboard) navigator.clipboard.writeText(cod).then(ok, function () { ta.select(); document.execCommand('copy'); ok(); });
+      else { ta.select(); document.execCommand('copy'); ok(); }
+    });
+    document.getElementById('bajarAv').addEventListener('click', function () {
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob(['Mis primeros pasos · código de avance\n\n' + cod + '\n'], { type: 'text/plain;charset=utf-8' }));
+      a.download = 'mi-avance.txt'; document.body.appendChild(a); a.click(); a.remove();
+      av.className = 'aviso bien'; av.textContent = '✓ Se descargó mi-avance.txt.';
+    });
+    zona.scrollIntoView({ block: 'nearest' });
+  }
+
+  function render() {
+    var n = P().length;
+    if (E.paso < 0 || !E.tema) { E.paso = -1; inicio(); }
+    else if (E.paso >= n) final();
+    else paso(E.paso);
+    dots(); window.scrollTo(0, 0);
+  }
+
+  var tv = null; try { tv = localStorage.getItem('dw3g:theme'); } catch (e) {}
+  if (tv) { try { document.documentElement.dataset.theme = JSON.parse(tv); } catch (e) {} }
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    var d = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = d; try { localStorage.setItem('dw3g:theme', JSON.stringify(d)); } catch (e) {}
+  });
+  render();
+})();
+</script>
+</body>
+</html>

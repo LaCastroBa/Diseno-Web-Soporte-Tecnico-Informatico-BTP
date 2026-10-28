@@ -5,33 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Diseño Web desde cero</title>
 <meta name="description" content="Guía paso a paso de Diseño Web para estudiantes sin conocimientos previos. Un paso por cada tema del programa, con enlaces a los tres niveles del taller.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231A1C2E'/%3E%3Crect x='12' y='38' width='10' height='14' rx='2' fill='%233FCB97'/%3E%3Crect x='27' y='26' width='10' height='26' rx='2' fill='%237C9DF5'/%3E%3Crect x='42' y='12' width='10' height='40' rx='2' fill='%23EC6DBE'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F172A'/%3E%3Crect x='12' y='38' width='10' height='14' rx='2' fill='%2334D399'/%3E%3Crect x='27' y='26' width='10' height='26' rx='2' fill='%2360A5FA'/%3E%3Crect x='42' y='12' width='10' height='40' rx='2' fill='%23A78BFA'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 /* Layout: portada · índice desplegable · pasos de introducción · un paso por tema (explicación, pasos, código, error común, botones a los tres niveles) */
 :root {
-  --bg: #F7F5F0; --surface: #FFFFFF; --surface-2: #F1EEE6; --ink: #1A1C2E; --ink-2: #555870; --line: #DDD8CC;
-  --b: #0B7D59; --b-t: #DCF2E9; --i: #2D58CF; --i-t: #E2EAFC; --v: #A12C7B; --v-t: #F6E2EF;
-  --accent: #B35F00; --accent-t: #FBEBD6; --alert: #B3261E; --alert-t: #FCE4E1;
-  --code-bg: #1B1D33; --code-ink: #E9EAF5;
+  --bg: #F1F5F9; --surface: #FFFFFF; --surface-2: #E9EFF6; --ink: #0F172A; --ink-2: #475569; --line: #D5DEE9;
+  --b: #047857; --b-t: #D1FAE5; --i: #1D4ED8; --i-t: #DBEAFE; --v: #6D28D9; --v-t: #EDE9FE;
+  --accent: #0E7490; --accent-t: #E3F6FA; --alert: #C62828; --alert-t: #FCE4E1;
+  --code-bg: #0B1220; --code-ink: #E2E8F0;
   --f-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
   --f-text: 'Atkinson Hyperlegible', 'Segoe UI', system-ui, sans-serif;
   --f-mono: 'JetBrains Mono', Consolas, monospace;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #14152A; --surface: #1F2140; --surface-2: #191A35; --ink: #ECECF7; --ink-2: #A8AAC6; --line: #34375E;
-    --b: #3FCB97; --b-t: #133A2D; --i: #7C9DF5; --i-t: #1D2A55; --v: #EC6DBE; --v-t: #3D1A33;
-    --accent: #F0A54A; --accent-t: #3B2A12; --alert: #FF8A80; --alert-t: #3D1717; --code-bg: #0E0F22;
-    color-scheme: dark;
-  }
-}
 :root[data-theme="dark"] {
-  --bg: #14152A; --surface: #1F2140; --surface-2: #191A35; --ink: #ECECF7; --ink-2: #A8AAC6; --line: #34375E;
-  --b: #3FCB97; --b-t: #133A2D; --i: #7C9DF5; --i-t: #1D2A55; --v: #EC6DBE; --v-t: #3D1A33;
-  --accent: #F0A54A; --accent-t: #3B2A12; --alert: #FF8A80; --alert-t: #3D1717; --code-bg: #0E0F22;
+  --bg: #0B1120; --surface: #111B2E; --surface-2: #0E1626; --ink: #E2E8F0; --ink-2: #94A3B8; --line: #24324A;
+  --b: #34D399; --b-t: #0B3B2E; --i: #60A5FA; --i-t: #172554; --v: #A78BFA; --v-t: #2E1065;
+  --accent: #22D3EE; --accent-t: #083344; --alert: #FF8A80; --alert-t: #3D1717; --code-bg: #060B16;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -122,6 +114,7 @@ pre.code button { position: absolute; top: 8px; right: 8px; background: rgba(255
     <h2>¡Llegaste al final!</h2>
     <p>Ya recorriste todo el programa. Ahora volvé al taller y subí de nivel en los temas que más te gustaron.</p>
     <a class="btn primary" href="index.html">Ir al taller</a>
+    <p style="margin-top:28px;font-size:0.85rem;color:var(--ink-2)">Recurso Educativo Abierto · Diseño Web, 1.er año BTP Soporte Técnico Informático (DGETP-UTU) · Ed. Tec. Laura Castro · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></p>
   </section>
 </main>
 <script>
@@ -162,12 +155,12 @@ i: { x: `Toda página web se hace con tres lenguajes que trabajan juntos, como u
 - **JavaScript** es el movimiento: dice qué hace cuando lo usás (clics, mensajes, cambios).
 
 Una URL también tiene partes: ~https://~ (protocolo seguro), ~www.ejemplo.com~ (dominio) y ~/fotos/playa.html~ (ruta al archivo).`,
-  e: { t: 'Las tres capas', c: `El código de abajo tiene las tres capas. Tocá **Ejecutar** y probá el botón. Después cambiá: el texto del título (HTML), el color de fondo (CSS) y el mensaje del botón (JS). Anotá en el código, con un comentario, cuál de las tres capas tocaste en cada cambio.`,
+  e: { t: 'Las tres capas', c: `Tocá **Abrir en CodePen**: el Pen tiene las tres capas. Probá el botón. Después cambiá: el texto del título (HTML), el color de fondo (CSS) y el mensaje del botón (JS). Anotá en el código, con un comentario, cuál de las tres capas tocaste en cada cambio.`,
     k: ['Cambiaste algo en HTML, en CSS y en JS', 'El botón sigue funcionando', 'Cada cambio tiene su comentario'],
     p: `Los comentarios en HTML son ~<!-- así -->~, en CSS ~/* así */~ y en JS ~// así~.`,
-    h: `<h1>Mi primera página</h1>
-<p>Esta página tiene esqueleto, ropa y movimiento.</p>
-<button id="boton">Tocame</button>`,
+    h: `<h1>TecnoFix · Servicio técnico</h1>
+<p>Reparamos computadoras, notebooks y celulares.</p>
+<button id="boton">Pedir turno</button>`,
     s: `body {
   font-family: sans-serif;
   background-color: lightyellow;
@@ -177,7 +170,7 @@ h1 {
   color: darkblue;
 }`,
     j: `document.getElementById('boton').addEventListener('click', function () {
-  alert('¡Hola! Esto lo hace JavaScript');
+  alert('¡Turno reservado! Esto lo hace JavaScript');
 });` } },
 v: { x: `Los navegadores traen **herramientas para desarrolladores** (DevTools). Se abren con **F12** o clic derecho → **Inspeccionar**.
 - La pestaña **Elementos** muestra el HTML y el CSS de la página.
@@ -201,10 +194,10 @@ b: { x: `- **Usabilidad:** que la página sea fácil de usar. Encontrás lo que 
 Dos reglas para empezar: toda imagen lleva un texto alternativo con ~alt~ (lo lee el lector de pantalla) y el texto tiene que contrastar con el fondo.`,
   e: { t: 'Arreglá la página', c: `Esta página tiene dos problemas de accesibilidad: la imagen no tiene ~alt~ y el texto gris claro casi no se lee. Arreglá los dos.`,
     k: ['La imagen tiene un alt que describe lo que muestra', 'El texto se lee bien sobre el fondo'],
-    p: `Un buen alt describe la imagen en pocas palabras: ~alt="Perro marrón corriendo en la playa"~.`,
-    h: `<h1>Mi mascota</h1>
-<img src="https://picsum.photos/id/237/400/250">
-<p class="texto">Se llama Luna y le encanta correr.</p>`,
+    p: `Un buen alt describe la imagen en pocas palabras: ~alt="Notebook abierta sobre un escritorio"~.`,
+    h: `<h1>Mi computadora</h1>
+<img src="https://picsum.photos/id/0/400/250">
+<p class="texto">Es una notebook con 8 GB de RAM y Windows 11.</p>`,
     s: `body { font-family: sans-serif; background: white; padding: 20px; }
 .texto { color: #dddddd; font-size: 18px; }` } },
 i: { x: `Otras reglas que mejoran mucho una página:
@@ -215,11 +208,11 @@ i: { x: `Otras reglas que mejoran mucho una página:
   e: { t: 'Cuatro problemas', c: `La página tiene cuatro problemas de usabilidad o accesibilidad. Encontralos, arreglalos y escribí en un comentario HTML cuáles eran.`,
     k: ['Encontraste los cuatro problemas', 'Los arreglaste en el código', 'El comentario los explica'],
     p: `Mirá el tamaño de letra, el texto del enlace, el orden de los títulos y el mensaje que solo usa color.`,
-    h: `<h3>Horarios</h3>
-<h1>Liceo</h1>
-<p class="chico">Las clases empiezan a las 8:00.</p>
+    h: `<h3>Horarios de atención</h3>
+<h1>Soporte técnico del liceo</h1>
+<p class="chico">Atendemos de lunes a viernes de 8:00 a 12:00.</p>
 <a href="#">Clic aquí</a>
-<p class="error">Campo obligatorio</p>`,
+<p class="error">Falta el número de serie del equipo</p>`,
     s: `body { font-family: sans-serif; padding: 20px; }
 .chico { font-size: 10px; }
 .error { color: red; }` } },
@@ -235,10 +228,11 @@ v: { x: `Una página accesible se tiene que poder usar **solo con el teclado**: 
 - el botón de la lupa tenga ~aria-label~.`,
     k: ['Se puede completar y enviar solo con teclado', 'Cada campo tiene label unido con for/id', 'El foco se ve con claridad', 'El botón de ícono tiene aria-label'],
     p: `Para el foco probá: ~:focus-visible { outline: 3px solid orange; outline-offset: 2px; }~`,
-    h: `<form>
+    h: `<h2>Reportar una falla</h2>
+<form>
   Nombre <input type="text">
-  Correo <input type="email">
-  <div class="boton" onclick="alert('Enviado')">Enviar</div>
+  Número de equipo <input type="text">
+  <div class="boton" onclick="alert('Reporte enviado')">Enviar</div>
 </form>
 <button class="lupa">🔍</button>`,
     s: `body { font-family: sans-serif; padding: 20px; }
@@ -254,44 +248,45 @@ b: { x: `Para hacer páginas web alcanza con:
 - **Un navegador:** donde ves el resultado.
 
 En CodePen tenés tres paneles (HTML, CSS y JS) y el resultado abajo. Para guardar tu trabajo necesitás una cuenta gratis: el botón **Save** te da un link para entregar.`,
-  e: { t: 'Mi primer Pen', c: `Tocá **Abrir en CodePen**, iniciá sesión y cambiá el texto por tu nombre y tu comida favorita. Guardá con **Save** y pegá el link del Pen abajo.`,
-    k: ['El Pen está guardado (el link termina en un código raro)', 'Aparecen tu nombre y tu comida favorita'],
+  e: { t: 'Mi primer Pen', c: `Tocá **Abrir en CodePen**, iniciá sesión y completá el texto con tu nombre, tu programa o juego favorito y el sistema operativo que usás. Guardá con **Save** y pegá el link del Pen abajo.`,
+    k: ['El Pen está guardado (el link termina en un código raro)', 'Aparecen tu nombre, tu programa favorito y tu sistema operativo'],
     p: `Si no tenés cuenta, usá "Sign up" con tu correo del liceo o con tu cuenta de Google.`,
     h: `<h1>Hola, soy ...</h1>
-<p>Mi comida favorita es ...</p>`,
+<p>Mi programa o juego favorito es ...</p>
+<p>En mi computadora uso el sistema operativo ...</p>`,
     s: `body { font-family: sans-serif; text-align: center; padding-top: 40px; }` } },
-i: { x: `**Visual Studio Code** (VS Code) es el editor que usan los profesionales. Lo mejor es instalarle la extensión **Live Server**: abre tu página en el navegador y la recarga sola cada vez que guardás.
+i: { x: `Las DevTools no son solo para mirar, también sirven para **probar sin romper nada**:
+- En **Elementos** podés cambiar CSS en vivo y ver el resultado al instante. Los cambios se borran al recargar.
+- En **Consola** ves los errores de JavaScript (en rojo) y podés escribir código para probarlo.
+- El **modo dispositivo** (ícono del celular) muestra la página como en un teléfono.
+
+Los profesionales además usan **Git** para guardar versiones y **GitHub** para compartir el código y publicar páginas gratis.`,
+  e: { t: 'Probador de estilos', c: `Abrí el ejercicio en CodePen y abrí la consola (botón **Console**, abajo a la izquierda). Tocá el botón: hay un error. Encontralo y arreglalo. Después agregá un ~console.log~ que muestre cuántos párrafos tiene la página.`,
+    k: ['La consola ya no muestra errores', 'El botón cambia el color de fondo', 'El console.log muestra el número correcto de párrafos'],
+    p: `~document.querySelectorAll('p').length~ cuenta los párrafos.`,
+    h: `<h1>Panel de diagnóstico</h1>
+<p>Procesador: OK</p>
+<p>Memoria RAM: OK</p>
+<p>Disco: OK</p>
+<button id="cambiar">Marcar como revisado</button>`,
+    s: `body { font-family: sans-serif; padding: 20px; }`,
+    j: `document.getElementById('cambiar').addEventListener('click', function () {
+  document.body.style.backgroundColor = 'lightgreen';
+  consol.log('Equipo revisado');
+});` } },
+v: { x: `**Visual Studio Code** (VS Code) es el editor que usan los profesionales. Lo mejor es instalarle la extensión **Live Server**: abre tu página en el navegador y la recarga sola cada vez que guardás.
 
 Ordená tus proyectos así:
 - una carpeta por proyecto;
 - el archivo principal se llama ~index.html~;
 - carpetas ~css~, ~js~ e ~img~;
 - nombres en minúscula, sin espacios ni tildes: ~mi-pagina.html~, no ~Mi Página.html~.`,
-  e: { t: 'Carpeta de proyecto', c: `Tocá **Descargar para VS Code**. Creá una carpeta ~mi-proyecto~ con las subcarpetas ~css~, ~js~ e ~img~. Poné el ~index.html~ adentro y abrilo con Live Server. Después escribí abajo cómo quedó el árbol de carpetas.`,
+  e: { t: 'Carpeta de proyecto', c: `Tocá **Descargar para VS Code**. Creá una carpeta ~mi-proyecto~ con las subcarpetas ~css~, ~js~ e ~img~. Poné el ~index.html~ adentro y abrilo con Live Server. Después escribí en **Comentarios** cómo quedó el árbol de carpetas.`,
     k: ['La estructura de carpetas es correcta', 'Los nombres no tienen espacios ni tildes', 'La página se abre con Live Server'],
     p: `Live Server: clic derecho sobre index.html → "Open with Live Server".`,
     h: `<h1>Proyecto en VS Code</h1>
 <p>Si ves esto con Live Server, ¡funciona!</p>`,
-    s: `body { font-family: sans-serif; padding: 20px; background: #eef6ff; }` } },
-v: { x: `Las DevTools no son solo para mirar, también sirven para **probar sin romper nada**:
-- En **Elementos** podés cambiar CSS en vivo y ver el resultado al instante. Los cambios se borran al recargar.
-- En **Consola** ves los errores de JavaScript (en rojo) y podés escribir código para probarlo.
-- El **modo dispositivo** (ícono del celular) muestra la página como en un teléfono.
-
-Los profesionales además usan **Git** para guardar versiones y **GitHub** para compartir el código y publicar páginas gratis.`,
-  e: { t: 'Probador de estilos', c: `Ejecutá el código y abrí la consola de la zona de práctica (abajo). Hay un error. Encontralo y arreglalo. Después agregá un ~console.log~ que muestre cuántos párrafos tiene la página.`,
-    k: ['La consola ya no muestra errores', 'El botón cambia el color', 'El console.log muestra el número correcto de párrafos'],
-    p: `~document.querySelectorAll('p').length~ cuenta los párrafos.`,
-    h: `<h1>Probador</h1>
-<p>Primer párrafo</p>
-<p>Segundo párrafo</p>
-<p>Tercer párrafo</p>
-<button id="cambiar">Cambiar color</button>`,
-    s: `body { font-family: sans-serif; padding: 20px; }`,
-    j: `document.getElementById('cambiar').addEventListener('click', function () {
-  document.body.style.backgroundColor = 'lightgreen';
-  consol.log('Color cambiado');
-});` } }
+    s: `body { font-family: sans-serif; padding: 20px; background: #eef6ff; }` } }
 });
 
 tema({ id: '1.4', u: '1', t: 'Creación de la estructura básica de una página web',
@@ -303,26 +298,13 @@ b: { x: `Toda página HTML tiene la misma estructura:
 - ~<body>~ tiene todo lo que se ve.
 
 Casi todas las etiquetas se abren y se cierran: ~<body>~ ... ~</body>~.`,
-  e: { t: 'El esqueleto', c: `Tocá **Descargar para VS Code**: el archivo trae la estructura completa. Abrilo y cambiá el título de la pestaña por "Mi primera página" y el contenido del body por un título y un párrafo sobre vos. En la zona de práctica alcanza con escribir el contenido del body.`,
-    k: ['La pestaña muestra "Mi primera página"', 'El body tiene un título y un párrafo', 'Todas las etiquetas están cerradas'],
-    p: `El título de la pestaña va dentro de ~<title>~, en el head.`,
-    h: `<h1>Sobre mí</h1>
-<p>Escribí acá algo sobre vos.</p>`,
+  e: { t: 'El esqueleto', c: `Tocá **Abrir en CodePen**. CodePen ya arma el esqueleto (head y body) por vos: en el panel HTML escribís solo lo que va dentro del body. Completá tu perfil técnico: qué te gusta de la informática y qué computadora o celular usás. Arriba de todo, dejá un comentario HTML que explique con tus palabras qué va en el head y qué va en el body.`,
+    k: ['Hay un título h1 y un párrafo sobre vos y la informática', 'Todas las etiquetas están cerradas', 'El comentario explica la diferencia entre head y body'],
+    p: `Un comentario HTML se escribe así: ~<!-- el head tiene... -->~. No se ve en la página.`,
+    h: `<h1>Mi perfil técnico</h1>
+<p>Escribí acá qué te gusta de la informática y qué equipo usás.</p>`,
     s: `` } },
-i: { x: `En el ~head~ van datos importantes:
-- ~<meta charset="UTF-8">~ hace que se vean bien las tildes y la ñ.
-- ~<meta name="viewport" content="width=device-width, initial-scale=1">~ hace que la página se adapte al celular.
-- ~<html lang="es">~ avisa el idioma (el lector de pantalla pronuncia mejor).
-- ~<link rel="stylesheet" href="css/estilos.css">~ conecta un archivo CSS aparte.`,
-  e: { t: 'Un head completo', c: `En VS Code, armá un ~index.html~ con el head completo (charset, viewport, title y link a ~css/estilos.css~) y creá el archivo ~estilos.css~ con un color de fondo. En la zona de práctica, escribí el head que usaste en un comentario y un body con un párrafo que use tildes y ñ.`,
-    k: ['El head tiene charset, viewport, title y link', 'El CSS externo funciona (se ve el color de fondo)', 'Las tildes y la ñ se ven bien'],
-    p: `En VS Code escribí ~!~ y apretá Tab: aparece la estructura completa sola.`,
-    h: `<!-- Pegá acá tu head:
-
--->
-<p>El ñandú corrió rápido por el campo.</p>`,
-    s: `body { background: #fff4e6; font-family: sans-serif; }` } },
-v: { x: `HTML moderno usa **etiquetas semánticas**: tienen nombre que dice qué son. Ayudan a los buscadores y a los lectores de pantalla.
+i: { x: `HTML moderno usa **etiquetas semánticas**: tienen nombre que dice qué son. Ayudan a los buscadores y a los lectores de pantalla.
 - ~<header>~ encabezado del sitio
 - ~<nav>~ menú de navegación
 - ~<main>~ contenido principal (uno solo por página)
@@ -344,7 +326,17 @@ v: { x: `HTML moderno usa **etiquetas semánticas**: tienen nombre que dice qué
 .menu { background: #e2eafc; padding: 8px 16px; }
 .principal { padding: 16px; }
 .noticia { border: 1px solid #ccc; padding: 12px; border-radius: 8px; }
-.pie { text-align: center; padding: 16px; color: #555; }` } }
+.pie { text-align: center; padding: 16px; color: #555; }` } },
+v: { x: `En el ~head~ van datos importantes:
+- ~<meta charset="UTF-8">~ hace que se vean bien las tildes y la ñ.
+- ~<meta name="viewport" content="width=device-width, initial-scale=1">~ hace que la página se adapte al celular.
+- ~<html lang="es">~ avisa el idioma (el lector de pantalla pronuncia mejor).
+- ~<link rel="stylesheet" href="css/estilos.css">~ conecta un archivo CSS aparte.`,
+  e: { t: 'Un head completo', c: `En VS Code, armá un ~index.html~ con el head completo (charset, viewport, title y link a ~css/estilos.css~). Creá la carpeta ~css~ con el archivo ~estilos.css~ y poné un color de fondo. En el body escribí un párrafo que use tildes y ñ. Abrilo con Live Server y entregá los dos archivos.`,
+    k: ['El head tiene charset, viewport, title y link', 'El CSS externo funciona (se ve el color de fondo)', 'Las tildes y la ñ se ven bien'],
+    p: `En VS Code escribí ~!~ y apretá Tab: aparece la estructura completa sola.`,
+    h: `<p>Configuración del módem: cambiá la contraseña del Wi-Fi una vez al año.</p>`,
+    s: `` } }
 });
 
 /* ============================ UNIDAD 2 ============================ */
@@ -356,12 +348,12 @@ b: { x: `Un **elemento** tiene etiqueta de apertura, contenido y etiqueta de cie
 - ~<strong>~: texto importante (se ve en negrita).
 - ~<em>~: texto con énfasis (se ve en cursiva).
 - ~<br>~: salto de línea (no se cierra).`,
-  e: { t: 'Tu receta', c: `Escribí tu receta favorita con: un título ~h1~, un subtítulo ~h2~ "Ingredientes", otro ~h2~ "Preparación" y párrafos. Marcá con ~strong~ algo importante (por ejemplo "¡cuidado, quema!").`,
+  e: { t: 'Ficha de un componente', c: `Armá la ficha de un componente de la computadora (memoria RAM, disco, procesador, fuente…) con: un título ~h1~, un subtítulo ~h2~ "Para qué sirve", otro ~h2~ "Cómo se instala" y párrafos. Marcá con ~strong~ algo importante (por ejemplo "¡Desenchufá la PC antes de abrirla!").`,
     k: ['Hay un h1 y dos h2', 'Hay al menos dos párrafos', 'Usaste strong o em', 'Todas las etiquetas están cerradas'],
     p: `Copiá la estructura del ejemplo y cambiá los textos.`,
-    h: `<h1>Tortas fritas</h1>
-<h2>Ingredientes</h2>
-<p>Harina, sal, grasa y agua tibia.</p>`,
+    h: `<h1>Memoria RAM</h1>
+<h2>Para qué sirve</h2>
+<p>Guarda los datos de los programas que están abiertos.</p>`,
     s: `body { font-family: sans-serif; padding: 20px; }` } },
 i: { x: `Las **listas** ordenan información:
 - ~<ul>~ lista sin orden (con puntos).
@@ -372,19 +364,19 @@ Los **atributos** van en la etiqueta de apertura: ~nombre="valor"~. Algunos sirv
 - ~class~ agrupa elementos para darles estilo.
 - ~id~ identifica un elemento único.
 - ~title~ muestra un texto al pasar el mouse.`,
-  e: { t: 'Lista de compras', c: `Armá una lista de compras con ~ul~ y tres categorías (Almacén, Verdulería, Limpieza). Cada categoría tiene una lista anidada con productos. Después hacé una lista numerada con los pasos para hacer la compra. Usá ~class="urgente"~ en dos productos.`,
-    k: ['La ul tiene tres categorías con listas anidadas', 'Hay una ol con pasos', 'Dos productos tienen class="urgente" y se ven distintos'],
+  e: { t: 'Lista para armar una PC', c: `Armá la lista de lo que hace falta para armar una computadora, con ~ul~ y tres categorías (Componentes internos, Periféricos, Software). Cada categoría tiene una lista anidada. Después hacé una lista numerada con los pasos para armarla. Usá ~class="importante"~ en dos piezas que no pueden faltar.`,
+    k: ['La ul tiene tres categorías con listas anidadas', 'Hay una ol con los pasos de armado', 'Dos piezas tienen class="importante" y se ven distintas'],
     p: `La lista anidada va adentro del ~li~, antes de su ~</li>~.`,
-    h: `<h1>Compras</h1>
+    h: `<h1>Armado de PC</h1>
 <ul>
-  <li>Almacén
+  <li>Componentes internos
     <ul>
-      <li>Yerba</li>
+      <li>Procesador</li>
     </ul>
   </li>
 </ul>`,
     s: `body { font-family: sans-serif; padding: 20px; }
-.urgente { color: crimson; font-weight: bold; }` } },
+.importante { color: crimson; font-weight: bold; }` } },
 v: { x: `Más detalles que separan un código prolijo de uno con errores:
 - **Elementos vacíos** no tienen cierre: ~<br>~, ~<img>~, ~<input>~, ~<hr>~, ~<meta>~.
 - **Bloque vs. en línea:** ~p~, ~h1~, ~div~, ~ul~ ocupan todo el ancho (bloque). ~a~, ~strong~, ~span~, ~img~ van dentro del texto (en línea).
@@ -395,12 +387,12 @@ El validador ~validator.w3.org~ revisa tu HTML y te dice los errores.`,
   e: { t: 'Cazador de errores', c: `Este código tiene cinco errores de HTML. Encontralos y corregilos. Después pegalo en validator.w3.org (pestaña "Validate by Direct Input") y verificá que no queden errores.`,
     k: ['Encontraste y corregiste los cinco errores', 'El validador no marca errores en el body', 'Explicás en un comentario cuáles eran'],
     p: `Revisá: un cierre cruzado, un título que cierra con otro número, un elemento vacío "cerrado", un atributo sin comillas cerradas y un li fuera de lista.`,
-    h: `<h1>Mi club</h2>
-<p>Somos <strong>muchos</p></strong>
-<img src="https://picsum.photos/200" alt="foto></img>
-<li>Fútbol</li>
+    h: `<h1>Mi taller de reparación</h2>
+<p>Arreglamos <strong>notebooks</p></strong>
+<img src="https://picsum.photos/id/0/200" alt="Notebook></img>
+<li>Windows</li>
 <ul>
-  <li>Básquet</li>
+  <li>Linux</li>
 </ul>`,
     s: `body { font-family: sans-serif; padding: 20px; }` } }
 });
@@ -412,11 +404,11 @@ b: { x: `El código se escribe **ordenado** para poder leerlo:
 - **Comentarios:** ~<!-- esto no se ve en la página -->~. Sirven para dejar notas.
 - **Una cosa por línea** en las partes grandes.
 
-En VS Code, **Shift + Alt + F** acomoda el código solo.`,
+En CodePen, la flechita ▾ de cada panel → **Format** acomoda el código solo. En VS Code es **Shift + Alt + F**.`,
   e: { t: 'Ordená el desorden', c: `El código funciona pero está todo amontonado. Ordenalo con sangría, una etiqueta grande por línea y agregá tres comentarios que expliquen cada parte.`,
     k: ['Cada nivel de anidamiento tiene su sangría', 'Hay al menos tres comentarios útiles', 'La página se ve igual que antes'],
-    p: `En la zona de práctica también podés usar Tab para la sangría.`,
-    h: `<header><h1>Banda escolar</h1></header><main><section><h2>Integrantes</h2><ul><li>Ana - batería</li><li>Leo - guitarra</li></ul></section><section><h2>Próximo show</h2><p>Viernes a las 19 h.</p></section></main><footer><p>Liceo 2026</p></footer>`,
+    p: `En CodePen podés usar Tab para la sangría, o la flechita ▾ del panel → **Format**.`,
+    h: `<header><h1>Equipo de soporte del liceo</h1></header><main><section><h2>Integrantes</h2><ul><li>Ana - redes</li><li>Leo - hardware</li></ul></section><section><h2>Próximo taller</h2><p>Viernes a las 10 h: cómo limpiar una notebook.</p></section></main><footer><p>Liceo 2026</p></footer>`,
     s: `body { font-family: sans-serif; padding: 20px; }` } },
 i: { x: `El navegador convierte tu HTML en un **árbol** llamado **DOM**:
 - **Padre:** la etiqueta que contiene a otra.
@@ -432,7 +424,7 @@ body
 -- h1`,
     h: `<body>
   <header>
-    <h1>Tienda</h1>
+    <h1>Tienda de informática</h1>
     <nav><a href="#">Inicio</a> <a href="#">Ofertas</a></nav>
   </header>
   <main>
@@ -444,7 +436,7 @@ v: { x: `Detalles de un documento profesional:
 - **Entidades HTML** para caracteres especiales: ~&lt;~ muestra <, ~&copy;~ muestra ©, ~&nbsp;~ es un espacio que no se corta.
 - **Etiquetas de metadatos** en el head: ~<meta name="description">~ (lo que muestra Google), ~<link rel="icon">~ (el ícono de la pestaña).
 - Una **plantilla base** que reusás en cada página del sitio para que todas tengan el mismo encabezado, menú y pie.`,
-  e: { t: 'Plantilla del sitio', c: `Creá una plantilla base para un sitio de tres páginas: encabezado con nombre del sitio, menú con tres enlaces (~index.html~, ~galeria.html~, ~contacto.html~), un main vacío con un comentario "CONTENIDO" y un pie con © y el año usando entidades. Mostrá en un párrafo el texto ~<h1>~ tal cual (que no se convierta en título).`,
+  e: { t: 'Plantilla del sitio', c: `Creá una plantilla base para el sitio de un servicio técnico, de tres páginas: encabezado con nombre del sitio, menú con tres enlaces (~index.html~, ~servicios.html~, ~contacto.html~), un main vacío con un comentario "CONTENIDO" y un pie con © y el año usando entidades. Mostrá en un párrafo el texto ~<h1>~ tal cual (que no se convierta en título).`,
     k: ['Encabezado, menú, main y pie con semántica', 'El © está escrito con entidad', 'El texto <h1> se ve como texto', 'En un comentario pusiste el meta description que usarías'],
     p: `Para que se vea ~<h1>~ escribí ~&lt;h1&gt;~.`,
     h: `<header>
@@ -463,13 +455,13 @@ b: { x: `- **Enlace:** ~<a href="https://www.wikipedia.org">Ir a Wikipedia</a>~.
 - **Imagen:** ~<img src="foto.jpg" alt="Descripción">~. El ~src~ es la dirección de la imagen y el ~alt~ la describe. No se cierra.
 
 Podés usar imágenes de internet copiando su dirección (clic derecho → Copiar dirección de imagen).`,
-  e: { t: 'Mi animal favorito', c: `Hacé una página sobre tu animal favorito con un título, dos imágenes con ~alt~ y un enlace a una página donde se pueda leer más (por ejemplo Wikipedia).`,
+  e: { t: 'Mi componente favorito', c: `Hacé una página sobre un componente o periférico de la computadora (procesador, placa de video, teclado mecánico, router…) con un título, dos imágenes con ~alt~ y un enlace a una página donde se pueda leer más (por ejemplo Wikipedia).`,
     k: ['Hay dos imágenes que se ven', 'Las dos tienen alt descriptivo', 'El enlace funciona y su texto dice a dónde va'],
-    p: `Si la imagen no aparece, revisá que la dirección termine en .jpg, .png o .webp, o usá ~https://picsum.photos/400/250~.`,
-    h: `<h1>El carpincho</h1>
-<img src="https://picsum.photos/id/1025/400/250" alt="Perro con una manta">
-<p>Escribí acá algo sobre tu animal.</p>
-<a href="https://es.wikipedia.org">Leer más en Wikipedia</a>`,
+    p: `Buscá fotos del componente en Wikipedia: clic derecho sobre la imagen → Copiar dirección de imagen. Si no aparece, revisá que la dirección termine en .jpg, .png o .webp.`,
+    h: `<h1>La placa de video</h1>
+<img src="https://picsum.photos/id/2/400/250" alt="Notebook abierta sobre un escritorio">
+<p>Escribí acá para qué sirve el componente que elegiste.</p>
+<a href="https://es.wikipedia.org/wiki/Tarjeta_gr%C3%A1fica">Leer más en Wikipedia</a>`,
     s: `body { font-family: sans-serif; padding: 20px; }
 img { max-width: 100%; border-radius: 8px; }` } },
 i: { x: `- **Ruta absoluta:** la dirección completa, ~https://sitio.com/foto.jpg~.
@@ -477,15 +469,15 @@ i: { x: `- **Ruta absoluta:** la dirección completa, ~https://sitio.com/foto.jp
 - ~target="_blank"~ abre el enlace en otra pestaña.
 - **Enlaces internos:** ~<a href="#contacto">~ salta al elemento con ~id="contacto"~ en la misma página.
 - ~<figure>~ y ~<figcaption>~ ponen una imagen con su epígrafe.`,
-  e: { t: 'Menú que salta', c: `Hacé una página larga con tres secciones (Inicio, Galería, Contacto), cada una con su ~id~. Arriba, un menú con enlaces internos a cada sección. En Galería, dos imágenes con ~figure~ y ~figcaption~. En Contacto, un enlace externo que abra en otra pestaña.`,
+  e: { t: 'Menú que salta', c: `Hacé la página de un servicio técnico con tres secciones (Servicios, Trabajos, Contacto), cada una con su ~id~. Arriba, un menú con enlaces internos a cada sección. En Trabajos, dos fotos de equipos reparados con ~figure~ y ~figcaption~. En Contacto, un enlace externo que abra en otra pestaña.`,
     k: ['Los tres enlaces del menú saltan a su sección', 'Las imágenes usan figure y figcaption', 'El enlace externo abre en otra pestaña'],
-    p: `El href lleva numeral: ~href="#galeria"~. El id no: ~id="galeria"~.`,
+    p: `El href lleva numeral: ~href="#trabajos"~. El id no: ~id="trabajos"~.`,
     h: `<nav>
-  <a href="#inicio">Inicio</a>
+  <a href="#servicios">Servicios</a>
 </nav>
-<section id="inicio">
-  <h2>Inicio</h2>
-  <p>Bienvenidos.</p>
+<section id="servicios">
+  <h2>Servicios</h2>
+  <p>Formateo, limpieza, cambio de pantalla y de batería.</p>
 </section>`,
     s: `body { font-family: sans-serif; padding: 20px; }
 section { min-height: 400px; border-top: 2px dashed #ccc; }
@@ -497,10 +489,11 @@ v: { x: `HTML trae reproductores propios:
 - ~<iframe>~ inserta otra página adentro de la tuya (un video de YouTube, un mapa).
 
 Atributos útiles: ~controls~ (botones), ~muted~, ~loop~, ~width~ y ~height~ (reservan el espacio y la página no "salta"), y ~loading="lazy"~ en imágenes e iframes (cargan cuando llegás con el scroll).`,
-  e: { t: 'Rincón multimedia', c: `Armá una página con: un video con controles y póster, un audio con controles, un video de YouTube insertado con iframe y tres imágenes con ~loading="lazy"~, ~width~ y ~height~.`,
+  e: { t: 'Tutorial multimedia', c: `Armá la página de un tutorial de soporte ("Cómo armar una PC", "Cómo limpiar el teclado"…) con: un video con controles y póster, un audio con controles, un video de YouTube sobre el tema insertado con iframe y tres imágenes con ~loading="lazy"~, ~width~ y ~height~.`,
     k: ['Video y audio con controles funcionan', 'El iframe de YouTube se ve', 'Las imágenes tienen loading, width y height'],
     p: `En YouTube: Compartir → Insertar → copiás el código del iframe.`,
-    h: `<h1>Rincón multimedia</h1>
+    h: `<h1>Tutorial: cómo armar una PC</h1>
+<!-- El video y el audio son de muestra: cambialos por los tuyos si los tenés -->
 <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" controls width="400"></video>
 <audio src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" controls></audio>`,
     s: `body { font-family: sans-serif; padding: 20px; }
@@ -521,10 +514,10 @@ Cada línea termina con **punto y coma**.`,
   e: { t: 'Pintá la página', c: `Con selectores de etiqueta, hacé que: el fondo de la página sea celeste, los ~h1~ sean azul oscuro, los párrafos tengan letra de 18px y los enlaces sean naranjas.`,
     k: ['Hay cuatro reglas con selectores de etiqueta', 'Cada declaración termina en punto y coma', 'Se ven los cuatro cambios'],
     p: `El fondo de la página se cambia en el selector ~body~.`,
-    h: `<h1>Colores</h1>
-<p>Este párrafo va a cambiar.</p>
-<p>Este también.</p>
-<a href="#">Un enlace</a>`,
+    h: `<h1>Partes de la computadora</h1>
+<p>El procesador hace los cálculos.</p>
+<p>La memoria RAM guarda lo que está abierto.</p>
+<a href="#">Ver más componentes</a>`,
     s: `body {
   /* fondo celeste */
 }
@@ -534,20 +527,20 @@ i: { x: `Selectores más precisos:
 - **Id:** ~#portada~ elige el elemento con ~id="portada"~. Hay uno solo por página.
 - **Agrupar:** ~h1, h2, h3 { ... }~ aplica lo mismo a varios.
 - **Descendiente:** ~nav a { ... }~ elige solo los enlaces que están dentro de un nav.`,
-  e: { t: 'Tarjetas con clase', c: `Hay tres tarjetas. Con una clase, dales a todas borde, fondo blanco y espacio interior. Con otra clase, destacá la tarjeta del medio. Con un descendiente, poné en verde solo los enlaces que están dentro de las tarjetas.`,
+  e: { t: 'Tarjetas con clase', c: `Hay tres tarjetas con planes de internet. Con una clase, dales a todas borde, fondo blanco y espacio interior. Con otra clase, destacá la tarjeta del medio. Con un descendiente, poné en verde solo los enlaces que están dentro de las tarjetas.`,
     k: ['Las tres tarjetas comparten una clase con estilo', 'La del medio tiene una clase extra', 'Solo los enlaces de las tarjetas son verdes'],
     p: `Un elemento puede tener dos clases: ~class="tarjeta destacada"~.`,
     h: `<a href="#">Enlace afuera</a>
 <div>
-  <h3>Plan básico</h3>
+  <h3>Plan 100 Mb</h3>
   <a href="#">Elegir</a>
 </div>
 <div>
-  <h3>Plan medio</h3>
+  <h3>Plan 300 Mb</h3>
   <a href="#">Elegir</a>
 </div>
 <div>
-  <h3>Plan full</h3>
+  <h3>Plan 1 Gb</h3>
   <a href="#">Elegir</a>
 </div>`,
     s: `body { font-family: sans-serif; background: #eef1f6; padding: 20px; }
@@ -555,17 +548,17 @@ i: { x: `Selectores más precisos:
 v: { x: `- **Pseudoclases:** eligen un estado o una posición. ~a:hover~ (mouse encima), ~input:focus~ (con foco), ~li:nth-child(2n)~ (los pares), ~li:first-child~.
 - **La cascada:** si dos reglas chocan, gana la **más específica**. Id le gana a clase, clase le gana a etiqueta. Si empatan, gana la que está **más abajo**.
 - **Herencia:** algunas propiedades, como ~color~ y ~font-family~, pasan de padres a hijos.`,
-  e: { t: '¿Quién gana?', c: `Antes de ejecutar, anotá en un comentario de qué color creés que va a quedar cada párrafo. Ejecutá y comprobá. Después agregá: filas alternadas en la tabla con ~nth-child~ y un ~hover~ que resalte la fila.`,
+  e: { t: '¿Quién gana?', c: `Antes de mirar el resultado, anotá en un comentario de qué color creés que va a quedar cada párrafo. Abrilo con Live Server y comprobá. Después agregá: filas alternadas en la tabla con ~nth-child~ y un ~hover~ que resalte la fila.`,
     k: ['Escribiste tu predicción antes de ejecutar', 'Explicás por qué gana cada regla', 'La tabla tiene filas alternadas y hover'],
     p: `Contá: id = 100 puntos, clase = 10, etiqueta = 1.`,
     h: `<p id="uno" class="rojo">Párrafo 1</p>
 <p class="rojo azul">Párrafo 2</p>
 <p>Párrafo 3</p>
 <table>
-  <tr><td>Ana</td><td>9</td></tr>
-  <tr><td>Bruno</td><td>7</td></tr>
-  <tr><td>Carla</td><td>10</td></tr>
-  <tr><td>Diego</td><td>8</td></tr>
+  <tr><td>PC-01</td><td>Funciona</td></tr>
+  <tr><td>PC-02</td><td>Sin internet</td></tr>
+  <tr><td>PC-03</td><td>Funciona</td></tr>
+  <tr><td>PC-04</td><td>Pantalla rota</td></tr>
 </table>`,
     s: `p { color: green; }
 .rojo { color: red; }
@@ -585,13 +578,13 @@ b: { x: `Propiedades de texto y bordes que más vas a usar:
 - ~text-align: center;~ alineación.
 - ~border: 2px solid black;~ borde (grosor, estilo, color).
 - ~border-radius: 10px;~ esquinas redondeadas.`,
-  e: { t: 'Cartel del evento', c: `Convertí este texto en un cartel lindo para la feria del liceo: título grande y centrado, fecha en negrita, todo el cartel con borde y esquinas redondeadas.`,
+  e: { t: 'Cartel del evento', c: `Convertí este texto en un cartel para la Jornada de Reparación de PCs del liceo: título grande y centrado, fecha en negrita, todo el cartel con borde y esquinas redondeadas.`,
     k: ['Usaste al menos cinco propiedades distintas', 'El título está centrado y grande', 'El cartel tiene borde redondeado'],
     p: `Ponele una clase al div y dale estilo con ~.cartel { ... }~.`,
     h: `<div class="cartel">
-  <h1>Feria de Ciencias</h1>
+  <h1>Jornada de Reparación de PCs</h1>
   <p class="fecha">Viernes 14 de noviembre</p>
-  <p>Gimnasio del liceo · Entrada libre</p>
+  <p>Laboratorio de informática · Traé tu equipo</p>
 </div>`,
     s: `.cartel {
 }
@@ -608,9 +601,9 @@ i: { x: `**Tres formas de poner CSS:**
   e: { t: 'De píxeles a rem', c: `Este CSS usa todo en px y tiene estilos en línea. Pasá todos los tamaños de letra a ~rem~, sacá los ~style~ del HTML y llevalos al CSS con clases.`,
     k: ['No quedan atributos style en el HTML', 'Los tamaños de letra están en rem', 'La página se ve parecida a antes'],
     p: `Dividí por 16: 32px = 2rem, 24px = 1.5rem, 14px = 0.875rem.`,
-    h: `<h1 style="color: teal">Noticias</h1>
-<h2>Deportes</h2>
-<p>El equipo ganó el torneo.</p>
+    h: `<h1 style="color: teal">Noticias de tecnología</h1>
+<h2>Seguridad</h2>
+<p>Aparece un virus nuevo que se esconde en archivos PDF.</p>
 <p style="color: gray; font-size: 14px">Publicado ayer</p>`,
     s: `h1 { font-size: 32px; }
 h2 { font-size: 24px; }
@@ -628,13 +621,14 @@ También podés estilizar tablas (~border-collapse~, ~th~) y formularios (~input
     p: `El encabezado de la tabla se estiliza con ~th~ y el botón con ~button~.`,
     h: `<table>
   <tr><th>Producto</th><th>Precio</th></tr>
-  <tr><td>Alfajor</td><td>$40</td></tr>
-  <tr><td>Refresco</td><td>$60</td></tr>
+  <tr><td>Mouse</td><td>$450</td></tr>
+  <tr><td>Teclado</td><td>$890</td></tr>
+  <tr><td>Pendrive 64 GB</td><td>$520</td></tr>
 </table>
 <form>
   <label for="n">Nombre</label>
   <input id="n">
-  <button>Pedir</button>
+  <button>Consultar</button>
 </form>`,
     s: `:root {
   --principal: #2D58CF;
@@ -687,11 +681,11 @@ v: { x: `~position~ saca una caja de su lugar normal:
   e: { t: 'Etiquetas y menú pegado', c: `Hacé que: el menú quede pegado arriba al hacer scroll (sticky), la tarjeta tenga una etiqueta "NUEVO" en la esquina superior derecha de la foto (absolute) y haya un botón redondo fijo abajo a la derecha (fixed).`,
     k: ['El menú queda pegado al bajar', 'La etiqueta está sobre la foto, en la esquina', 'El botón fijo no se mueve con el scroll', 'Nada importante queda tapado (usaste z-index si hacía falta)'],
     p: `El padre de la etiqueta necesita ~position: relative~.`,
-    h: `<nav class="menu">Tienda del liceo</nav>
+    h: `<nav class="menu">Tienda de informática</nav>
 <div class="tarjeta">
-  <img src="https://picsum.photos/id/96/300/180" alt="Lentes de sol">
+  <img src="https://picsum.photos/id/3/300/180" alt="Notebook abierta sobre un escritorio">
   <span class="etiqueta">NUEVO</span>
-  <p>Lentes de sol</p>
+  <p>Notebook 14" · 16 GB de RAM</p>
 </div>
 <p style="height: 900px">Bajá para probar el scroll...</p>
 <button class="flotante">?</button>`,
@@ -708,13 +702,13 @@ a: `**Como la ropa y el maquillaje en el teatro.** El mismo actor (el HTML) camb
 b: { x: `**Colores:** se escriben por nombre (~tomato~), en hexadecimal (~#ff6347~) o en rgb (~rgb(255, 99, 71)~). Las páginas tipo Coolors te dan paletas que combinan.
 
 **Fuentes de Google Fonts:** elegís una en fonts.google.com, copiás el ~<link>~ y lo pegás en el HTML. Después la usás en el CSS: ~font-family: 'Poppins', sans-serif;~`,
-  e: { t: 'Paleta y fuente propias', c: `Elegí una paleta de tres colores en coolors.co y una fuente de Google Fonts. Aplicalas a la página de la banda: un color para el fondo, otro para el título y otro para los botones. Usá la fuente en los títulos.`,
+  e: { t: 'Paleta y fuente propias', c: `Elegí una paleta de tres colores en coolors.co y una fuente de Google Fonts. Aplicalas a la página del servicio técnico: un color para el fondo, otro para el título y otro para los botones. Usá la fuente en los títulos.`,
     k: ['Usaste tres colores en hexadecimal', 'La fuente de Google se ve en los títulos', 'El texto se lee bien sobre el fondo'],
     p: `El link de Google Fonts va en el panel HTML, arriba de todo.`,
     h: `<link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
-<h1>Los Desenchufados</h1>
-<p>Banda de rock del liceo</p>
-<button>Escuchar</button>`,
+<h1>TecnoFix</h1>
+<p>Servicio técnico de computadoras</p>
+<button>Pedir turno</button>`,
     s: `body { font-family: sans-serif; padding: 20px; }
 h1 { font-family: 'Bungee', sans-serif; }` } },
 i: { x: `Efectos que hacen ver una página más moderna:
@@ -727,7 +721,7 @@ i: { x: `Efectos que hacen ver una página más moderna:
   e: { t: 'Botones con estilo', c: `Diseñá tres botones distintos: uno con degradado, uno con sombra, y uno "fantasma" (fondo transparente y solo borde). Los tres con esquinas redondeadas. Además, hacé que la foto de perfil sea un círculo con sombra.`,
     k: ['Los tres botones usan efectos distintos', 'La foto es un círculo con sombra', 'Los efectos son prolijos (no exagerados)'],
     p: `Para un círculo perfecto, la imagen tiene que tener el mismo ancho que alto.`,
-    h: `<img class="perfil" src="https://picsum.photos/id/64/150/150" alt="Persona sonriendo">
+    h: `<img class="perfil" src="https://picsum.photos/id/64/150/150" alt="Foto de perfil del técnico">
 <button class="b1">Degradado</button>
 <button class="b2">Sombra</button>
 <button class="b3">Fantasma</button>`,
@@ -747,9 +741,9 @@ Respetá a quien no quiere movimiento: ~@media (prefers-reduced-motion: reduce)~
     k: ['El hover de las tarjetas es suave', 'El corazón se anima con keyframes', 'prefers-reduced-motion apaga la animación'],
     p: `La transition va en el estado normal (~.tarjeta~), no en el ~:hover~.`,
     h: `<div class="grilla">
-  <div class="tarjeta">Fotos</div>
-  <div class="tarjeta">Música</div>
-  <div class="tarjeta">Juegos</div>
+  <div class="tarjeta">Hardware</div>
+  <div class="tarjeta">Software</div>
+  <div class="tarjeta">Redes</div>
 </div>
 <p class="corazon">❤</p>`,
     s: `body { font-family: sans-serif; padding: 30px; }
@@ -768,9 +762,9 @@ b: { x: `Más de la mitad de las visitas son desde el celular. Para empezar:
     k: ['La imagen no se sale en pantallas chicas', 'La caja se achica en el celular', 'No aparece scroll horizontal'],
     p: `Cambiá ~width: 800px~ por ~max-width: 800px~.`,
     h: `<div class="caja">
-  <h1>Excursión a Colonia</h1>
-  <img src="https://picsum.photos/id/1040/900/400" alt="Calle antigua de piedra">
-  <p>Salimos el lunes a las 7:00 desde la puerta del liceo.</p>
+  <h1>Visita al centro de datos</h1>
+  <img src="https://picsum.photos/id/1/900/400" alt="Persona trabajando con una notebook">
+  <p>El lunes a las 8:00 vamos a conocer dónde se guardan los servidores.</p>
 </div>`,
     s: `body { font-family: sans-serif; margin: 0; padding: 10px; }
 .caja { width: 800px; background: #fff4e6; padding: 20px; }
@@ -788,13 +782,13 @@ Con media queries cambiás tamaños de letra, ocultás cosas o pasás de una col
   e: { t: 'Una, dos, tres columnas', c: `Hacé que las tarjetas estén una debajo de la otra en el celular, de a dos desde 600px y de a tres desde 900px. Además, que el título sea más grande en computadora.`,
     k: ['En celular hay una columna', 'Desde 600px hay dos', 'Desde 900px hay tres', 'El título cambia de tamaño'],
     p: `Dale a ~.tarjeta~ un ~width~ distinto en cada media query: 100%, 48% y 31%.`,
-    h: `<h1>Talleres</h1>
-<div class="tarjeta">Robótica</div>
-<div class="tarjeta">Fotografía</div>
-<div class="tarjeta">Teatro</div>
-<div class="tarjeta">Música</div>
-<div class="tarjeta">Ajedrez</div>
-<div class="tarjeta">Huerta</div>`,
+    h: `<h1>Cursos de informática</h1>
+<div class="tarjeta">Redes</div>
+<div class="tarjeta">Hardware</div>
+<div class="tarjeta">Programación</div>
+<div class="tarjeta">Ciberseguridad</div>
+<div class="tarjeta">Linux</div>
+<div class="tarjeta">Diseño web</div>`,
     s: `* { box-sizing: border-box; }
 body { font-family: sans-serif; padding: 10px; }
 .tarjeta { display: inline-block; width: 100%; padding: 30px; margin-bottom: 8px; background: #e2eafc; border-radius: 8px; }
@@ -825,7 +819,7 @@ b: { x: `**JavaScript** (JS) es un lenguaje de programación que corre en el nav
 - ~alert('Hola')~ muestra una ventanita con un mensaje.
 - ~console.log('Hola')~ escribe un mensaje en la **consola**, que es donde los programadores miran qué está pasando.
 - Cada instrucción termina con **punto y coma**.`,
-  e: { t: 'Botón que saluda', c: `Ejecutá el código y tocá el botón. Después cambiá el mensaje del alert por un saludo tuyo y agregá un ~console.log~ que diga "Alguien tocó el botón". Mirá la consola debajo del resultado.`,
+  e: { t: 'Botón que saluda', c: `Abrilo en CodePen y tocá el botón. Después cambiá el mensaje del alert por un saludo tuyo y agregá un ~console.log~ que diga "Alguien tocó el botón". Mirá la consola de CodePen (botón **Console**, abajo).`,
     k: ['El alert muestra tu saludo', 'El mensaje aparece en la consola cada vez que tocás', 'No hay errores en rojo'],
     p: `Los textos van entre comillas: ~'así'~.`,
     h: `<h1>Mi primer programa</h1>
@@ -841,10 +835,10 @@ i: { x: `- El JS va dentro de ~<script>~, normalmente **al final del body**, par
 - Para mostrar algo **en la página** (no en un alert) cambiás el texto de un elemento con ~textContent~:
 
 ~document.getElementById('salida').textContent = 'Hola';~`,
-  e: { t: 'Saludo personalizado', c: `Cuando tocás el botón, el programa pregunta el nombre con ~prompt~ y escribe en el párrafo "¡Hola, NOMBRE! Bienvenido/a". Comentá cada línea del JS explicando qué hace.`,
+  e: { t: 'Saludo personalizado', c: `Cuando tocás el botón, el programa pregunta el nombre con ~prompt~ y escribe en el párrafo "¡Hola, NOMBRE! Bienvenido/a al sistema", como cuando iniciás sesión en una computadora. Comentá cada línea del JS explicando qué hace.`,
     k: ['Pide el nombre con prompt', 'El saludo aparece en la página, no en un alert', 'Cada línea del JS tiene su comentario'],
     p: `Para unir textos usá ~+~: ~'¡Hola, ' + nombre + '!'~.`,
-    h: `<button id="boton">Presentarme</button>
+    h: `<button id="boton">Iniciar sesión</button>
 <p id="salida">Acá va a aparecer tu saludo.</p>`,
     s: `body { font-family: sans-serif; padding: 20px; }
 #salida { font-size: 1.4rem; color: #2D58CF; }`,
@@ -855,74 +849,75 @@ v: { x: `- En un proyecto real el JS va en un archivo aparte: ~<script src="js/s
 - **Tipos de datos:** texto (~'hola'~, string), número (~42~), booleano (~true~ / ~false~), arreglo (~[1, 2, 3]~), objeto (~{ nombre: 'Ana' }~), ~undefined~ y ~null~.
 - ~typeof~ te dice el tipo de un valor.
 - Ojo: ~prompt~ siempre devuelve **texto**. ~'5' + '3'~ da ~'53'~. Para convertir a número: ~Number('5')~.`,
-  e: { t: 'El problema del 5 + 3', c: `El programa suma dos números pero da un resultado raro. Usá ~console.log~ y ~typeof~ para mostrar el tipo de cada dato, explicá el problema en un comentario y arreglalo con ~Number()~. Agregá un aviso si alguien escribe algo que no es un número (~isNaN~).`,
+  e: { t: 'El problema del 5 + 3', c: `El programa suma el espacio libre de un disco y de un pendrive (en GB), pero da un resultado raro. Usá ~console.log~ y ~typeof~ para mostrar el tipo de cada dato, explicá el problema en un comentario y arreglalo con ~Number()~. Agregá un aviso si alguien escribe algo que no es un número (~isNaN~).`,
     k: ['La consola muestra el typeof de los datos', 'La suma da el resultado correcto', 'Avisa si no se escribe un número', 'El comentario explica el error'],
     p: `~isNaN(Number('hola'))~ da ~true~.`,
-    h: `<input id="a" placeholder="Número 1">
-<input id="b" placeholder="Número 2">
-<button id="sumar">Sumar</button>
+    h: `<input id="a" placeholder="GB del disco">
+<input id="b" placeholder="GB del pendrive">
+<button id="sumar">Sumar espacio</button>
 <p id="r"></p>`,
     s: `body { font-family: sans-serif; padding: 20px; }
-input { width: 100px; }`,
+input { width: 140px; }`,
     j: `document.getElementById('sumar').addEventListener('click', function () {
   var a = document.getElementById('a').value;
   var b = document.getElementById('b').value;
-  document.getElementById('r').textContent = 'Resultado: ' + (a + b);
+  document.getElementById('r').textContent = 'Espacio total: ' + (a + b) + ' GB';
 });` } }
 });
 
 tema({ id: '3.2', u: '3', t: 'Variables, operadores y estructuras de control',
 a: `**Una variable es una caja con etiqueta** donde guardás algo para usarlo después. Las estructuras de control son **los cruces de caminos**: "si llueve, llevo paraguas; si no, no".`,
-b: { x: `- ~let edad = 14;~ crea una variable que puede cambiar.
+b: { x: `- ~let ramGB = 8;~ crea una variable que puede cambiar.
 - ~const nombre = 'Sofi';~ crea una que no cambia.
 - **Operadores matemáticos:** ~+~ ~-~ ~*~ (por) ~/~ (dividido).
 - Con textos, ~+~ los une: ~'Hola ' + nombre~.
 
 El nombre de una variable no lleva espacios ni tildes: ~precioTotal~, no ~precio total~.`,
-  e: { t: 'Calculadora de cumpleaños', c: `Completá el programa para que calcule en qué año naciste restando tu edad al año actual, y cuántos días viviste aproximadamente (edad × 365). Mostrá los dos resultados en la página.`,
-    k: ['Usás variables con nombres claros', 'Los dos cálculos dan bien', 'Los resultados aparecen en la página'],
-    p: `~let anioNacimiento = 2026 - edad;~`,
+  e: { t: 'Calculadora de almacenamiento', c: `Un pendrive tiene 16 GB. Completá el programa para que calcule cuántas fotos de 4 MB y cuántos videos de 512 MB entran. Primero pasá los GB a MB (1 GB = 1024 MB). Mostrá los dos resultados en la página.`,
+    k: ['Usás variables con nombres claros', 'Los dos cálculos dan bien: 4096 fotos y 32 videos', 'Los resultados aparecen en la página'],
+    p: `~let capacidadMB = capacidadGB * 1024;~ y después ~let fotos = capacidadMB / pesoFotoMB;~`,
     h: `<p id="r1"></p>
 <p id="r2"></p>`,
     s: `body { font-family: sans-serif; padding: 20px; font-size: 1.2rem; }`,
-    j: `let edad = 14;
-let anioActual = 2026;
+    j: `let capacidadGB = 16;
+let pesoFotoMB = 4;
+let pesoVideoMB = 512;
 
 // calculá acá
 
-document.getElementById('r1').textContent = 'Naciste en ...';
-document.getElementById('r2').textContent = 'Viviste unos ... días';` } },
+document.getElementById('r1').textContent = 'Entran ... fotos';
+document.getElementById('r2').textContent = 'Entran ... videos';` } },
 i: { x: `**if / else** decide qué hacer según una condición:
 
-~if (nota >= 7) { ... } else { ... }~
+~if (bateria >= 20) { ... } else { ... }~
 
 - **Comparar:** ~>~ ~<~ ~>=~ ~<=~ ~===~ (igual) ~!==~ (distinto).
 - **Combinar:** ~&&~ (y: las dos tienen que cumplirse), ~||~ (o: alcanza con una).
 - **else if** agrega más caminos.`,
-  e: { t: 'Juicio de notas', c: `Según la nota que se escribe (1 a 12), mostrá: "Excelente" (10 a 12), "Aprobado" (7 a 9), "A recuperar" (1 a 6) o "Nota no válida" si está fuera de rango. Cambiá también el color del mensaje según el resultado.`,
+  e: { t: 'Estado de la batería', c: `Según el porcentaje de batería que se escribe (0 a 100), mostrá: "Batería llena" (80 a 100), "Uso normal" (20 a 79), "¡Conectá el cargador!" (0 a 19) o "Valor no válido" si está fuera de rango. Cambiá también el color del mensaje según el resultado.`,
     k: ['Los cuatro casos funcionan', 'Usás else if', 'Usás && o || para el caso no válido', 'El color cambia según el resultado'],
-    p: `Fuera de rango: ~if (nota < 1 || nota > 12)~`,
-    h: `<input id="nota" type="number" placeholder="Nota">
+    p: `Fuera de rango: ~if (bateria < 0 || bateria > 100)~`,
+    h: `<input id="bateria" type="number" placeholder="Batería (%)">
 <button id="ver">Ver</button>
 <p id="msj"></p>`,
     s: `body { font-family: sans-serif; padding: 20px; }
 #msj { font-size: 1.5rem; font-weight: bold; }`,
     j: `document.getElementById('ver').addEventListener('click', function () {
-  let nota = Number(document.getElementById('nota').value);
+  let bateria = Number(document.getElementById('bateria').value);
   let msj = document.getElementById('msj');
   // escribí los if acá
 });` } },
-v: { x: `- **Arreglos:** una lista de valores: ~let notas = [8, 10, 6];~. ~notas.length~ dice cuántos hay; ~notas[0]~ es el primero.
+v: { x: `- **Arreglos:** una lista de valores: ~let temps = [45, 60, 52];~. ~temps.length~ dice cuántos hay; ~temps[0]~ es el primero.
 - **for** repite un bloque: ~for (let i = 0; i < 5; i++) { ... }~
 - **while** repite mientras se cumpla una condición.
 - **Funciones** agrupan código para reusarlo:
 
 ~function promedio(lista) { ... return resultado; }~`,
-  e: { t: 'Tabla y promedio', c: `Programá dos funciones: ~tabla(n)~ que muestre la tabla de multiplicar de n del 1 al 10 en una lista HTML, y ~promedio(lista)~ que reciba un arreglo de notas y devuelva el promedio con un decimal. Mostrá el promedio de ~[8, 10, 6, 9, 7]~.`,
-    k: ['tabla(n) usa un for', 'La tabla aparece como lista en la página', 'promedio devuelve el valor con return', 'El promedio da 8.0'],
+  e: { t: 'Conversión y temperatura', c: `Programá dos funciones: ~tabla(n)~ que muestre en una lista HTML cuántos MB tienen 1, 2, 3… hasta n GB (1 GB = 1024 MB), y ~promedio(lista)~ que reciba las temperaturas del procesador medidas durante el día y devuelva el promedio con un decimal. Mostrá el promedio de ~[45, 60, 52, 70, 48]~.`,
+    k: ['tabla(n) usa un for', 'La tabla aparece como lista en la página (8 GB = 8192 MB)', 'promedio devuelve el valor con return', 'El promedio da 55.0'],
     p: `~resultado.toFixed(1)~ redondea a un decimal. Para agregar a la lista: ~lista.innerHTML += '<li>' + texto + '</li>';~`,
-    h: `<input id="n" type="number" value="7">
-<button id="hacer">Tabla</button>
+    h: `<input id="n" type="number" value="8">
+<button id="hacer">Ver tabla</button>
 <ul id="lista"></ul>
 <p id="prom"></p>`,
     s: `body { font-family: sans-serif; padding: 20px; }`,
@@ -932,7 +927,7 @@ v: { x: `- **Arreglos:** una lista de valores: ~let notas = [8, 10, 6];~. ~notas
   // usá un for
 }
 
-function promedio(notas) {
+function promedio(temps) {
   // sumá con un for y devolvé el promedio
 }
 
@@ -940,7 +935,7 @@ document.getElementById('hacer').addEventListener('click', function () {
   tabla(Number(document.getElementById('n').value));
 });
 
-document.getElementById('prom').textContent = 'Promedio: ' + promedio([8, 10, 6, 9, 7]);` } }
+document.getElementById('prom').textContent = 'Temperatura promedio del procesador: ' + promedio([45, 60, 52, 70, 48]) + ' °C';` } }
 });
 
 tema({ id: '3.3', u: '3', t: 'Manipulación del DOM y eventos',
@@ -950,20 +945,20 @@ b: { x: `- **Seleccionar:** ~document.querySelector('#titulo')~ o ~document.getE
 - **Escuchar un evento:** ~boton.addEventListener('click', function () { ... });~
 
 Un **evento** es algo que pasa: un clic, una tecla, el mouse que entra.`,
-  e: { t: 'Contador de goles', c: `Hacé un marcador: un botón suma un gol al equipo A, otro al equipo B y un tercero reinicia todo en 0. Los números se actualizan en la página.`,
-    k: ['Cada botón suma a su equipo', 'El botón reiniciar vuelve a 0 a 0', 'Usás variables para guardar los goles'],
-    p: `~golesA = golesA + 1;~ y después mostrás ~golesA~ con textContent.`,
-    h: `<h2>Peñarol <span id="a">0</span> - <span id="b">0</span> Nacional</h2>
-<button id="golA">Gol Peñarol</button>
-<button id="golB">Gol Nacional</button>
+  e: { t: 'Contador del taller', c: `Hacé el contador del taller de reparación: un botón suma una PC reparada, otro suma una PC en espera y un tercero reinicia todo en 0. Los números se actualizan en la página.`,
+    k: ['Cada botón suma a su contador', 'El botón reiniciar vuelve todo a 0', 'Usás variables para guardar los números'],
+    p: `~reparadas = reparadas + 1;~ y después mostrás ~reparadas~ con textContent.`,
+    h: `<h2>Reparadas: <span id="a">0</span> · En espera: <span id="b">0</span></h2>
+<button id="masRep">+1 reparada</button>
+<button id="masEsp">+1 en espera</button>
 <button id="reset">Reiniciar</button>`,
     s: `body { font-family: sans-serif; padding: 20px; text-align: center; }
 h2 { font-size: 2rem; }
 button { padding: 10px; margin: 4px; }`,
-    j: `let golesA = 0;
-let golesB = 0;
+    j: `let reparadas = 0;
+let enEspera = 0;
 
-document.getElementById('golA').addEventListener('click', function () {
+document.getElementById('masRep').addEventListener('click', function () {
   // completá
 });` } },
 i: { x: `- **Clases:** ~el.classList.add('activo')~, ~remove~, y ~toggle~ (pone o saca).
@@ -1021,7 +1016,7 @@ b: { x: `HTML ya trae validación sin programar:
 - ~pattern~: un formato especial.
 
 Si algo está mal, el navegador no deja enviar y muestra un aviso.`,
-  e: { t: 'Inscripción al torneo', c: `Agregá validación HTML: nombre obligatorio de al menos 3 letras, correo válido, edad entre 12 y 18, y una casilla obligatoria "Acepto el reglamento". Probá enviar con datos mal.`,
+  e: { t: 'Inscripción al taller de armado de PC', c: `Agregá validación HTML: nombre obligatorio de al menos 3 letras, correo válido, edad entre 12 y 18, y una casilla obligatoria "Acepto las normas del laboratorio". Probá enviar con datos mal.`,
     k: ['No se puede enviar vacío', 'El correo tiene que ser válido', 'La edad tiene límites', 'La casilla es obligatoria'],
     p: `Todos los atributos van en el ~<input>~.`,
     h: `<form>
@@ -1031,7 +1026,7 @@ Si algo está mal, el navegador no deja enviar y muestra un aviso.`,
   <input id="mail">
   <label for="edad">Edad</label>
   <input id="edad">
-  <label><input type="checkbox"> Acepto el reglamento</label>
+  <label><input type="checkbox"> Acepto las normas del laboratorio</label>
   <button>Inscribirme</button>
 </form>`,
     s: `body { font-family: sans-serif; padding: 20px; }
@@ -1134,11 +1129,11 @@ v: { x: `- ~setInterval(funcion, 3000)~ repite algo **cada** 3 segundos. ~clearI
 - Un **carrusel** muestra una imagen por vez y avanza solo o con botones.
 - Para mover algo cuadro a cuadro de forma suave existe ~requestAnimationFrame~.
 - Pausá las animaciones automáticas cuando el mouse está encima: así la persona puede leer.`,
-  e: { t: 'Carrusel', c: `Programá un carrusel de 4 imágenes: botones anterior y siguiente, avance automático cada 3 segundos con ~setInterval~, que se pause con el mouse encima, y puntitos abajo que indiquen cuál se ve. Al llegar a la última, vuelve a la primera.`,
+  e: { t: 'Carrusel', c: `Programá un carrusel para la tienda de informática, con 4 fotos: botones anterior y siguiente, avance automático cada 3 segundos con ~setInterval~, que se pause con el mouse encima, y puntitos abajo que indiquen cuál se ve. Al llegar a la última, vuelve a la primera.`,
     k: ['Anterior y siguiente funcionan y dan la vuelta', 'Avanza solo y se pausa con el mouse', 'Los puntitos marcan la imagen actual', 'Las imágenes tienen alt'],
     p: `Usá el operador resto: ~actual = (actual + 1) % fotos.length;~`,
     h: `<div class="carrusel" id="car">
-  <img id="foto" src="https://picsum.photos/id/1015/500/280" alt="Río entre montañas">
+  <img id="foto" src="https://picsum.photos/id/0/500/280" alt="Notebook abierta sobre un escritorio">
   <button id="ant">‹</button>
   <button id="sig">›</button>
 </div>
@@ -1149,10 +1144,10 @@ v: { x: `- ~setInterval(funcion, 3000)~ repite algo **cada** 3 segundos. ~clearI
 #ant, #sig { position: absolute; top: 45%; font-size: 1.5rem; }
 #ant { left: 8px; } #sig { right: 8px; }`,
     j: `let fotos = [
-  { src: 'https://picsum.photos/id/1015/500/280', alt: 'Río entre montañas' },
-  { src: 'https://picsum.photos/id/1016/500/280', alt: 'Cañón rocoso' },
-  { src: 'https://picsum.photos/id/1018/500/280', alt: 'Montañas con nieve' },
-  { src: 'https://picsum.photos/id/1019/500/280', alt: 'Costa con niebla' }
+  { src: 'https://picsum.photos/id/0/500/280', alt: 'Notebook abierta sobre un escritorio' },
+  { src: 'https://picsum.photos/id/1/500/280', alt: 'Persona trabajando con una notebook' },
+  { src: 'https://picsum.photos/id/2/500/280', alt: 'Notebook sobre una mesa de trabajo' },
+  { src: 'https://picsum.photos/id/3/500/280', alt: 'Puesto de trabajo con notebook' }
 ];
 let actual = 0;
 
@@ -1202,9 +1197,9 @@ v: { x: `Un **framework** como **React**, **Vue** o **Angular** organiza la pág
 React normalmente usa JSX y herramientas de compilación. Para probar sin instalar nada podés usar ~React.createElement~ y cargar React desde un CDN.
 
 ¿Cuándo usar un framework? En aplicaciones grandes con muchos datos que cambian. Para un sitio simple, HTML + CSS + JS alcanza.`,
-  e: { t: 'Componente contador', c: `Ejecutá el componente de React. Modificalo para que tenga un botón "−" además del "+", que no baje de 0, y usalo tres veces en la página (tres contadores independientes). Respondé en un comentario: ¿qué ventaja tiene un componente frente a copiar el HTML tres veces?`,
+  e: { t: 'Componente contador', c: `Abrí el archivo con Live Server y mirá el componente de React. Modificalo para que tenga un botón "−" además del "+", que no baje de 0, y usalo tres veces para llevar el stock de la tienda: mouse, teclados y monitores (tres contadores independientes). Respondé en un comentario: ¿qué ventaja tiene un componente frente a copiar el HTML tres veces?`,
     k: ['Hay botones + y −', 'No baja de 0', 'Hay tres contadores independientes', 'El comentario explica la ventaja'],
-    p: `Cada ~React.createElement(Contador, { nombre: 'Manzanas' })~ crea un contador nuevo con su propio estado.`,
+    p: `Cada ~React.createElement(Contador, { nombre: 'Teclados' })~ crea un contador nuevo con su propio estado.`,
     h: `<script src="https://unpkg.com/react@18/umd/react.production.min.js"><\/script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"><\/script>
 <div id="app"></div>`,
@@ -1222,7 +1217,7 @@ function Contador(props) {
 }
 
 ReactDOM.createRoot(document.getElementById('app')).render(
-  h(Contador, { nombre: 'Manzanas' })
+  h(Contador, { nombre: 'Mouse' })
 );` } }
 });
 
@@ -1233,13 +1228,13 @@ b: { x: `Algunos componentes interactivos vienen **en HTML, sin programar**:
 - ~<input type="range">~, ~type="color"~, ~type="date"~ dan controles listos.
 
 Siempre que HTML ya lo resuelve, usalo: es accesible y no se rompe.`,
-  e: { t: 'Preguntas frecuentes', c: `Armá una sección de preguntas frecuentes del liceo con al menos cuatro preguntas usando ~details~ y ~summary~. Dale estilo: borde, espacio y un cambio de color cuando está abierta (~details[open]~).`,
+  e: { t: 'Preguntas frecuentes', c: `Armá una sección de preguntas frecuentes de soporte técnico con al menos cuatro preguntas usando ~details~ y ~summary~. Dale estilo: borde, espacio y un cambio de color cuando está abierta (~details[open]~).`,
     k: ['Hay cuatro preguntas que se abren y se cierran', 'Tienen estilo', 'La abierta se ve distinta'],
     p: `~details[open] summary { color: #2D58CF; }~`,
     h: `<h2>Preguntas frecuentes</h2>
 <details>
-  <summary>¿A qué hora entramos?</summary>
-  <p>El turno matutino entra a las 7:30.</p>
+  <summary>¿Por qué mi computadora está lenta?</summary>
+  <p>Puede tener el disco casi lleno o demasiados programas abiertos.</p>
 </details>`,
     s: `body { font-family: sans-serif; padding: 20px; max-width: 600px; }
 summary { cursor: pointer; font-weight: bold; }` } },
@@ -1251,17 +1246,17 @@ La lógica con JS:
 3. Ocultás todos los paneles y mostrás el que corresponde.
 
 Un truco: guardá en cada pestaña a qué panel corresponde con ~data-panel="fotos"~ y leelo con ~boton.dataset.panel~.`,
-  e: { t: 'Pestañas', c: `Programá las pestañas para que al tocar una se muestre su panel y se marque como activa. Usá ~data-panel~ y un ~forEach~ para recorrer los botones. Agregá una cuarta pestaña con su panel.`,
+  e: { t: 'Pestañas', c: `Las pestañas son la ficha de una notebook en una tienda. Programalas para que al tocar una se muestre su panel y se marque como activa. Usá ~data-panel~ y un ~forEach~ para recorrer los botones. Agregá una cuarta pestaña con su panel.`,
     k: ['Se ve un panel por vez', 'La pestaña activa se distingue', 'Usás data-panel', 'Hay una cuarta pestaña que funciona'],
     p: `~document.querySelectorAll('.tab').forEach(function (b) { ... });~`,
     h: `<div class="tabs">
-  <button class="tab activa" data-panel="p1">Horario</button>
-  <button class="tab" data-panel="p2">Materiales</button>
-  <button class="tab" data-panel="p3">Contacto</button>
+  <button class="tab activa" data-panel="p1">Características</button>
+  <button class="tab" data-panel="p2">Precio</button>
+  <button class="tab" data-panel="p3">Garantía</button>
 </div>
-<div class="panel" id="p1">Lunes y miércoles de 10 a 12.</div>
-<div class="panel" id="p2" hidden>Cuaderno, pendrive y auriculares.</div>
-<div class="panel" id="p3" hidden>profe@liceo.edu.uy</div>`,
+<div class="panel" id="p1">Procesador de 8 núcleos, 16 GB de RAM y disco SSD de 512 GB.</div>
+<div class="panel" id="p2" hidden>$ 24.990 o 12 cuotas sin recargo.</div>
+<div class="panel" id="p3" hidden>Un año de garantía en el servicio técnico.</div>`,
     s: `body { font-family: sans-serif; padding: 20px; }
 .tab { padding: 10px 16px; border: none; background: #eee; cursor: pointer; }
 .tab.activa { background: #2D58CF; color: white; }
@@ -1275,9 +1270,9 @@ Integrar es hacer que varios componentes convivan en la misma página sin pisars
     k: ['El menú se abre y se cierra en pantallas chicas', 'aria-expanded cambia', 'El modal abre con showModal y cierra con botón y con Esc', 'Todo funciona con teclado'],
     p: `~boton.setAttribute('aria-expanded', abierto);~`,
     h: `<header>
-  <strong>Club de Lectura</strong>
+  <strong>Blog de Tecnología</strong>
   <button id="hamb" aria-expanded="false" aria-controls="menu">☰</button>
-  <nav id="menu"><a href="#">Inicio</a><a href="#">Libros</a><a href="#">Reuniones</a></nav>
+  <nav id="menu"><a href="#">Inicio</a><a href="#">Tutoriales</a><a href="#">Novedades</a></nav>
 </header>
 <main>
   <button id="abrir">Suscribirme</button>
@@ -1311,51 +1306,52 @@ b: { x: `Cuando algo no anda, **mirá la consola**: los errores aparecen en rojo
   e: { t: 'Tres errores', c: `Este programa tiene tres errores, uno de cada tipo de la explicación. Usá la consola para encontrarlos y arreglalos. Anotá en un comentario cuál era cada uno y qué decía la consola.`,
     k: ['El programa funciona', 'Están los tres errores explicados', 'Copiaste el mensaje de la consola de cada uno'],
     p: `Arreglá un error, ejecutá de nuevo y mirá cuál aparece después.`,
-    h: `<button id="boton">Calcular</button>
+    h: `<h2>Costo de la reparación</h2>
+<button id="boton">Calcular</button>
 <p id="resultado"></p>`,
     s: `body { font-family: sans-serif; padding: 20px; }`,
-    j: `let precio = 100;
-let cantidad = 3;
+    j: `let precioHora = 600;
+let horas = 3;
 
 document.getElementById('Boton').addEventListener('click', function () {
-  let total = precio * Cantidad;
+  let total = precioHora * Horas;
   document.getElementById('resultado').textContent = 'Total: $' + total;
 };` } },
 i: { x: `A veces no hay error rojo pero el resultado está **mal**: es un **error lógico**.
 - Poné ~console.log~ en distintos puntos para ver el valor de las variables.
 - **Probá casos:** valores normales, el valor más chico, el más grande, cero, vacío.
 - Escribí antes qué resultado esperás. Si lo que da es distinto, ahí está el problema.`,
-  e: { t: 'El promedio mentiroso', c: `La función debería calcular el promedio pero da mal. Usá ~console.log~ dentro del for para seguir los valores, encontrá los dos errores lógicos y arreglalos. Probá con ~[10]~, ~[7, 8, 9]~ y ~[]~ (este último debería mostrar "Sin notas").`,
+  e: { t: 'La velocidad mentirosa', c: `La función debería calcular la velocidad promedio de internet a partir de varias mediciones (en Mbps), pero da mal. Usá ~console.log~ dentro del for para seguir los valores, encontrá los dos errores lógicos y arreglalos. Probá con ~[50]~, ~[90, 100, 110]~ y ~[]~ (este último debería mostrar "Sin mediciones").`,
     k: ['Los tres casos dan el resultado correcto', 'Hay console.log que muestran el seguimiento', 'El caso vacío no da NaN'],
     p: `Mirá desde qué número empieza el for y entre qué se divide.`,
     h: `<p id="r"></p>`,
     s: `body { font-family: sans-serif; padding: 20px; }`,
-    j: `function promedio(notas) {
+    j: `function promedio(mediciones) {
   let suma = 0;
-  for (let i = 1; i < notas.length; i++) {
-    suma = suma + notas[i];
+  for (let i = 1; i < mediciones.length; i++) {
+    suma = suma + mediciones[i];
   }
   return suma / 3;
 }
 
-document.getElementById('r').textContent = promedio([7, 8, 9]);` } },
+document.getElementById('r').textContent = 'Velocidad promedio: ' + promedio([90, 100, 110]) + ' Mbps';` } },
 v: { x: `Herramientas de profesional:
 - **Puntos de interrupción (breakpoints):** en DevTools → Fuentes (Sources) hacés clic en el número de línea; el programa se frena ahí y ves el valor de cada variable paso a paso. En el código podés poner ~debugger;~.
 - **try / catch** atrapa un error para que la página no se rompa y puedas mostrar un mensaje amable.
 - **Plan de pruebas:** una tabla con qué se prueba, qué se espera y qué pasó. Sirve para no olvidarte de nada antes de entregar.`,
-  e: { t: 'Conversor a prueba de errores', c: `El conversor de pesos a dólares se rompe con ciertas entradas. Protegelo con ~try / catch~ y validaciones, y escribí un plan de pruebas de al menos 5 casos (en un comentario) con: entrada, resultado esperado y resultado obtenido. Probá también con ~debugger;~ en tu navegador.`,
+  e: { t: 'Conversor a prueba de errores', c: `La velocidad de internet se mide en megabits por segundo (Mbps), pero las descargas se muestran en megabytes por segundo (MB/s): hay que dividir entre 8. El conversor se rompe con ciertas entradas. Protegelo con ~try / catch~ y validaciones, y escribí un plan de pruebas de al menos 5 casos (en un comentario) con: entrada, resultado esperado y resultado obtenido. Probá también con ~debugger;~ en tu navegador.`,
     k: ['La página nunca muestra NaN ni se rompe', 'Usás try / catch', 'El plan tiene 5 casos o más', 'Incluís casos límite: vacío, negativo, letras'],
     p: `Dentro del try podés lanzar tu propio error: ~throw new Error('Escribí un número positivo');~`,
-    h: `<input id="pesos" placeholder="Pesos uruguayos">
+    h: `<input id="mbps" placeholder="Velocidad en Mbps">
 <button id="conv">Convertir</button>
 <p id="r"></p>`,
     s: `body { font-family: sans-serif; padding: 20px; }`,
-    j: `let cotizacion = 40;
+    j: `let bitsPorByte = 8;
 
 document.getElementById('conv').addEventListener('click', function () {
-  let pesos = document.getElementById('pesos').value;
-  let dolares = pesos / cotizacion;
-  document.getElementById('r').textContent = 'US$ ' + dolares.toFixed(2);
+  let mbps = document.getElementById('mbps').value;
+  let mbs = mbps / bitsPorByte;
+  document.getElementById('r').textContent = 'Descarga: ' + mbs.toFixed(2) + ' MB/s';
 });
 
 /* PLAN DE PRUEBAS
@@ -1397,21 +1393,21 @@ i: { x: `- ~flex-wrap: wrap;~ deja que los hijos bajen a otra línea si no entra
 ~.galeria { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }~
 
 ~1fr~ es "una parte del espacio libre": tres columnas iguales.`,
-  e: { t: 'Tarjetas y galería', c: `Primero, con flexbox + wrap, hacé que las tarjetas de precios se acomoden solas (de 3 en computadora, se bajan en el celular). Segundo, con grid, armá la galería de 6 fotos en 3 columnas, y que la primera foto ocupe dos columnas.`,
+  e: { t: 'Tarjetas y galería', c: `Primero, con flexbox + wrap, hacé que las tarjetas de precios del antivirus se acomoden solas (de 3 en computadora, se bajan en el celular). Segundo, con grid, armá la galería de 6 fotos de puestos de trabajo en 3 columnas, y que la primera foto ocupe dos columnas.`,
     k: ['Las tarjetas usan flex-wrap y flex', 'La galería usa grid con repeat y fr', 'La primera foto ocupa dos columnas'],
     p: `Para que ocupe dos columnas: ~grid-column: span 2;~`,
     h: `<div class="precios">
-  <div class="plan">Básico</div>
-  <div class="plan">Pro</div>
-  <div class="plan">Equipo</div>
+  <div class="plan">Antivirus Básico</div>
+  <div class="plan">Antivirus Pro</div>
+  <div class="plan">Antivirus Empresa</div>
 </div>
 <div class="galeria">
-  <img src="https://picsum.photos/id/10/400/250" alt="Bosque">
-  <img src="https://picsum.photos/id/11/400/250" alt="Campo">
-  <img src="https://picsum.photos/id/12/400/250" alt="Playa">
-  <img src="https://picsum.photos/id/13/400/250" alt="Costa">
-  <img src="https://picsum.photos/id/14/400/250" alt="Mar">
-  <img src="https://picsum.photos/id/15/400/250" alt="Cascada">
+  <img src="https://picsum.photos/id/0/400/250" alt="Notebook abierta sobre un escritorio">
+  <img src="https://picsum.photos/id/1/400/250" alt="Persona trabajando con una notebook">
+  <img src="https://picsum.photos/id/2/400/250" alt="Notebook sobre una mesa de trabajo">
+  <img src="https://picsum.photos/id/3/400/250" alt="Puesto de trabajo con notebook">
+  <img src="https://picsum.photos/id/5/400/250" alt="Notebook en un escritorio">
+  <img src="https://picsum.photos/id/6/400/250" alt="Notebook y celular sobre una mesa">
 </div>`,
     s: `body { font-family: sans-serif; padding: 16px; }
 .plan { background: #e2eafc; padding: 40px 20px; text-align: center; border-radius: 10px; }
@@ -1467,11 +1463,11 @@ i: { x: `En el código también se gana velocidad:
     k: ['Las imágenes de abajo tienen loading="lazy"', 'Todas tienen width y height', 'La fuente pide solo los pesos usados', 'El comentario explica al menos cinco mejoras'],
     p: `Mirá el link de Google Fonts: pide todos los pesos de la fuente.`,
     h: `<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<h1>Galería de viajes</h1>
-<img src="https://picsum.photos/id/1036/2400/1600" alt="Montaña nevada">
+<h1>Catálogo de notebooks</h1>
+<img src="https://picsum.photos/id/0/2400/1600" alt="Notebook abierta sobre un escritorio">
 <p style="height: 600px">Bajá...</p>
-<img src="https://picsum.photos/id/1039/2400/1600" alt="Cascada">
-<img src="https://picsum.photos/id/1043/2400/1600" alt="Bosque">`,
+<img src="https://picsum.photos/id/2/2400/1600" alt="Notebook sobre una mesa de trabajo">
+<img src="https://picsum.photos/id/3/2400/1600" alt="Puesto de trabajo con notebook">`,
     s: `body { font-family: 'Roboto', sans-serif; padding: 20px; }
 img { width: 400px; display: block; margin-bottom: 12px; }
 /* este comentario largo no hace falta en producción */` } },
@@ -1496,12 +1492,12 @@ Los datos se guardan en una **base de datos**, que funciona como planillas:
 - Una **tabla** por cada cosa (usuarios, productos).
 - Cada **fila** es un registro (un producto).
 - Cada **columna** es un dato (nombre, precio, stock).`,
-  e: { t: 'Diseñá la base', c: `Elegí un sitio que uses (una tienda, una app de música, el CREA). Respondé: ¿es estático o dinámico y por qué? Después diseñá una tabla de su base de datos con 4 columnas y escribí 3 filas de ejemplo.`,
+  e: { t: 'Diseñá la base', c: `Elegí un sitio que uses (una tienda de informática, el sistema de turnos de un servicio técnico, el CREA). Respondé: ¿es estático o dinámico y por qué? Después diseñá una tabla de su base de datos con 4 columnas y escribí 3 filas de ejemplo.`,
     k: ['Justificás si es estático o dinámico', 'La tabla tiene nombre y 4 columnas con sentido', 'Hay 3 filas de ejemplo'],
-    p: `Ejemplo: tabla CANCIONES → titulo | artista | duracion | reproducciones` } },
+    p: `Ejemplo: tabla REPARACIONES → equipo | falla | fecha | estado` } },
 i: { x: `En JavaScript los datos se guardan como **arreglo de objetos**, igual que una tabla:
 
-~let productos = [ { nombre: 'Buzo', precio: 1200 }, { nombre: 'Gorro', precio: 450 } ];~
+~let productos = [ { nombre: 'Teclado', precio: 890 }, { nombre: 'Mouse', precio: 450 } ];~
 
 Con un ~for~ (o ~forEach~) recorrés los datos y **generás el HTML** de cada uno. Así, para agregar un producto no tocás el HTML: agregás un dato. Eso es lo que hace un sitio dinámico.`,
   e: { t: 'Catálogo desde datos', c: `Completá el código para que las tarjetas se generen desde el arreglo. Agregá dos productos más al arreglo. Después agregá un botón que muestre solo los productos de menos de $1000 (~filter~).`,
@@ -1514,9 +1510,9 @@ Con un ~for~ (o ~forEach~) recorrés los datos y **generás el HTML** de cada un
 #catalogo { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 12px; }
 .prod { border: 1px solid #ddd; border-radius: 8px; padding: 12px; }`,
     j: `let productos = [
-  { nombre: 'Buzo del liceo', precio: 1200 },
-  { nombre: 'Gorro', precio: 450 },
-  { nombre: 'Taza', precio: 380 }
+  { nombre: 'Teclado mecánico', precio: 2490 },
+  { nombre: 'Mouse', precio: 450 },
+  { nombre: 'Pendrive 64 GB', precio: 520 }
 ];
 
 function mostrar(lista) {
@@ -1533,11 +1529,11 @@ v: { x: `Para que los datos **no se borren al recargar** la página:
 - Para guardar arreglos u objetos se convierten a texto con **JSON**: ~JSON.stringify(datos)~ para guardar y ~JSON.parse(texto)~ para recuperar.
 
 Ojo: localStorage solo vive en **ese navegador**. Un sitio real guarda los datos en un **servidor** con una base de datos (MySQL, PostgreSQL, Firebase) y la página los pide con una API.`,
-  e: { t: 'Libreta que recuerda', c: `Hacé una libreta de notas: se escribe una nota, se agrega a la lista y se guarda en localStorage. Al recargar la página, las notas siguen ahí. Cada nota se puede borrar (y se borra también del almacenamiento). Mostrá la fecha de cada nota.`,
+  e: { t: 'Bitácora del técnico', c: `Hacé la bitácora de un servicio técnico: se escribe lo que se hizo en un equipo (por ejemplo "PC-03: cambio de disco"), se agrega a la lista y se guarda en localStorage. Al recargar la página, los registros siguen ahí. Cada registro se puede borrar (y se borra también del almacenamiento). Mostrá la fecha de cada uno.`,
     k: ['Las notas sobreviven a la recarga', 'Usás JSON.stringify y JSON.parse', 'Borrar actualiza localStorage', 'Cada nota muestra su fecha'],
     p: `Al empezar: ~let notas = JSON.parse(localStorage.getItem('notas')) || [];~ Fecha: ~new Date().toLocaleDateString()~`,
     h: `<form id="f">
-  <input id="txt" placeholder="Escribí una nota">
+  <input id="txt" placeholder="Ej.: PC-03, cambio de disco">
   <button>Guardar</button>
 </form>
 <ul id="lista"></ul>`,
@@ -1567,11 +1563,11 @@ b: { x: `Repaso y un paso más:
   e: { t: 'Revisión en tres pantallas', c: `Probá esta página en los tres anchos con el modo dispositivo. Arreglá: los botones chicos, la letra chica en celular y la tabla que se sale de la pantalla. Escribí en un comentario qué viste en cada ancho.`,
     k: ['Los botones tienen al menos 44px de alto', 'La letra es legible en celular', 'La tabla no rompe el ancho', 'El comentario describe los tres anchos'],
     p: `Para la tabla, envolvela en un div con ~overflow-x: auto~.`,
-    h: `<h1>Horarios del gimnasio</h1>
-<button>Inscribirme</button> <button>Ver precios</button>
+    h: `<h1>Horarios del laboratorio de informática</h1>
+<button>Reservar una PC</button> <button>Ver normas</button>
 <table>
   <tr><th>Lunes</th><th>Martes</th><th>Miércoles</th><th>Jueves</th><th>Viernes</th><th>Sábado</th></tr>
-  <tr><td>Funcional 8:00</td><td>Spinning 9:00</td><td>Yoga 10:00</td><td>Funcional 8:00</td><td>Zumba 19:00</td><td>Libre</td></tr>
+  <tr><td>Redes 8:00</td><td>Programación 9:00</td><td>Hardware 10:00</td><td>Redes 8:00</td><td>Diseño web 14:00</td><td>Cerrado</td></tr>
 </table>`,
     s: `body { font-family: sans-serif; padding: 10px; font-size: 12px; }
 button { font-size: 10px; padding: 2px 4px; }
@@ -1587,12 +1583,12 @@ i: { x: `Imágenes que se adaptan:
 Así el celular baja una imagen liviana y la compu una grande.`,
   e: { t: 'Imágenes inteligentes', c: `Usá ~picture~ para que el banner muestre una imagen vertical en el celular y una horizontal desde 800px. En la grilla de productos, que todas las fotos tengan la misma proporción (~aspect-ratio~) y no se deformen (~object-fit~).`,
     k: ['El banner cambia de imagen según el ancho', 'Las fotos de la grilla tienen igual proporción', 'Ninguna se ve deformada'],
-    p: `Imagen vertical: ~https://picsum.photos/id/1011/500/700~. Horizontal: ~https://picsum.photos/id/1011/1200/400~.`,
-    h: `<img class="banner" src="https://picsum.photos/id/1011/1200/400" alt="Lago con montañas">
+    p: `Imagen vertical: ~https://picsum.photos/id/0/500/700~. Horizontal: ~https://picsum.photos/id/0/1200/400~.`,
+    h: `<img class="banner" src="https://picsum.photos/id/0/1200/400" alt="Notebook abierta sobre un escritorio">
 <div class="grilla">
-  <img src="https://picsum.photos/id/20/400/600" alt="Escritorio">
-  <img src="https://picsum.photos/id/21/600/300" alt="Zapatos">
-  <img src="https://picsum.photos/id/22/400/400" alt="Persona caminando">
+  <img src="https://picsum.photos/id/1/400/600" alt="Persona trabajando con una notebook">
+  <img src="https://picsum.photos/id/2/600/300" alt="Notebook sobre una mesa de trabajo">
+  <img src="https://picsum.photos/id/3/400/400" alt="Puesto de trabajo con notebook">
 </div>`,
     s: `body { font-family: sans-serif; margin: 0; }
 .banner { width: 100%; display: block; }
@@ -1609,10 +1605,10 @@ v: { x: `- **Container queries:** el componente se adapta al ancho **de su conte
     p: `Las dos columnas necesitan ~container-type: inline-size~.`,
     h: `<div class="layout">
   <aside class="zona">
-    <div class="tarjeta"><img src="https://picsum.photos/id/30/300/200" alt="Taza de café"><div><h3>Café</h3><p>Taller de barismo los sábados.</p></div></div>
+    <div class="tarjeta"><img src="https://picsum.photos/id/1/300/200" alt="Persona trabajando con una notebook"><div><h3>Curso de redes</h3><p>Aprendé a armar la red de tu casa. Los sábados.</p></div></div>
   </aside>
   <main class="zona">
-    <div class="tarjeta"><img src="https://picsum.photos/id/30/300/200" alt="Taza de café"><div><h3>Café</h3><p>Taller de barismo los sábados.</p></div></div>
+    <div class="tarjeta"><img src="https://picsum.photos/id/1/300/200" alt="Persona trabajando con una notebook"><div><h3>Curso de redes</h3><p>Aprendé a armar la red de tu casa. Los sábados.</p></div></div>
   </main>
 </div>`,
     s: `body { font-family: sans-serif; margin: 0; padding: 12px; }
@@ -1660,12 +1656,12 @@ Principios de la psicología que se usan en interfaces:
 - **Proximidad:** lo que está cerca parece relacionado.
 - **Ley de Hick:** más opciones = más tiempo para decidir.
 - **Formularios cortos:** pedí solo lo necesario, agrupá los campos y poné el label arriba del campo.`,
-  e: { t: 'Rediseño del formulario', c: `Este formulario de inscripción es confuso. Rediseñalo aplicando proximidad, labels arriba, campos agrupados (datos personales / contacto), menos campos (sacá los innecesarios) y un botón principal claro. Explicá en un comentario cada decisión.`,
+  e: { t: 'Rediseño del formulario', c: `Este formulario para pedir una reparación es confuso. Rediseñalo aplicando proximidad, labels arriba, campos agrupados (datos personales / contacto), menos campos (sacá los innecesarios) y un botón principal claro. Explicá en un comentario cada decisión.`,
     k: ['Los campos están agrupados con fieldset o secciones', 'Sacaste campos innecesarios y explicaste por qué', 'Hay un solo botón principal claro', 'Cada decisión está explicada'],
     p: `~<fieldset><legend>Datos personales</legend>...</fieldset>~ agrupa campos.`,
     h: `<form>
   Nombre <input> Apellido <input> Segundo apellido <input>
-  Color favorito <input> Correo <input> Repetir correo <input>
+  Modelo del equipo <input> ¿Qué falla? <input> Color favorito <input> Correo <input> Repetir correo <input>
   Teléfono <input> Teléfono alternativo <input> Fax <input>
   <button>Cancelar</button> <button>Borrar</button> <button>Enviar</button>
 </form>`,
@@ -1682,23 +1678,24 @@ b: { x: `Video de calidad:
 - Nunca pongas ~autoplay~ con sonido: molesta y es inaccesible. Si hace falta, ~autoplay muted~.`,
   e: { t: 'Video accesible', c: `Mejorá el video: agregá póster, controles, ~preload~ y un párrafo de descripción para quien no lo puede ver. Agregá también un enlace para descargarlo. En un comentario explicá para qué sirve ~<track>~.`,
     k: ['El video tiene poster, controls y preload', 'Hay descripción en texto', 'El comentario explica track'],
-    p: `Póster: ~https://picsum.photos/id/152/640/360~`,
-    h: `<h2>Cómo florece una flor</h2>
+    p: `Póster: ~https://picsum.photos/id/0/640/360~`,
+    h: `<h2>Tutorial: cómo limpiar el ventilador de la PC</h2>
+<!-- Video de muestra: cambialo por uno tuyo si lo tenés -->
 <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" width="400" autoplay></video>`,
     s: `body { font-family: sans-serif; padding: 20px; }
 video { max-width: 100%; }` } },
 i: { x: `- **SVG en línea:** dibujos hechos con código (~<circle>~, ~<rect>~, ~<path>~). No pierden calidad al agrandarse y se pueden colorear con CSS (~fill~) y animar con ~:hover~.
 - **Mapas:** OpenStreetMap y Google Maps dan un ~<iframe>~ para insertar (en OpenStreetMap: Compartir → HTML).`,
-  e: { t: 'Ícono SVG y mapa', c: `Dibujá con SVG un ícono simple (una casa con techo, cuerpo y puerta, o una cara) y hacé que cambie de color con hover desde el CSS. Insertá un mapa de OpenStreetMap de tu ciudad o de tu liceo.`,
+  e: { t: 'Ícono SVG y mapa', c: `Dibujá con SVG un ícono simple de informática (un monitor con pantalla, pie y base, o un mouse) y hacé que cambie de color con hover desde el CSS. Insertá un mapa de OpenStreetMap con la ubicación de tu liceo o de un servicio técnico de tu barrio.`,
     k: ['El ícono usa al menos tres figuras SVG', 'Cambia de color con CSS', 'El mapa se ve y tiene title'],
     p: `~<rect x="20" y="50" width="60" height="40" fill="tomato"/>~ dibuja un rectángulo.`,
     h: `<svg width="100" height="100" viewBox="0 0 100 100" class="icono">
-  <polygon points="10,50 50,10 90,50" class="techo"/>
+  <rect x="10" y="12" width="80" height="52" rx="4" class="pantalla"/>
 </svg>
 <iframe title="Mapa de Montevideo" width="400" height="250" src="https://www.openstreetmap.org/export/embed.html?bbox=-56.25,-34.93,-56.10,-34.86&layer=mapnik"></iframe>`,
     s: `body { font-family: sans-serif; padding: 20px; }
-.techo { fill: crimson; transition: fill 0.3s; }
-.icono:hover .techo { fill: darkorange; }
+.pantalla { fill: #2D58CF; transition: fill 0.3s; }
+.icono:hover .pantalla { fill: darkorange; }
 iframe { display: block; max-width: 100%; border: 0; margin-top: 12px; }` } },
 v: { x: `- **Canvas:** un lienzo donde dibujás con JS píxel por píxel. Sirve para juegos, gráficos y apps de dibujo:
 
@@ -1730,43 +1727,47 @@ lienzo.addEventListener('pointerdown', function (e) {
 
 tema({ id: '4.7', u: '4', t: 'APIs y servicios web',
 a: `**Una API es el mozo de un restaurante.** Vos (tu página) no entrás a la cocina (el servidor): le pedís al mozo con el menú (la documentación) y él te trae el plato (los datos).`,
-b: { x: `Una **API** es una forma de pedirle datos a otro servicio: el clima, fotos, noticias, monedas.
+b: { x: `Una **API** es una forma de pedirle datos a otro servicio: perfiles de usuarios, el clima, noticias, precios.
 
 Los datos llegan en **JSON**, un formato de texto parecido a los objetos de JavaScript:
 
-~{ "ciudad": "Montevideo", "temperatura": 18, "lluvia": false }~
+~{ "usuario": "ana-dev", "repositorios": 12, "verificado": false }~
 
 - Las claves van entre comillas dobles.
 - Los valores pueden ser texto, número, true/false, listas ~[ ]~ u objetos ~{ }~.`,
-  e: { t: 'Leer JSON', c: `Abrí en el navegador esta dirección: ~https://dog.ceo/api/breeds/image/random~. Respondé: ¿qué datos trae? ¿cuáles son las claves y sus valores? Recargá tres veces: ¿qué cambia? Después pensá: ¿qué API te gustaría que existiera para un proyecto tuyo y qué datos traería?`,
-    k: ['Identificaste las claves y los valores', 'Notaste qué cambia al recargar', 'Propusiste una API con datos de ejemplo en JSON'],
+  e: { t: 'Leer JSON', c: `Abrí en el navegador esta dirección: ~https://api.github.com/users/torvalds~. Es el perfil público en GitHub de Linus Torvalds, el creador de Linux. Respondé: ¿qué datos trae? Anotá cinco claves con su valor. ¿Cuántos repositorios públicos tiene (~public_repos~)? ¿Cuándo creó la cuenta (~created_at~)? Cambiá ~torvalds~ por ~gaearon~ y compará. Después pensá: ¿qué API te gustaría que existiera para un servicio técnico y qué datos traería?`,
+    k: ['Anotaste cinco claves con su valor', 'Respondiste repositorios y fecha de creación', 'Propusiste una API con datos de ejemplo en JSON'],
     p: `Firefox muestra el JSON ordenado. En Chrome marcá "Dar formato" (pretty print).` } },
 i: { x: `~fetch~ pide datos a una API:
 
-~fetch('https://dog.ceo/api/breeds/image/random')~
+~fetch('https://randomuser.me/api/')~
 ~  .then(function (r) { return r.json(); })~
-~  .then(function (datos) { console.log(datos.message); });~
+~  .then(function (datos) { console.log(datos.results[0].email); });~
 
 1. ~fetch~ hace el pedido.
 2. El primer ~then~ convierte la respuesta a JSON.
 3. El segundo ~then~ usa los datos.
 
 Mientras espera, mostrá "Cargando…": las APIs pueden tardar.`,
-  e: { t: 'Perrito al azar', c: `Completá el código para que el botón traiga una foto de perro al azar y la muestre. Mientras carga, el botón dice "Cargando…". Después cambiá la dirección para pedir solo una raza (la documentación está en dog.ceo/dog-api).`,
-    k: ['El botón trae una foto nueva', 'Muestra "Cargando…" mientras espera', 'Pediste una raza específica', 'La imagen tiene alt'],
-    p: `Una raza: ~https://dog.ceo/api/breed/beagle/images/random~`,
-    h: `<button id="traer">Traer perrito</button>
-<div><img id="perro" alt="Foto de un perro" width="300"></div>`,
+  e: { t: 'Usuario de prueba', c: `Los programadores usan usuarios inventados para probar sus sistemas. Completá el código para que el botón traiga un usuario de prueba al azar y muestre su foto, su nombre, su nombre de usuario y su correo. Mientras carga, el botón dice "Cargando…". Después cambiá la dirección para pedir solo usuarios de un país (la documentación está en randomuser.me/documentation).`,
+    k: ['El botón trae un usuario nuevo', 'Muestra "Cargando…" mientras espera', 'Se ven foto, nombre, usuario y correo', 'Pediste usuarios de un país'],
+    p: `El usuario llega en ~datos.results[0]~: la foto en ~.picture.large~, el nombre en ~.name.first~ y ~.name.last~, el usuario en ~.login.username~ y el correo en ~.email~. Un país: ~https://randomuser.me/api/?nat=es~`,
+    h: `<button id="traer">Generar usuario</button>
+<div class="ficha">
+  <img id="foto" alt="Foto del usuario de prueba" width="128" height="128">
+  <p id="datos">Tocá el botón</p>
+</div>`,
     s: `body { font-family: sans-serif; padding: 20px; text-align: center; }
-#perro { max-width: 100%; margin-top: 12px; border-radius: 10px; }`,
+#foto { border-radius: 50%; margin-top: 12px; background: #eee; }`,
     j: `let boton = document.getElementById('traer');
 
 boton.addEventListener('click', function () {
   boton.textContent = 'Cargando…';
-  fetch('https://dog.ceo/api/breeds/image/random')
+  fetch('https://randomuser.me/api/')
     .then(function (r) { return r.json(); })
     .then(function (datos) {
-      // mostrá la foto y volvé a poner el texto del botón
+      let u = datos.results[0];
+      // mostrá la foto y los datos, y volvé a poner el texto del botón
     });
 });` } },
 v: { x: `- ~async / await~ hace el código más fácil de leer:
@@ -1774,23 +1775,30 @@ v: { x: `- ~async / await~ hace el código más fácil de leer:
 ~async function cargar() { let r = await fetch(url); let datos = await r.json(); }~
 
 - ~try / catch~ atrapa el error si no hay internet o la API falla. Siempre mostrá un mensaje amable.
-- Muchas APIs reciben **parámetros** en la dirección después de ~?~: ~?latitude=-34.9&longitude=-56.16~.
+- Muchas APIs reciben **parámetros** en la dirección después de ~?~: ~?results=5&nat=es~.
 - Algunas piden una **clave (API key)**. Nunca la publiques en GitHub.`,
-  e: { t: 'El clima de hoy', c: `Usá la API de Open-Meteo (gratis, sin clave) para mostrar la temperatura actual y el viento de Montevideo con ~async/await~. Agregá un selector de ciudades (Montevideo, Salto, Rivera, Maldonado) que cambie los datos. Manejá el error con ~try/catch~.`,
-    k: ['Usás async/await', 'Muestra temperatura y viento', 'El selector cambia de ciudad', 'Si falla, se ve un mensaje amable'],
-    p: `Coordenadas: Salto (-31.38, -57.96), Rivera (-30.90, -55.55), Maldonado (-34.90, -54.95). Los datos llegan en ~datos.current.temperature_2m~.`,
-    h: `<select id="ciudad">
-  <option value="-34.90,-56.16">Montevideo</option>
+  e: { t: 'Datos de prueba para una base', c: `Necesitás usuarios de prueba para cargar en la base de datos de un sistema. Con la API randomuser.me y ~async/await~, mostrá una tabla con el nombre, el nombre de usuario y el correo de varios usuarios. Agregá dos selectores: la cantidad (3, 5 o 10) y el país (España, Brasil, México, Estados Unidos). Manejá el error con ~try/catch~.`,
+    k: ['Usás async/await', 'Muestra una tabla con nombre, usuario y correo', 'Los selectores cambian la cantidad y el país', 'Si falla, se ve un mensaje amable'],
+    p: `Los usuarios llegan en el arreglo ~datos.results~. Países: ~es~, ~br~, ~mx~ y ~us~. Para probar el error, desconectá el Wi-Fi o escribí mal la dirección.`,
+    h: `<label for="cant">Cantidad</label>
+<select id="cant">
+  <option>3</option>
+  <option selected>5</option>
 </select>
-<div id="clima">Elegí una ciudad</div>`,
+<label for="pais">País</label>
+<select id="pais">
+  <option value="es">España</option>
+</select>
+<div id="tabla">Cargando…</div>`,
     s: `body { font-family: sans-serif; padding: 20px; }
-#clima { font-size: 1.6rem; margin-top: 12px; }`,
-    j: `async function cargar(lat, lon) {
-  let url = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon + '&current=temperature_2m,wind_speed_10m';
+table { border-collapse: collapse; margin-top: 12px; }
+td, th { border: 1px solid #ccc; padding: 6px 10px; text-align: left; }`,
+    j: `async function cargar(cantidad, pais) {
+  let url = 'https://randomuser.me/api/?results=' + cantidad + '&nat=' + pais;
   // completá con try / catch
 }
 
-cargar(-34.90, -56.16);` } }
+cargar(5, 'es');` } }
 });
 
 tema({ id: '4.8', u: '4', t: 'Prácticas modernas y tendencias en diseño web',
@@ -1814,8 +1822,8 @@ Con **variables CSS** el modo oscuro es fácil: solo cambiás los valores de las
     k: ['Los colores salen de variables', 'Cambia sola con prefers-color-scheme', 'prefers-reduced-motion apaga la animación'],
     p: `En DevTools: tres puntitos → More tools → Rendering → "Emulate CSS prefers-color-scheme".`,
     h: `<div class="tarjeta">
-  <h2>Noticias del liceo</h2>
-  <p>Se viene la semana de la ciencia.</p>
+  <h2>Noticias de tecnología</h2>
+  <p>Sale una nueva versión de Linux para computadoras viejas.</p>
   <span class="nuevo">NUEVO</span>
 </div>`,
     s: `:root {
@@ -1850,12 +1858,12 @@ body { background: var(--fondo); color: var(--texto); font-family: sans-serif; p
 tema({ id: '5.1', u: '5', t: 'Diseño e implementación de un proyecto web',
 a: `**Como organizar un cumpleaños:** antes de comprar nada, decidís para quién es, qué se va a hacer, quién se encarga de qué y para cuándo.`,
 b: { x: `El proyecto final es un **sitio web real** que van a publicar. Primero se planifica:
-- **Tema:** algo que les interese (un club, una banda, un juego, un emprendimiento del barrio).
+- **Tema:** algo de informática que les interese (un servicio técnico, una guía de ciberseguridad, un catálogo de componentes, un blog de videojuegos o de tecnología).
 - **Objetivo:** ¿para qué sirve el sitio?
 - **Mapa del sitio:** las páginas o secciones que va a tener y cómo se conectan.`,
   e: { t: 'Idea y mapa del sitio', c: `Escribí: el tema de tu sitio, su objetivo en una oración y el mapa del sitio con al menos tres secciones (con qué va a tener cada una).`,
     k: ['El tema es claro', 'El objetivo cabe en una oración', 'El mapa tiene al menos tres secciones con su contenido'],
-    p: `Ejemplo: "Sitio del club de ajedrez para que nuevos socios se inscriban". Secciones: Inicio, Horarios, Inscripción.` } },
+    p: `Ejemplo: "Sitio del servicio técnico del liceo para que los estudiantes pidan reparaciones". Secciones: Servicios, Pedir turno, Contacto.` } },
 i: { x: `Un **brief** es el documento que ordena el proyecto:
 - **Público:** ¿quién lo va a usar? (edad, qué necesita, desde qué dispositivo)
 - **Objetivo y contenido** de cada sección.
@@ -2078,23 +2086,45 @@ var INTRO = [
 No hace falta saber nada antes. Vamos de a un paso.` },
   { t: 'Qué necesitás', x: `- Una computadora o una ceibalita con internet.
 - Un navegador: Chrome, Firefox o Edge.
-- Una cuenta gratis en **CodePen** (codepen.io). Ahí vas a escribir código sin instalar nada.
-- Más adelante, si podés, **Visual Studio Code** instalado.
+- Para el nivel **básico** y el **intermedio**: una cuenta gratis en **CodePen** (codepen.io). Ahí escribís código sin instalar nada.
+- Para el nivel **avanzado**: **Visual Studio Code** instalado, con la extensión **Live Server**.
 
 Para crear la cuenta de CodePen:
 1. Entrá a codepen.io.
 2. Tocá **Sign Up** y elegí la opción gratis.
-3. Registrate con tu correo o con tu cuenta de Google.` },
-  { t: 'Cómo funcionan los tres niveles', x: `Cada tema del taller tiene tres pestañas:
-- **Básico** (verde): la idea principal y un primer ejercicio. Todos empiezan acá.
-- **Intermedio** (azul): más herramientas para el mismo tema.
-- **Avanzado** (rosa): como lo hacen los profesionales.
+3. Registrate con tu correo o con tu cuenta de Google.
+
+Para preparar Visual Studio Code:
+1. Descargalo gratis de code.visualstudio.com e instalalo.
+2. Abrilo, tocá el ícono de los cuatro cuadraditos (Extensiones) y buscá **Live Server**.
+3. Tocá **Install**.` },
+  { t: 'Cómo funcionan los tres niveles', x: `Cada tema del taller tiene tres pestañas, y cada nivel se hace con una herramienta:
+- **Básico** (verde), **en CodePen**: la idea principal y un primer ejercicio. Todos empiezan acá.
+- **Intermedio** (azul), **en CodePen**: más herramientas para el mismo tema.
+- **Avanzado** (rosa), **en Visual Studio Code**: como lo hacen los profesionales, con tus propios archivos.
 
 No es una carrera. Si el básico te costó, quedate ahí y hacelo bien. Si lo terminaste rápido, subí un escalón. Al final de cada paso de esta guía tenés los botones para ir a cada nivel.` },
   { t: 'Cómo leer el código', x: `El código es texto con reglas. Tres consejos para no perderte:
 - **Copiar no está mal**: escribir el ejemplo a mano y cambiarle cosas es la mejor forma de aprender.
 - **Los signos importan**: un ~<~, una comilla o un punto y coma que falta pueden romper todo.
-- **Probá seguido**: cambiá una cosa, tocá Ejecutar y mirá qué pasó. Si se rompe, deshacé con **Ctrl + Z**.` }
+- **Probá seguido**: cambiá una cosa y mirá qué pasó. En CodePen el resultado se actualiza solo; en VS Code, guardá con **Ctrl + S** y Live Server recarga la página. Si se rompe, deshacé con **Ctrl + Z**.` },
+  { t: 'Cómo entregar en básico e intermedio (CodePen)', x: `1. En el ejercicio, tocá **Abrir en CodePen**. Se abre un Pen con el código para empezar.
+2. Hacé el ejercicio en CodePen.
+3. Tocá **Save** y copiá el link de la barra del navegador. Tiene que ser parecido a ~codepen.io/tu-usuario/pen/abcXYZ~.
+4. Volvé al taller y pegá el link en **Link de tu Pen**.
+5. Escribí tu nombre y apellido (solo la primera vez, después se acuerda) y tocá **Entregar**.
+6. Se abre el formulario de tu profe en otra pestaña, con todo ya escrito. Bajá hasta el final y tocá **Enviar**.
+
+Si por algún motivo no podés guardar en CodePen, abrí **¿No podés guardar en CodePen?** y pegá tu código de cada panel en su cuadro.` },
+  { t: 'Cómo entregar en avanzado (VS Code)', x: `1. En el ejercicio, tocá **Descargar para VS Code**. Baja un archivo ~index.html~.
+2. Creá una carpeta para el ejercicio (por ejemplo ~ejercicio-2-4~) y mové ahí el archivo.
+3. En VS Code: **Archivo → Abrir carpeta** y elegí esa carpeta.
+4. Clic derecho en ~index.html~ → **Open with Live Server**. Trabajá y guardá con **Ctrl + S**.
+5. Cuando termines, volvé al taller, tocá **Tus archivos** y elegí el ~index.html~. Si hiciste archivos ~.css~ o ~.js~ aparte, elegilos también (con **Ctrl + clic** elegís varios).
+6. Escribí tu nombre y tocá **Entregar**.
+7. Se abre el formulario de tu profe en otra pestaña, con todo ya escrito. Bajá hasta el final y tocá **Enviar**. Si tu código es muy largo, el taller lo copia solo: en la pregunta **HTML** borrá el texto y pegalo con **Ctrl + V**.
+
+Tu profe recibe la entrega recién cuando tocás **Enviar** en el formulario. Si después cambiás algo, tocá **Entregar de nuevo**. En **Mis entregas** ves qué entregaste y qué te falta.` }
 ];
 
 var GUIA = {
@@ -2107,7 +2137,7 @@ Hacer **diseño web** es escribir esas instrucciones: qué hay en la página, c�
 
 Una regla fácil: toda imagen lleva una descripción en el atributo ~alt~. El lector de pantalla la lee en voz alta.`,
   p: ['Fijate en una página que el texto se lea bien sobre el fondo.', 'Revisá que las imágenes tengan una descripción con alt.', 'Probá recorrer una página solo con la tecla Tab: ¿se ve dónde estás?'],
-  c: `<img src="https://picsum.photos/id/237/300/200" alt="Perro negro mirando a la cámara">`,
+  c: `<img src="https://picsum.photos/id/0/300/200" alt="Notebook abierta sobre un escritorio">`,
   er: `Poner un alt que no dice nada, como ~alt="imagen"~ o ~alt="foto1"~. El alt tiene que describir lo que se ve.` },
 '1.3': { s: `Para hacer páginas web necesitás un **editor de código** (donde escribís) y un **navegador** (donde mirás el resultado).
 
@@ -2132,9 +2162,9 @@ En CodePen no hace falta escribir el esqueleto: CodePen lo pone solo y vos escri
 '2.1': { s: `HTML funciona con **etiquetas**: palabras entre ~<~ y ~>~ que envuelven el contenido y dicen qué es. ~<h1>~ es un título, ~<p>~ es un párrafo. Casi todas tienen una de apertura y una de cierre, que lleva una barra: ~</p>~.
 
 Un **atributo** es un dato extra que va dentro de la etiqueta de apertura, como ~class="importante"~.`,
-  p: ['Escribí ~<h1>~, después el texto del título y cerrá con ~</h1>~.', 'Abajo, un párrafo: ~<p>Mi texto</p>~.', 'Para resaltar una palabra: ~<strong>muy</strong>~.', 'Tocá Ejecutar y mirá cómo se ve.'],
-  c: `<h1>Mi receta</h1>
-<p>Esta receta es <strong>muy</strong> fácil.</p>`,
+  p: ['Escribí ~<h1>~, después el texto del título y cerrá con ~</h1>~.', 'Abajo, un párrafo: ~<p>Mi texto</p>~.', 'Para resaltar una palabra: ~<strong>desenchufá</strong>~.', 'Mirá el resultado: en CodePen se actualiza solo.'],
+  c: `<h1>Memoria RAM</h1>
+<p>Antes de cambiarla, <strong>desenchufá</strong> la computadora.</p>`,
   er: `Olvidarse de cerrar una etiqueta. Si falta un ~</strong>~, todo lo que sigue queda en negrita.` },
 '2.2': { s: `El código tiene que estar **ordenado** para que vos (y tu profe) lo puedan leer. Lo que está adentro de otra etiqueta se corre un poco a la derecha: eso se llama **sangría**. Es como un índice: los subtemas van más adentro que los temas.
 
@@ -2150,8 +2180,8 @@ También podés dejar notas que no se ven en la página, llamadas **comentarios*
 
 Una **imagen** se pone con ~<img>~. El atributo ~src~ dice dónde está la imagen y ~alt~ la describe. Esta etiqueta no se cierra.`,
   p: ['Buscá una imagen en internet, clic derecho → **Copiar dirección de imagen**.', 'Escribí ~<img src="~, pegá la dirección y cerrá con ~">~.', 'Agregá ~alt="..."~ con una descripción.', 'Para el enlace: ~<a href="https://...">Texto que se ve</a>~.'],
-  c: `<img src="https://picsum.photos/id/1025/300/200" alt="Perro envuelto en una manta">
-<a href="https://es.wikipedia.org">Leer más en Wikipedia</a>`,
+  c: `<img src="https://picsum.photos/id/2/300/200" alt="Notebook sobre una mesa de trabajo">
+<a href="https://es.wikipedia.org/wiki/Computadora_port%C3%A1til">Leer más en Wikipedia</a>`,
   er: `Copiar la dirección de la página en vez de la de la imagen. La dirección de una imagen suele terminar en .jpg, .png o .webp.` },
 '2.4': { s: `**CSS** es el lenguaje que le pone estilo a la página. Una regla de CSS tiene tres partes:
 - el **selector**: a quién le hablás (~h1~ = todos los títulos);
@@ -2159,7 +2189,7 @@ Una **imagen** se pone con ~<img>~. El atributo ~src~ dice dónde está la image
 - el **valor**: cómo lo querés (~red~).
 
 Se escribe así: ~h1 { color: red; }~`,
-  p: ['En la caja CSS escribí el nombre de una etiqueta, por ejemplo ~p~.', 'Abrí una llave ~{~.', 'Escribí una propiedad, dos puntos, el valor y punto y coma: ~color: blue;~', 'Cerrá la llave ~}~ y tocá Ejecutar.'],
+  p: ['En la caja CSS escribí el nombre de una etiqueta, por ejemplo ~p~.', 'Abrí una llave ~{~.', 'Escribí una propiedad, dos puntos, el valor y punto y coma: ~color: blue;~', 'Cerrá la llave ~}~ y mirá el resultado.'],
   c: `body { background-color: lightyellow; }
 h1 { color: darkblue; }
 p { font-size: 18px; }`,
@@ -2234,12 +2264,12 @@ if (nota >= 7) {
 
 Con ~querySelector~ agarrás un elemento, con ~textContent~ le cambiás el texto y con ~addEventListener~ hacés que reaccione a un **evento** (un clic, una tecla).`,
   p: ['Agarrá un elemento: ~let titulo = document.querySelector(\'#titulo\');~', 'Cambiale el texto: ~titulo.textContent = \'Nuevo\';~', 'Para que pase al tocar un botón, ponelo dentro de un ~addEventListener(\'click\', ...)~.'],
-  c: `let goles = 0;
-document.querySelector('#gol').addEventListener('click', function () {
-  goles = goles + 1;
-  document.querySelector('#marcador').textContent = goles;
+  c: `let reparadas = 0;
+document.querySelector('#masRep').addEventListener('click', function () {
+  reparadas = reparadas + 1;
+  document.querySelector('#contador').textContent = reparadas;
 });`,
-  er: `Poner el ~#~ en ~getElementById~. Con ~getElementById('gol')~ va sin numeral; con ~querySelector('#gol')~ va con numeral.` },
+  er: `Poner el ~#~ en ~getElementById~. Con ~getElementById('masRep')~ va sin numeral; con ~querySelector('#masRep')~ va con numeral.` },
 '3.4': { s: `**Validar** es revisar que los datos de un formulario estén bien antes de enviarlos: que no falte el nombre, que el correo tenga @, que la edad sea un número razonable.
 
 HTML ya trae validación con atributos como ~required~ (obligatorio) o ~type="email"~. Con JavaScript podés escribir tus propios mensajes.`,
@@ -2278,7 +2308,7 @@ Algunos ya vienen en HTML sin programar. El más fácil es el acordeón: ~<detai
 '3.8': { s: `Todos los programadores se equivocan. **Depurar** es encontrar y arreglar errores (en inglés, *bugs*). La herramienta principal es la **consola**: te dice qué error hubo y en qué línea.
 
 Si no hay error pero el resultado está mal, poné ~console.log()~ en distintas partes para ver qué valor tiene cada variable.`,
-  p: ['Ejecutá el código y mirá la consola.', 'Leé el error: suele decir qué falta o qué no existe, y la línea.', 'Andá a esa línea y revisá mayúsculas, comillas y paréntesis.', 'Arreglá un error por vez y volvé a ejecutar.'],
+  p: ['Abrí la consola: en CodePen es el botón **Console** (abajo a la izquierda); en VS Code, F12 en el navegador.', 'Leé el error: suele decir qué falta o qué no existe, y la línea.', 'Andá a esa línea y revisá mayúsculas, comillas y paréntesis.', 'Arreglá un error por vez y volvé a ejecutar.'],
   c: `let total = precio * cantidad;
 console.log('precio:', precio, 'cantidad:', cantidad, 'total:', total);`,
   er: `Cambiar muchas cosas a la vez. Si algo mejora o empeora, no vas a saber cuál cambio fue.` },
@@ -2302,10 +2332,10 @@ Antes de subir una imagen, achicala y comprimila con **squoosh.app**. El formato
 '4.3': { s: `Una página **estática** dice siempre lo mismo, como un cartel. Una **dinámica** cambia según los datos, como el feed de Instagram.
 
 Esos datos se guardan en una **base de datos**: algo parecido a una planilla con tablas, filas y columnas. Con JavaScript podés guardar datos en una lista y armar la página a partir de ellos.`,
-  p: ['Pensá los datos como una tabla: cada fila es una cosa, cada columna un dato.', 'En JS, guardalos en una lista de objetos: ~[{ nombre: \'Buzo\', precio: 1200 }]~', 'Recorré la lista con ~forEach~.', 'Por cada dato, creá su parte de HTML.'],
+  p: ['Pensá los datos como una tabla: cada fila es una cosa, cada columna un dato.', 'En JS, guardalos en una lista de objetos: ~[{ nombre: \'Mouse\', precio: 450 }]~', 'Recorré la lista con ~forEach~.', 'Por cada dato, creá su parte de HTML.'],
   c: `let productos = [
-  { nombre: 'Buzo', precio: 1200 },
-  { nombre: 'Gorro', precio: 450 }
+  { nombre: 'Teclado', precio: 890 },
+  { nombre: 'Mouse', precio: 450 }
 ];
 productos.forEach(function (p) {
   console.log(p.nombre + ': $' + p.precio);
@@ -2332,16 +2362,16 @@ Para eso se usan **media queries**: reglas de CSS que solo se aplican si la pant
 
 Con el atributo ~controls~ aparecen los botones de play, pausa y volumen.`,
   p: ['Escribí ~<video src="..." controls></video>~.', 'Agregá ~poster="imagen.jpg"~ para que tenga portada.', 'Para YouTube: **Compartir → Insertar** y copiá el código.', 'Para un mapa: openstreetmap.org → **Compartir → HTML**.'],
-  c: `<video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" controls width="400"></video>`,
+  c: `<video src="tutorial-armado-pc.mp4" controls poster="portada.jpg" width="400"></video>`,
   er: `Poner un video que arranca solo con sonido. Molesta y asusta. Si arranca solo, que sea sin sonido (~muted~).` },
-'4.7': { s: `Una **API** es una forma de pedirle datos a otro servicio: el clima, fotos de perros, frases, monedas. Es como el mozo de un restaurante: le pedís algo y te lo trae.
+'4.7': { s: `Una **API** es una forma de pedirle datos a otro servicio: perfiles de usuarios, el clima, noticias, precios. Es como el mozo de un restaurante: le pedís algo y te lo trae.
 
-Los datos llegan en **JSON**, un formato de texto con claves y valores: ~{ "temperatura": 18 }~. En JavaScript se piden con ~fetch~.`,
-  p: ['Abrí en el navegador ~https://dog.ceo/api/breeds/image/random~ y mirá lo que llega.', 'En JS, pedilo con ~fetch(dirección)~.', 'Convertí la respuesta con ~.then(r => r.json())~.', 'Usá los datos: por ejemplo, poné la foto en un ~<img>~.'],
-  c: `fetch('https://dog.ceo/api/breeds/image/random')
+Los datos llegan en **JSON**, un formato de texto con claves y valores: ~{ "usuario": "torvalds", "repositorios": 8 }~. En JavaScript se piden con ~fetch~.`,
+  p: ['Abrí en el navegador ~https://api.github.com/users/torvalds~ y mirá lo que llega: es el perfil público del creador de Linux.', 'En JS, pedilo con ~fetch(dirección)~.', 'Convertí la respuesta con ~.then(r => r.json())~.', 'Usá los datos: por ejemplo, mostrá cuántos repositorios tiene.'],
+  c: `fetch('https://api.github.com/users/torvalds')
   .then(function (r) { return r.json(); })
   .then(function (datos) {
-    document.querySelector('#perro').src = datos.message;
+    document.querySelector('#repos').textContent = datos.public_repos;
   });`,
   er: `Usar los datos antes de que lleguen. Las APIs tardan un poco: todo lo que usa los datos va dentro del último ~then~.` },
 '4.8': { s: `El diseño web cambia con el tiempo, como la moda. Hoy las tendencias son: diseños limpios con mucho espacio, **modo oscuro**, letras grandes en los títulos, pequeñas animaciones que confirman lo que hiciste y, sobre todo, **accesibilidad**.
@@ -2357,7 +2387,7 @@ body { background: var(--fondo); color: var(--texto); }`,
 '5.1': { s: `El proyecto final es **un sitio web tuyo (o de tu equipo) publicado en internet**. Antes de programar, se planifica: sobre qué es, para quién, qué secciones va a tener y quién hace cada cosa.
 
 Es como organizar un cumpleaños: primero decidís todo, después comprás y cocinás.`,
-  p: ['Elegí un tema que te guste: un club, una banda, un juego, un emprendimiento.', 'Escribí en una oración para qué sirve el sitio.', 'Hacé la lista de secciones (al menos tres).', 'Si es en equipo, repartan las tareas.'],
+  p: ['Elegí un tema de informática que te guste: un servicio técnico, una guía de ciberseguridad, un catálogo de componentes, un blog de videojuegos.', 'Escribí en una oración para qué sirve el sitio.', 'Hacé la lista de secciones (al menos tres).', 'Si es en equipo, repartan las tareas.'],
   er: `Elegir un proyecto gigante. Mejor un sitio chico y bien terminado que uno enorme a medias.` },
 '5.2': { s: `Antes de escribir código, dibujá la página en papel con cajas: dónde va el título, el menú, las fotos, los textos. Eso se llama **wireframe**. Después lo pasás a HTML con las etiquetas que aprendiste.
 
@@ -2432,7 +2462,7 @@ Después, lo presentás al grupo y contás cómo lo hiciste.`,
       if (g.c) h += '<pre class="code"><button type="button" data-copy>Copiar</button><code>' + esc(g.c) + '</code></pre>';
       h += '<div class="box error"><span class="lab">Error común</span><p>' + inline(g.er) + '</p></div>';
       h += '<div class="niveles"><span class="lab">Practicá en el taller:</span>' + ['b', 'i', 'v'].map(function (l) {
-        return '<a class="niv ' + l + '" href="index.html#t/' + p.t.id + '/' + l + '"><b>' + NIV[l] + '</b>' + esc(p.t[l].e.t) + '</a>';
+        return '<a class="niv ' + l + '" href="index.html#t/' + p.t.id + '/' + l + '"><b>' + NIV[l] + (p.t[l].e.h !== undefined || p.t[l].e.s !== undefined || p.t[l].e.j !== undefined ? (l === 'v' ? ' · VS Code' : ' · CodePen') : '') + '</b>' + esc(p.t[l].e.t) + '</a>';
       }).join('') + '</div>';
     }
     h += '</div><label class="leer"><input type="checkbox" data-leer="' + p.key + '"' + (leidos[p.key] ? ' checked' : '') + '> Ya lo leí</label></article>';
@@ -2462,7 +2492,7 @@ Después, lo presentás al grupo y contás cómo lo hiciste.`,
   });
   var tv = lsGet('theme', null); if (tv) document.documentElement.dataset.theme = tv;
   document.getElementById('themeBtn').addEventListener('click', function () {
-    var dark = document.documentElement.dataset.theme ? document.documentElement.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    var dark = document.documentElement.dataset.theme ? document.documentElement.dataset.theme === 'dark' : false;
     tv = dark ? 'light' : 'dark'; document.documentElement.dataset.theme = tv; lsSet('theme', tv);
   });
   document.getElementById('indiceBody').addEventListener('click', function (e) { if (e.target.closest('a')) document.getElementById('indice').open = false; });

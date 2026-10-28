@@ -106,9 +106,9 @@ textarea.av { width: 100%; min-height: 86px; font-family: var(--f-mono); font-si
   function inline(s) { return esc(s).replace(/~([^~]+)~/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>'); }
 
   var TEMAS = {
-    juego: { t: 'Un videojuego', d: 'El que más jugás', ej: 'Minecraft', q: 'el videojuego', img: 'pp-juego.svg', alt: 'Joystick de videojuegos' },
-    celu: { t: 'Mi celular', d: 'El que tenés o el que querés', ej: 'Samsung Galaxy A15', q: 'el celular', img: 'pp-celular.svg', alt: 'Celular con aplicaciones en la pantalla' },
-    app: { t: 'Una app que uso', d: 'YouTube, Spotify, TikTok…', ej: 'Spotify', q: 'la app', img: 'pp-app.svg', alt: 'Ícono de una aplicación con una notificación' },
+    juego: { t: 'Un videojuego', d: 'El que más jugás', ej: 'Minecraft', q: 'el videojuego', img: 'https://images.unsplash.com/photo-1482855549413-2a6c9b1955a7?w=400&h=250&fit=crop', alt: 'Joystick de consola sobre una mesa' },
+    celu: { t: 'Mi celular', d: 'El que tenés o el que querés', ej: 'Samsung Galaxy A15', q: 'el celular', img: 'https://images.unsplash.com/photo-1608714783717-618b2de85e39?w=400&h=250&fit=crop', alt: 'Mano sosteniendo un celular' },
+    app: { t: 'Una app que uso', d: 'YouTube, Spotify, TikTok…', ej: 'Spotify', q: 'la app', img: 'https://images.unsplash.com/photo-1672618832486-a5890cc8bf7d?w=400&h=250&fit=crop', alt: 'Celular con sus apps en la pantalla' },
     consola: { t: 'Una compu o consola', d: 'PC gamer, PlayStation, Switch…', ej: 'PlayStation 5', q: 'la consola o compu', img: 'https://picsum.photos/id/0/400/250', alt: 'Notebook sobre un escritorio' }
   };
   /* Dirección completa de la imagen de cada tema (sirve en la vista previa y en la página descargada). */
@@ -184,7 +184,7 @@ textarea.av { width: 100%; min-height: 86px; font-family: var(--f-mono); font-si
       { k: 'img', clase: 3, titulo: 'Una imagen',
         c: 'La etiqueta ~<img>~ muestra una imagen. En ~src~ va la **dirección** de la imagen y en ~alt~ una **descripción** corta.\nBuscá una imagen de ' + tm.q + ', mantené apretado sobre ella (o clic derecho) → **Copiar dirección de imagen** y pegala entre las comillas de ~src~. Si no encontrás una, tocá **Usar una de ejemplo**.',
         ini: '<img src="" alt="">',
-        ejemplo: urlImagen(tm), ejemploAlt: tm.alt,
+        ejemplo: urlImagen(tm), ejemploAlt: tm.alt, ejemploCredito: tm.credito || '',
         check: function (s) {
           if (!/<img/i.test(s)) return 'Dejá la etiqueta ~<img~ del principio.';
           var src = (s.match(/src\s*=\s*"([^"]*)"/i) || [])[1] || '';
@@ -316,6 +316,7 @@ textarea.av { width: 100%; min-height: 86px; font-family: var(--f-mono); font-si
       ta.value = ta.value.replace(/src\s*=\s*"[^"]*"/i, 'src="' + p.ejemplo + '"');
       if (/alt\s*=\s*""/.test(ta.value)) ta.value = ta.value.replace(/alt\s*=\s*""/, 'alt="' + p.ejemploAlt + '"');
       actualizar(); ta.focus();
+      if (p.ejemploCredito) { av.className = 'aviso'; av.innerHTML = '<span style="font-weight:400;color:var(--ink-2);font-size:0.9rem">' + esc(p.ejemploCredito) + '</span>'; }
     });
     document.getElementById('deshacer').addEventListener('click', function () { ta.value = p.ini; av.textContent = ''; av.className = 'aviso'; actualizar(); ta.focus(); });
     document.getElementById('atras').addEventListener('click', function () { E.paso = i - 1; guardarEstado(); render(); });

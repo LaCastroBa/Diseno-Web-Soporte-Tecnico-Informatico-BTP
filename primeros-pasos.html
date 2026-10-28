@@ -67,7 +67,10 @@ iframe.previa { width: 100%; height: 260px; border: 2px solid var(--line); borde
 .btn[disabled] { opacity: 0.5; cursor: not-allowed; }
 .calma { color: var(--ink-2); font-size: 0.95rem; margin-top: 14px; }
 .temas { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin: 12px 0; }
-.tema { text-align: left; border: 2px solid var(--line); background: var(--surface-2); border-radius: 14px; padding: 14px 16px; cursor: pointer; }
+.tema { text-align: left; border: 2px solid var(--line); background: var(--surface-2); border-radius: 14px; padding: 14px 16px; cursor: pointer; position: relative; }
+.tema .hecha { position: absolute; top: 8px; right: 8px; background: var(--ok); color: #fff; font-size: 0.8rem; font-weight: 700; border-radius: 999px; padding: 3px 10px; }
+.mias { list-style: none; padding: 0; margin: 8px 0 0; }
+.mias li { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 12px; padding: 8px 12px; margin-bottom: 8px; background: var(--surface-2); }
 .tema[aria-pressed="true"] { border-color: var(--i); background: var(--i-t); }
 .tema b { display: block; font-size: 1.1rem; }
 .tema span { color: var(--ink-2); font-size: 0.95rem; }
@@ -103,11 +106,13 @@ textarea.av { width: 100%; min-height: 86px; font-family: var(--f-mono); font-si
   function inline(s) { return esc(s).replace(/~([^~]+)~/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>'); }
 
   var TEMAS = {
-    juego: { t: 'Un videojuego', d: 'El que más jugás', ej: 'Minecraft', q: 'el videojuego' },
-    celu: { t: 'Mi celular', d: 'El que tenés o el que querés', ej: 'Samsung Galaxy A15', q: 'el celular' },
-    app: { t: 'Una app que uso', d: 'YouTube, Spotify, TikTok…', ej: 'Spotify', q: 'la app' },
-    consola: { t: 'Una compu o consola', d: 'PC gamer, PlayStation, Switch…', ej: 'PlayStation 5', q: 'la consola o compu' }
+    juego: { t: 'Un videojuego', d: 'El que más jugás', ej: 'Minecraft', q: 'el videojuego', img: 'pp-juego.svg', alt: 'Joystick de videojuegos' },
+    celu: { t: 'Mi celular', d: 'El que tenés o el que querés', ej: 'Samsung Galaxy A15', q: 'el celular', img: 'pp-celular.svg', alt: 'Celular con aplicaciones en la pantalla' },
+    app: { t: 'Una app que uso', d: 'YouTube, Spotify, TikTok…', ej: 'Spotify', q: 'la app', img: 'pp-app.svg', alt: 'Ícono de una aplicación con una notificación' },
+    consola: { t: 'Una compu o consola', d: 'PC gamer, PlayStation, Switch…', ej: 'PlayStation 5', q: 'la consola o compu', img: 'https://picsum.photos/id/0/400/250', alt: 'Notebook sobre un escritorio' }
   };
+  /* Dirección completa de la imagen de cada tema (sirve en la vista previa y en la página descargada). */
+  function urlImagen(tm) { try { return new URL(tm.img, location.href).href; } catch (e) { return tm.img; } }
 
   /* ---------- los pasos ----------
      Cada paso cambia un solo pedacito de código (k). La vista previa junta todos. */
@@ -179,12 +184,12 @@ textarea.av { width: 100%; min-height: 86px; font-family: var(--f-mono); font-si
       { k: 'img', clase: 3, titulo: 'Una imagen',
         c: 'La etiqueta ~<img>~ muestra una imagen. En ~src~ va la **dirección** de la imagen y en ~alt~ una **descripción** corta.\nBuscá una imagen de ' + tm.q + ', mantené apretado sobre ella (o clic derecho) → **Copiar dirección de imagen** y pegala entre las comillas de ~src~. Si no encontrás una, tocá **Usar una de ejemplo**.',
         ini: '<img src="" alt="">',
-        ejemplo: 'https://picsum.photos/id/0/400/250',
+        ejemplo: urlImagen(tm), ejemploAlt: tm.alt,
         check: function (s) {
           if (!/<img/i.test(s)) return 'Dejá la etiqueta ~<img~ del principio.';
           var src = (s.match(/src\s*=\s*"([^"]*)"/i) || [])[1] || '';
           var alt = (s.match(/alt\s*=\s*"([^"]*)"/i) || [])[1] || '';
-          if (!/^https?:\/\/\S+$/i.test(src.trim())) return 'Pegá la dirección de la imagen entre las comillas de ~src=""~. Empieza con ~https://~.';
+          if (!/^(https?:\/\/\S+|data:image\/\S+)$/i.test(src.trim())) return 'Pegá la dirección de la imagen entre las comillas de ~src=""~. Empieza con ~https://~.';
           if (alt.trim().length < 3) return 'Escribí en ~alt=""~ qué se ve en la imagen, por ejemplo ~alt="Pantalla de inicio del juego"~.';
           return '';
         },
@@ -205,6 +210,8 @@ textarea.av { width: 100%; min-height: 86px; font-family: var(--f-mono); font-si
   }
 
   var E = cargarEstado() || { tema: '', nombre: '', paso: -1, cod: {}, ok: {} };
+  if (!E.hechas) E.hechas = [];
+  function temasHechos() { var o = {}; E.hechas.forEach(function (x) { o[x.tema] = true; }); return o; }
   var vista = document.getElementById('vista');
 
   /* ---------- vista previa ---------- */
@@ -235,11 +242,14 @@ textarea.av { width: 100%; min-height: 86px; font-family: var(--f-mono); font-si
 
   /* ---------- pantallas ---------- */
   function inicio() {
-    var h = '<div class="paso-n">Antes de empezar</div><h1>Tu primera página web</h1>' +
-      '<div class="consigna"><p>Vas a hacer una página sobre algo que te guste, de a un paso por vez. Cada paso es corto.</p><p>No pasa nada si algo sale mal: la página te avisa qué arreglar y siempre podés volver atrás.</p></div>' +
+    var otra = E.hechas.length > 0, hechos = temasHechos();
+    var h = '<div class="paso-n">' + (otra ? 'Página número ' + (E.hechas.length + 1) : 'Antes de empezar') + '</div><h1>' + (otra ? 'Tu próxima página web' : 'Tu primera página web') + '</h1>' +
+      (otra ? '<div class="consigna"><p>Ya sabés cómo se hace. Elegí otro tema y repetí los mismos pasos.</p><p>Los temas que ya hiciste tienen una ✓.</p></div>'
+            : '<div class="consigna"><p>Vas a hacer una página sobre algo que te guste, de a un paso por vez. Cada paso es corto.</p><p>No pasa nada si algo sale mal: la página te avisa qué arreglar y siempre podés volver atrás.</p></div>') +
       '<p><b>¿Sobre qué querés que sea tu página?</b></p><div class="temas" role="group" aria-label="Tema de tu página">';
     Object.keys(TEMAS).forEach(function (k) {
-      h += '<button class="tema" data-t="' + k + '" aria-pressed="' + (E.tema === k) + '"><b>' + TEMAS[k].t + '</b><span>' + TEMAS[k].d + '</span></button>';
+      h += '<button class="tema" data-t="' + k + '" aria-pressed="' + (E.tema === k) + '">' +
+        (hechos[k] ? '<span class="hecha">✓ Ya la hiciste</span>' : '') + '<b>' + TEMAS[k].t + '</b><span>' + TEMAS[k].d + '</span></button>';
     });
     h += '</div><label class="lab" for="nom">¿Cuál? Escribí el nombre</label><input class="campo" id="nom" value="' + esc(E.nombre) + '" placeholder="' + esc((TEMAS[E.tema] || TEMAS.juego).ej) + '">' +
       '<div class="aviso casi" id="aviso"></div><div class="fila"><button class="btn pri" id="empezar">Empezar</button></div>' +
@@ -271,7 +281,7 @@ textarea.av { width: 100%; min-height: 86px; font-family: var(--f-mono); font-si
       var av = document.getElementById('aviso');
       if (!E.tema) { av.textContent = 'Elegí primero sobre qué va a ser tu página.'; return; }
       if (!E.nombre) { av.textContent = 'Escribí el nombre de ' + TEMAS[E.tema].q + '.'; document.getElementById('nom').focus(); return; }
-      E.paso = 0; guardarEstado(); render();
+      E.paso = 0; E.id = Date.now(); guardarEstado(); render();
     });
   }
 
@@ -304,7 +314,7 @@ textarea.av { width: 100%; min-height: 86px; font-family: var(--f-mono); font-si
     var ej = document.getElementById('ejemplo');
     if (ej) ej.addEventListener('click', function () {
       ta.value = ta.value.replace(/src\s*=\s*"[^"]*"/i, 'src="' + p.ejemplo + '"');
-      if (/alt\s*=\s*""/.test(ta.value)) ta.value = ta.value.replace(/alt\s*=\s*""/, 'alt="Notebook sobre un escritorio"');
+      if (/alt\s*=\s*""/.test(ta.value)) ta.value = ta.value.replace(/alt\s*=\s*""/, 'alt="' + p.ejemploAlt + '"');
       actualizar(); ta.focus();
     });
     document.getElementById('deshacer').addEventListener('click', function () { ta.value = p.ini; av.textContent = ''; av.className = 'aviso'; actualizar(); ta.focus(); });
@@ -346,21 +356,42 @@ textarea.av { width: 100%; min-height: 86px; font-family: var(--f-mono); font-si
     var pasos = P(), cod = paginaCompleta(), tm = TEMAS[E.tema] || TEMAS.juego;
     var html = '<!DOCTYPE html>\n<html lang="es">\n<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n  <title>' + esc(E.nombre) + '</title>\n  <style>\n' + cod.s.replace(/^/gm, '    ') + '\n  </style>\n</head>\n<body>\n' + cod.h.replace(/^/gm, '  ') + '\n</body>\n</html>';
     var faltan = pasos.filter(function (p) { return !E.ok[p.k]; });
-    var h = '<div class="final"><div class="paso-n">Terminaste</div><h1>¡Hiciste tu primera página web!</h1>' +
+    if (!E.id) E.id = Date.now();
+    var pos = -1; E.hechas.forEach(function (x, k) { if (x.id === E.id) pos = k; });
+    var esta = { id: E.id, tema: E.tema, nombre: E.nombre, h: cod.h, s: cod.s, fecha: Date.now() };
+    if (pos < 0) { E.hechas.push(esta); pos = E.hechas.length - 1; } else E.hechas[pos] = esta;
+    guardarEstado();
+    var numero = pos + 1;
+    var lista = '';
+    if (E.hechas.length > 1) {
+      lista = '<h2 style="margin-top:22px">Mis páginas (' + E.hechas.length + ')</h2><ul class="mias">' + E.hechas.map(function (x, k) {
+        return '<li><span><b>' + (k + 1) + '.</b> ' + esc(x.nombre) + ' <span class="calma" style="margin:0">(' + esc((TEMAS[x.tema] || {}).t || '') + ')</span></span><button class="btn" data-bajar="' + k + '">Descargar</button></li>';
+      }).join('') + '</ul>';
+    }
+    var h = '<div class="final"><div class="paso-n">Terminaste</div><h1>' + (numero > 1 ? '¡Terminaste tu página número ' + numero + '!' : '¡Hiciste tu primera página web!') + '</h1>' +
       '<p>Esta página sobre <b>' + esc(E.nombre) + '</b> la programaste vos, de a un paso por vez.</p>' +
       '<ul class="logros"><li>Escribiste etiquetas HTML: título, párrafo, lista, imagen y botón.</li><li>Le diste estilo con CSS: color y fondo.</li><li>Hiciste un botón con JavaScript.</li></ul>' +
       (faltan.length ? '<p class="aviso casi">Te quedó sin revisar: ' + faltan.map(function (p) { return p.titulo; }).join(', ') + '. Podés volver cuando quieras.</p>' : '') +
       '<iframe class="previa" id="previa" title="Tu página terminada" sandbox="allow-scripts allow-modals" style="height:320px;margin-top:14px"></iframe>' +
       '<details><summary>Ver todo tu código</summary><pre class="todo">' + esc(html) + '</pre></details>' +
-      '<div id="entrega"></div>' +
-      '<div class="fila"><button class="btn" id="bajar">Descargar mi página</button><button class="btn" id="volver">← Volver a los pasos</button><button class="btn" id="bGuardar">Guardar mi avance</button></div><div id="zGuardar"></div></div>';
+      '<div id="entrega"></div>' + lista +
+      '<div class="guardar" style="border-style:solid;margin-top:18px"><p><b>¿Seguís?</b> Hacé otra página sobre otro tema, con los mismos pasos. Cada vez te va a salir más rápido.</p><div class="fila" style="margin-top:6px"><button class="btn ok" id="otra">Hacer otra página →</button></div></div>' +
+      '<div class="fila"><button class="btn" id="bajar">Descargar esta página</button><button class="btn" id="volver">← Volver a los pasos</button><button class="btn" id="bGuardar">Guardar mi avance</button></div><div id="zGuardar"></div></div>';
     vista.innerHTML = h;
     document.getElementById('previa').srcdoc = docPrevia(cod);
     document.getElementById('volver').addEventListener('click', function () { E.paso = pasos.length - 1; guardarEstado(); render(); });
     document.getElementById('bGuardar').addEventListener('click', function () { panelGuardar(document.getElementById('zGuardar')); });
-    document.getElementById('bajar').addEventListener('click', function () {
-      var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([html], { type: 'text/html;charset=utf-8' })); a.download = 'index.html';
+    function bajarPagina(x, nombreArchivo) {
+      var doc = '<!DOCTYPE html>\n<html lang="es">\n<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n  <title>' + esc(x.nombre) + '</title>\n  <style>\n' + x.s.replace(/^/gm, '    ') + '\n  </style>\n</head>\n<body>\n' + x.h.replace(/^/gm, '  ') + '\n</body>\n</html>';
+      var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([doc], { type: 'text/html;charset=utf-8' })); a.download = nombreArchivo;
       document.body.appendChild(a); a.click(); a.remove();
+    }
+    function archivo(x) { return (String(x.nombre).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'mi-pagina') + '.html'; }
+    document.getElementById('bajar').addEventListener('click', function () { bajarPagina(esta, archivo(esta)); });
+    vista.querySelectorAll('[data-bajar]').forEach(function (b) { b.addEventListener('click', function () { var x = E.hechas[+b.dataset.bajar]; bajarPagina(x, archivo(x)); }); });
+    document.getElementById('otra').addEventListener('click', function () {
+      E = { tema: '', nombre: '', paso: -1, cod: {}, ok: {}, hechas: E.hechas };
+      guardarEstado(); render();
     });
     leerFormulario().then(function () {
       if (!FORM.accion || !FORM.campos.NOMBRE) return;
@@ -372,7 +403,7 @@ textarea.av { width: 100%; min-height: 86px; font-family: var(--f-mono); font-si
         var al = document.getElementById('alumno').value.trim(), av = document.getElementById('avEnt'), b = this;
         if (al.length < 3) { av.className = 'aviso casi'; av.textContent = 'Escribí tu nombre y apellido.'; return; }
         try { localStorage.setItem('dw3:alumno', JSON.stringify({ nombre: al })); } catch (e) {}
-        var datos = { NOMBRE: al, TEMA: 'Primeros pasos', NIVEL: 'Primeros pasos', EJERCICIO: 'Mi primera página: ' + E.nombre + ' (' + tm.t + ')', LINK: '', RESPUESTA: '', HTML: cod.h, CSS: cod.s, JS: '' };
+        var datos = { NOMBRE: al, TEMA: 'Primeros pasos', NIVEL: 'Primeros pasos', EJERCICIO: 'Página ' + numero + ': ' + E.nombre + ' (' + tm.t + ')', LINK: '', RESPUESTA: '', HTML: cod.h, CSS: cod.s, JS: '' };
         var u = new URL(FORM.url), largo = false, codigo = '';
         function poner(d) { Object.keys(FORM.campos).forEach(function (k) { if (k in d) u.searchParams.set(FORM.campos[k], d[k]); }); }
         poner(datos);

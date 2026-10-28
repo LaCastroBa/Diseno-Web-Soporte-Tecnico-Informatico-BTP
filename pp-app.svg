@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" role="img" aria-label="Ícono de una aplicación con una notificación">
-  <rect width="400" height="250" fill="#DCFCE7"/>
-  <rect x="40" y="40" width="44" height="44" rx="12" fill="#BBF7D0"/><rect x="316" y="166" width="44" height="44" rx="12" fill="#BBF7D0"/>
-  <rect x="316" y="40" width="44" height="44" rx="12" fill="#BBF7D0"/><rect x="40" y="166" width="44" height="44" rx="12" fill="#BBF7D0"/>
-  <rect x="130" y="55" width="140" height="140" rx="34" fill="#047857"/>
-  <path d="M182 92 L232 125 L182 158 Z" fill="#FFFFFF"/>
-  <circle cx="264" cy="62" r="20" fill="#F43F5E"/>
-  <text x="264" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#FFFFFF">3</text>
-</svg>

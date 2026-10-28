@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Taller de Diseño Web</title>
+<title>Unidad curricular - Diseño Web</title>
 <meta name="description" content="Diseño Web, 1.er año BTP Soporte Técnico Informático. Cada tema del programa en tres niveles: básico, intermedio y avanzado, con ejercicios para CodePen y Visual Studio Code.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F172A'/%3E%3Crect x='12' y='38' width='10' height='14' rx='2' fill='%2334D399'/%3E%3Crect x='27' y='26' width='10' height='26' rx='2' fill='%2360A5FA'/%3E%3Crect x='42' y='12' width='10' height='40' rx='2' fill='%23A78BFA'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -276,7 +276,7 @@ table.t tr:last-child td { border-bottom: 0; }
   </button>
   <a class="brand" href="#inicio">
     <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#0F172A"/><rect x="12" y="38" width="10" height="14" rx="2" fill="#34D399"/><rect x="27" y="26" width="10" height="26" rx="2" fill="#60A5FA"/><rect x="42" y="12" width="10" height="40" rx="2" fill="#A78BFA"/></svg>
-    <span>Diseño Web <span class="long">· Taller</span></span>
+    <span>Diseño Web <span class="long">- Curso</span></span>
   </a>
   <nav aria-label="Secciones">
     <a href="#inicio" data-v="inicio">Inicio</a>
@@ -314,7 +314,7 @@ var FORMULARIO = 'https://docs.google.com/forms/d/e/1FAIpQLSdyyYqm4GbnYfhPHi2awZ
 </script>
 <script>
 /* =====================================================================
- *  CONTENIDOS DEL TALLER
+ *  CONTENIDOS DEL CURSO
  *  Cada tema del programa tiene tres niveles: b (básico), i (intermedio)
  *  y v (avanzado). Cada nivel tiene:
  *    x: explicación (formato: **negrita**, ~código~, líneas con "- " = lista)
@@ -2448,7 +2448,7 @@ var GLOSARIO = [
   function vInicio() {
     var p = progreso();
     var h = '<section class="hero"><div class="kicker">1.er año · BTP Soporte Técnico Informático</div>' +
-      '<h1>Taller de Diseño Web</h1>' +
+      '<h1>Unidad curricular - de Diseño Web</h1>' +
       '<p>Los ' + TEMAS.length + ' contenidos del programa, y <b>cada uno en tres niveles</b>. Todo el grupo trabaja el mismo tema en la misma clase, pero cada uno en el escalón que le corresponde.</p>' +
       '<a class="btn primary" href="#t/' + TEMAS[0].id + '/' + nivel + '">Empezar por el tema ' + TEMAS[0].id + '</a>' +
       '<div class="stairs" aria-hidden="true"><div class="stair b"><b>Básico</b><span>La idea y el primer paso. En CodePen.</span></div><div class="stair i"><b>Intermedio</b><span>Más herramientas, más control. En CodePen.</span></div><div class="stair v"><b>Avanzado</b><span>Como los profesionales. En VS Code.</span></div></div></section>';
@@ -2662,7 +2662,7 @@ var GLOSARIO = [
       var form = document.createElement('form');
       form.method = 'POST'; form.action = 'https://codepen.io/pen/define'; form.target = '_blank';
       var inp = document.createElement('input'); inp.type = 'hidden'; inp.name = 'data';
-      inp.value = JSON.stringify({ title: t.id + ' ' + t.t + ' · ' + NIV[l] + ' · ' + e.t, description: 'Taller de Diseño Web · ' + NIV_LARGO[l], html: inicial.h, css: inicial.s, js: inicial.j, editors: '111' });
+      inp.value = JSON.stringify({ title: t.id + ' ' + t.t + ' · ' + NIV[l] + ' · ' + e.t, description: 'Diseño Web · ' + NIV_LARGO[l], html: inicial.h, css: inicial.s, js: inicial.j, editors: '111' });
       form.appendChild(inp); document.body.appendChild(form); form.submit(); form.remove();
     });
     var dl = document.getElementById('dl');
@@ -2840,7 +2840,7 @@ var GLOSARIO = [
       if (!/^(inicio|programa|entregas|glosario)$/.test(v)) v = 'inicio';
       var a = document.querySelector('.top nav a[data-v="' + v + '"]'); if (a) a.setAttribute('aria-current', 'page');
       view.innerHTML = v === 'programa' ? vPrograma() : v === 'entregas' ? vEntregas() : v === 'glosario' ? vGlosario() : vInicio();
-      document.title = { inicio: 'Taller de Diseño Web', programa: 'Programa · Diseño Web', entregas: 'Mis entregas · Diseño Web', glosario: 'Glosario · Diseño Web' }[v];
+      document.title = { inicio: 'Diseño Web', programa: 'Programa · Diseño Web', entregas: 'Mis entregas · Diseño Web', glosario: 'Glosario · Diseño Web' }[v];
       renderSide(null);
       if (hash === '#rubrica') { var r = document.getElementById('rubrica'); if (r) r.scrollIntoView(); } else window.scrollTo(0, 0);
       if (v === 'glosario') {

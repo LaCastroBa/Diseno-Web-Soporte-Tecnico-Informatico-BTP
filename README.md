@@ -8,9 +8,9 @@ Cada uno de los contenidos del programa tiene **tres niveles**: básico, interme
 
 | Archivo | Para qué sirve |
 |---|---|
-| `index.html` | **Taller de Diseño Web.** Los 33 contenidos (unidades 1 a 5). Cada tema tiene una analogía y tres pestañas (Básico, Intermedio, Avanzado), cada una con su explicación y su ejercicio. Básico e intermedio se hacen en **CodePen** y avanzado en **Visual Studio Code**. Incluye el programa con acceso directo a cada nivel, la rúbrica del proyecto, la lista de entregas y el glosario. |
-| `guia-estudiante.html` | **Diseño Web desde cero.** Guía paso a paso para estudiantes de 14 años sin conocimientos previos: pasos de introducción y uno por cada tema, con analogía, explicación sencilla, cómo se hace, código para copiar y error común. Cada paso enlaza a los tres niveles del taller. |
-| `primeros-pasos.html` | **Mis primeros pasos.** Recorrido corto para estudiantes a los que les cuesta empezar: eligen un tema (videojuego, celular, app o consola) y hacen su primera página en 7 pasos cortos, de a uno por vez. Funciona en el celular, revisa cada paso y dice qué arreglar, guarda el avance y al final se entrega por el mismo formulario del taller. |
+| `index.html` | **Diseño Web.** Los contenidos (unidades 1 a 5). Cada tema tiene una analogía y tres pestañas (Básico, Intermedio, Avanzado), cada una con su explicación y su ejercicio. Básico e intermedio se hacen en **CodePen** y avanzado en **Visual Studio Code**. Incluye el programa con acceso directo a cada nivel, la rúbrica del proyecto, la lista de entregas y el glosario. |
+| `guia-estudiante.html` | **Diseño Web desde cero.** Guía paso a paso para estudiantes de 14 años sin conocimientos previos: pasos de introducción y uno por cada tema, con analogía, explicación sencilla, cómo se hace, código para copiar y error común. Cada paso enlaza a los tres niveles del curso. |
+| `primeros-pasos.html` | **Mis primeros pasos.** Recorrido corto para estudiantes a los que les cuesta empezar: eligen un tema (videojuego, celular, app o consola) y hacen su primera página en 7 pasos cortos, de a uno por vez. Funciona en el celular, revisa cada paso y dice qué arreglar, guarda el avance y al final se entrega por el mismo formulario del curso. |
 | `.nojekyll` | Le indica a GitHub Pages que publique los archivos tal cual. |
 
 Todas las páginas son archivos HTML únicos: no hay que instalar nada.
@@ -32,16 +32,16 @@ Una forma de organizar la clase: explicación común de 10 minutos con la analog
 | Intermedio | CodePen | El enlace del Pen guardado (o el código pegado, si no pudieron guardar) |
 | Avanzado | Visual Studio Code + Live Server | Sus archivos: `index.html` y, si los tienen, `.css` y `.js` |
 
-- **CodePen:** *Abrir en CodePen* crea un Pen con el código para empezar. Lo guardan con *Save* (necesitan cuenta gratis) y pegan el link en el ejercicio. El taller avisa si el link es de un Pen sin guardar.
-- **Visual Studio Code:** *Descargar para VS Code* baja un `index.html` para abrir con Live Server. Al terminar eligen sus archivos en el taller y pueden ver una vista previa antes de entregar.
-- **Ejercicios de respuesta escrita:** se responden en el mismo taller, en cualquier nivel.
+- **CodePen:** *Abrir en CodePen* crea un Pen con el código para empezar. Lo guardan con *Save* (necesitan cuenta gratis) y pegan el link en el ejercicio. El curso avisa si el link es de un Pen sin guardar.
+- **Visual Studio Code:** *Descargar para VS Code* baja un `index.html` para abrir con Live Server. Al terminar eligen sus archivos en el curso y pueden ver una vista previa antes de entregar.
+- **Ejercicios de respuesta escrita:** se responden en el mismo curso, en cualquier nivel.
 - **Entregas:** con el botón **Entregar** (ver más abajo). En **Mis entregas** ven qué entregaron y qué les falta.
 
 > El progreso se guarda en el navegador de cada estudiante (localStorage). Si cambian de computadora o borran los datos del navegador, se pierde la marca de "terminado", pero las entregas ya enviadas quedan en tu formulario.
 
 ## Entregas por Formulario de Google (sin cuentas)
 
-Debajo de cada ejercicio hay un botón **Entregar**. Abre el Formulario de Google en otra pestaña con el nombre, el tema, el nivel, el ejercicio, el enlace, la respuesta escrita y el código (HTML, CSS y JS) ya escritos: el estudiante solo toca **Enviar**. No necesita ninguna cuenta. Todo te llega a la planilla del formulario, una fila por entrega. Si el código es muy largo para entrar en el link, el taller lo copia y el estudiante lo pega en la pregunta HTML.
+Debajo de cada ejercicio hay un botón **Entregar**. Abre el Formulario de Google en otra pestaña con el nombre, el tema, el nivel, el ejercicio, el enlace, la respuesta escrita y el código (HTML, CSS y JS) ya escritos: el estudiante solo toca **Enviar**. No necesita ninguna cuenta. Todo te llega a la planilla del formulario, una fila por entrega. Si el código es muy largo para entrar en el link, el curso lo copia y el estudiante lo pega en la pregunta HTML.
 
 ## Cómo editar o agregar ejercicios
 
